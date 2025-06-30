@@ -1,0 +1,31 @@
+<?php
+
+    return [
+        'welcome' => 'Welcome to our application',
+        'dashboard' => 'Dashboard',
+        'settings' => 'Settings',
+        'company_name' => 'Company Name',
+        'company_slug' => 'Company Slug',
+        'save' => 'Save',
+        'profile' => 'Profile',
+        'logout' => 'Logout',
+        'login' => 'Login',
+        'register' => 'Register',
+        'home' => 'Home',
+        'about' => 'About Us',
+        'contact' => 'Contact Us',
+        'language' => [
+            'switcher' => 'Switch Language',
+            'current' => 'Current Language: :lang',
+        ],
+        'profile_settings' => 'Profile Settings',
+        'profile_information' => 'Profile Information',
+        'full_name' => 'Full Name',
+        'email' => 'Email',
+        'change_password' => 'Change Password',
+        'current_password' => 'Current Password',
+        'current_password_note' => '(leave empty if no password set)',
+        'new_password' => 'New Password',
+        'confirm_password' => 'Confirm Password',
+        'update' => 'Update',
+    ];
