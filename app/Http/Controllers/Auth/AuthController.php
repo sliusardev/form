@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Company;
 use App\Models\User;
+use App\Services\CompanyService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -44,6 +46,8 @@ class AuthController extends Controller
         $clientRole = Role::query()->where('name', RoleEnum::CLIENT->value)->first();
 
         $user->assignRole($clientRole);
+
+        resolve(CompanyService::class)->createNew($user);
 
         Auth::login($user);
 

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class CompanyService
@@ -36,10 +37,16 @@ class CompanyService
         return static::values()[$value] ?? '';
     }
 
-    public static function createNew(): Company
+    public static function createNew(User $user): Company
     {
-        return Company::query()->create([
-            'data' => []
-        ]);
+        $company = $user->company;
+
+        if (!$company) {
+            $company = Company::query()->create([
+                'data' => [],
+                'user_id' => $user->id
+            ]);
+        }
+        return $company;
     }
 }

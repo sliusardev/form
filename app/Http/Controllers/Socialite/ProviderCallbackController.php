@@ -6,6 +6,7 @@ use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Models\AuthProviders;
 use App\Models\User;
+use App\Services\CompanyService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
@@ -51,6 +52,8 @@ class ProviderCallbackController extends Controller
             ]);
 
             $providerUser->update(['user_id' => $user->id]);
+
+            resolve(CompanyService::class)->createNew($user);
 
             $user->assignRole($role);
         }

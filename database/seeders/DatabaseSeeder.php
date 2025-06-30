@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\RoleEnum;
+use App\Models\Company;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -35,6 +36,10 @@ class DatabaseSeeder extends Seeder
             $role = Role::query()->where('name', RoleEnum::ADMIN->value)->first();
 
             $user->assignRole($role);
+
+            Company::query()->create([
+                'user_id' => $user->id,
+            ]);
         }
 
         $clientRole = Role::query()->where('name', RoleEnum::CLIENT->value)->first();

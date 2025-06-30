@@ -7,6 +7,7 @@
         'company' => 'Company',
         'name' => 'Name',
         'slug' => 'Slug',
+        'hash' => 'Hash',
         'save' => 'Save',
         'profile' => 'Profile',
         'logout' => 'Logout',
