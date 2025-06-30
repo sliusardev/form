@@ -68,9 +68,9 @@ class User extends Authenticatable
         return $this->hasMany(AuthProviders::class);
     }
 
-    public function setting(): BelongsTo
+    public function company(): BelongsTo
     {
-        return $this->belongsTo(Setting::class);
+        return $this->belongsTo(Company::class);
     }
 
     public function getAvatar(): string

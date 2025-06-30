@@ -7,16 +7,16 @@
     <!-- Profile Form -->
     <div class="bg-white rounded-lg shadow p-6 mb-6">
         <h3 class="text-lg font-medium mb-4">Company Settings</h3>
-        <form class="space-y-4" action="{{ route('settings.update') }}" method="POST">
+        <form class="space-y-4" action="{{ route('company.update') }}" method="POST">
             @csrf
             @method('PUT')
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.company_name')}}</label>
-                <input type="text" name="company_name" id="company_name" value="{{ old('company_name', $settings->company_name ?? '') }}" required class="w-full bg-white border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.name')}}</label>
+                <input type="text" name="name" id="name" value="{{ old('name', $company->name ?? '') }}" required class="w-full bg-white border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.company_slug')}}</label>
-                <input type="text" name="company_slug" id="company_slug" value="{{ old('company_slug', $settings->company_slug ?? '') }}" required class="w-full bg-white border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.slug')}}</label>
+                <input type="text" name="slug" id="slug" value="{{ old('slug', $company->slug ?? '') }}" required class="w-full bg-white border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
             </div>
             <div>
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">{{__('dashboard.save')}}</button>
@@ -26,8 +26,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const companyNameInput = document.getElementById('company_name');
-    const companySlugInput = document.getElementById('company_slug');
+    const companyNameInput = document.getElementById('name');
+    const companySlugInput = document.getElementById('slug');
 
     // Transliteration map for Cyrillic to Latin
     const transliterationMap = {

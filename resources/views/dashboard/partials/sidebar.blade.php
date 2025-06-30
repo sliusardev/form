@@ -15,8 +15,8 @@
         <a href="#submissions" class="block px-4 py-2 hover:bg-gray-700 rounded">Submissions</a>
         <a href="#forms" class="block px-4 py-2 hover:bg-gray-700 rounded">Forms</a>
         <a href="#integrations" class="block px-4 py-2 hover:bg-gray-700 rounded">Integrations</a>
-        <a href="{{route('settings.index')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
-            {{__('dashboard.settings')}}
+        <a href="{{route('company.index')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
+            {{__('dashboard.company')}}
         </a>
     </nav>
 </div>
@@ -34,4 +34,3 @@
         });
     </script>
 @endpush
-

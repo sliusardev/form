@@ -3,9 +3,10 @@
     return [
         'welcome' => 'Welcome to our application',
         'dashboard' => 'Dashboard',
-        'settings' => 'Settings',
-        'company_name' => 'Company Name',
-        'company_slug' => 'Company Slug',
+        'companies' => 'Companies',
+        'company' => 'Company',
+        'name' => 'Name',
+        'slug' => 'Slug',
         'save' => 'Save',
         'profile' => 'Profile',
         'logout' => 'Logout',

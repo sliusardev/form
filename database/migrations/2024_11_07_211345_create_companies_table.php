@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -11,12 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->index();
-            $table->string('company_name')->nullable();
-            $table->string('company_slug')->unique()->index()->nullable();
-            $table->string('company_hash')->nullable();
+            $table->string('name')->nullable();
+            $table->string('slug')->unique()->index()->nullable();
+            $table->string('hash')->default(Str::random(15));
             $table->json('data')->nullable();
             $table->timestamps();
         });
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('companies');
     }
 };

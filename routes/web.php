@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\SettingController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +14,8 @@ Route::prefix('dashboard')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
-        Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
+        Route::get('/company', [CompanyController::class, 'index'])->name('company.index');
+        Route::put('/company', [CompanyController::class, 'update'])->name('company.update');
 
         Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
         Route::put('/profile', [UserController::class, 'update'])->name('user.update');
