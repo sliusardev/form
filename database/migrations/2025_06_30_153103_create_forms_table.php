@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->constrained()->onDelete('cascade');
+            $table->bigInteger('project_id')->nullable();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->boolean('is_enabled')->default(true);
+            $table->boolean('send_notify')->default(false);
+            $table->string('hash')->unique();
             $table->timestamps();
         });
     }

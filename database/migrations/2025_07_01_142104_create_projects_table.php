@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('submissions', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained();
-            $table->foreignId('form_id')
-                ->constrained(table: 'forms', indexName: 'form_id')
-                ->onDelete('cascade');
-            $table->json('payload')->nullable();
-            $table->string('status')->nullable();
-            $table->string('ip_address')->nullable();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->boolean('is_enabled')->default(true);
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('submissions');
+        Schema::dropIfExists('projects');
     }
 };

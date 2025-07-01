@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Str;
 
 class CompanyService
 {
@@ -44,7 +45,8 @@ class CompanyService
         if (!$company) {
             $company = Company::query()->create([
                 'data' => [],
-                'user_id' => $user->id
+                'user_id' => $user->id,
+                'hash' => Str::random(15)
             ]);
         }
         return $company;

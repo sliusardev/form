@@ -2,11 +2,9 @@
 
 @section('content')
 
-    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Account Settings</h2>
-
     <!-- Profile Form -->
     <div class="bg-white rounded-lg shadow p-6 mb-6">
-        <h3 class="text-lg font-medium mb-4">Company Settings</h3>
+        <h3 class="text-lg font-medium mb-4">{{__('dashboard.company_settings')}}</h3>
         <form class="space-y-4" action="{{ route('company.update') }}" method="POST">
             @csrf
             @method('PUT')

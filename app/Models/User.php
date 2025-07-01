@@ -7,6 +7,7 @@ use App\Enums\RoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -68,9 +69,9 @@ class User extends Authenticatable
         return $this->hasMany(AuthProviders::class);
     }
 
-    public function company(): BelongsTo
+    public function company(): HasOne
     {
-        return $this->belongsTo(Company::class);
+        return $this->hasOne(Company::class, 'user_id', 'id');
     }
 
     public function getAvatar(): string

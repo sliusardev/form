@@ -6,8 +6,10 @@ use App\Enums\RoleEnum;
 use App\Models\Company;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Services\CompanyService;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,9 +39,7 @@ class DatabaseSeeder extends Seeder
 
             $user->assignRole($role);
 
-            Company::query()->create([
-                'user_id' => $user->id,
-            ]);
+            resolve(CompanyService::class)->createNew($user);
         }
 
         $clientRole = Role::query()->where('name', RoleEnum::CLIENT->value)->first();

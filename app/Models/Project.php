@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Submission extends Model
+class Project extends Model
 {
     protected $fillable = [
         'company_id',
-        'form_id',
-        'payload',
-        'status',
-        'ip_address',
+        'title',
+        'is_enabled',
+        'description',
     ];
 
     protected $casts = [
-        'payload' => 'array'
+        'is_enabled' => 'boolean',
     ];
 
     public function company(): BelongsTo
@@ -24,8 +24,8 @@ class Submission extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function form(): BelongsTo
+    public function forms()
     {
-        return $this->belongsTo(Form::class, 'form_id', 'id');
+        return $this->hasMany(Form::class, 'project_id', 'id');
     }
 }

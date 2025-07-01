@@ -12,9 +12,15 @@
         <a href="{{route('dashboard')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
             {{__('dashboard.dashboard')}}
         </a>
-        <a href="#submissions" class="block px-4 py-2 hover:bg-gray-700 rounded">Submissions</a>
-        <a href="#forms" class="block px-4 py-2 hover:bg-gray-700 rounded">Forms</a>
-        <a href="#integrations" class="block px-4 py-2 hover:bg-gray-700 rounded">Integrations</a>
+        <a href="{{route('forms.submissions')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
+            {{__('dashboard.submissions')}}
+        </a>
+        <a href="{{route('forms.index')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
+            {{__('dashboard.forms')}}
+        </a>
+        <a href="{{route('integrations.index')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
+            {{__('dashboard.integrations')}}
+        </a>
         <a href="{{route('company.index')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
             {{__('dashboard.company')}}
         </a>

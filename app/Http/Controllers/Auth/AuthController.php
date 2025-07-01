@@ -51,6 +51,10 @@ class AuthController extends Controller
 
         Auth::login($user);
 
+        $request->session()->regenerate();
+
+        session()->put('company_id', $user->company->id);
+
         return to_route('dashboard');
     }
 
@@ -62,6 +66,8 @@ class AuthController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        session()->put('company_id', auth()->user()->company->id);
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

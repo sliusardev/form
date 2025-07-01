@@ -59,6 +59,7 @@ class ProviderCallbackController extends Controller
         }
 
         Auth::login($user);
+        session()->put('company_id', $user->company->id);
 
         return redirect('/dashboard');
     }
