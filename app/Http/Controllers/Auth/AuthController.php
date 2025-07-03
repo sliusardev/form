@@ -47,13 +47,13 @@ class AuthController extends Controller
 
         $user->assignRole($clientRole);
 
-        resolve(CompanyService::class)->createNew($user);
-
         Auth::login($user);
 
         $request->session()->regenerate();
 
-        session()->put('company_id', $user->company->id);
+        $company = resolve(CompanyService::class)->createNew($user);
+
+        session()->put('company_id', $company->id);
 
         return to_route('dashboard');
     }
