@@ -1,4 +1,4 @@
-<div class="flex items-center justify-between h-16 bg-white border-b px-4">
+<div class="flex items-center justify-between h-16 bg-white border-b-gray-600 px-4 py-4">
     <div class="flex items-center space-x-2">
         <button id="sidebarToggle" class="text-gray-500 focus:outline-none lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">

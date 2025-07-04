@@ -15,11 +15,12 @@
 
             @foreach($forms as $form)
                 <div class="bg-white rounded-lg shadow p-5">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">
-                        <a href="" class="hover:underline">{{ $form->title }}</a>
-                    </h3>
+                    <div class="border-b-gray-600">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                            <a href="" class="hover:underline">{{ $form->title }}</a>
+                        </h3>
+                    </div>
 
-                    <hr class="my-3">
 
                     <p class="text-gray-600 text-sm mb-4">
                         {{$form->description ?: 'No description provided.'}}

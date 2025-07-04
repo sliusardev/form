@@ -5,7 +5,7 @@
 
     <div class="overflow-x-auto bg-white rounded-lg shadow">
         <table class="min-w-full table-auto text-sm">
-            <thead class="bg-gray-100 border-b">
+            <thead class="bg-gray-200 border-b">
             <tr>
                 <th class="px-6 py-3 text-left font-medium text-gray-600">ID</th>
                 <th class="px-6 py-3 text-left font-medium text-gray-600">Form</th>
