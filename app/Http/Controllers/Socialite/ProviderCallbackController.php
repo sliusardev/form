@@ -53,15 +53,14 @@ class ProviderCallbackController extends Controller
 
             $providerUser->update(['user_id' => $user->id]);
 
-            $company = resolve(CompanyService::class)->createNew($user);
-
-            session()->put('company_id', $company->id);
-
             $user->assignRole($role);
         }
 
         Auth::login($user);
-        session()->put('company_id', $user->company->id);
+
+        $company = resolve(CompanyService::class)->createNew($user);
+
+        session()->put('company_id', $company->id);
 
         return redirect('/dashboard');
     }

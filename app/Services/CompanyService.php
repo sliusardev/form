@@ -38,17 +38,35 @@ class CompanyService
         return static::values()[$value] ?? '';
     }
 
-    public static function createNew(User $user): Company
+    public function createNew(User $user): Company
     {
         $company = $user->company;
 
         if (!$company) {
+
+            $slug = $this->generateUniqueSlug($user->name);
+
             $company = Company::query()->create([
                 'data' => [],
                 'user_id' => $user->id,
-                'hash' => Str::random(15)
+                'hash' => Str::random(15),
+                'name' => $user->name,
+                'slug' => $slug,
             ]);
         }
         return $company;
+    }
+
+    public function generateUniqueSlug($name): string
+    {
+        $slug = Str::slug($name);
+        $count = 1;
+
+        $originalSlug = $slug;
+        while (Company::query()->where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $count++;
+        }
+
+        return $slug;
     }
 }

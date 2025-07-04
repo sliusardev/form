@@ -8,6 +8,7 @@
         'form' => 'Form',
         'forms' => 'Forms',
         'form_url' => 'Form URL',
+        'url' => 'URL',
         'submissions' => 'Submissions',
         'submission' => 'Submission',
         'integration' => 'Integration',

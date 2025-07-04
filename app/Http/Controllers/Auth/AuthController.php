@@ -67,7 +67,9 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        session()->put('company_id', auth()->user()->company->id);
+        $company = resolve(CompanyService::class)->createNew(auth()->user());
+
+        session()->put('company_id', $company->id);
 
         return redirect()->intended(route('dashboard', absolute: false));
     }
