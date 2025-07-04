@@ -20,6 +20,7 @@ return new class extends Migration
             $table->json('payload')->nullable();
             $table->string('status')->nullable();
             $table->string('ip_address')->nullable();
+            $table->string('hash')->nullable();
             $table->timestamps();
         });
     }

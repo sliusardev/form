@@ -13,6 +13,7 @@ class FormController extends Controller
         $forms = Form::query()
             ->where('company_id', selectedCompanyId())
             ->orderBy('created_at', 'desc')
+            ->withCount('submissions')
             ->paginate(18);
 
         return view('dashboard.forms.index', compact('forms'));

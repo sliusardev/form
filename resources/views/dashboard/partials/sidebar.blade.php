@@ -12,7 +12,7 @@
         <a href="{{route('dashboard')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
             {{__('dashboard.dashboard')}}
         </a>
-        <a href="{{route('forms.submissions')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
+        <a href="{{route('submissions.index')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
             {{__('dashboard.submissions')}}
         </a>
         <a href="{{route('forms.index')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">

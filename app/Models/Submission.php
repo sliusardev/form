@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Query\Builder;
 
 class Submission extends Model
 {
@@ -13,10 +14,11 @@ class Submission extends Model
         'payload',
         'status',
         'ip_address',
+        'hash',
     ];
 
     protected $casts = [
-        'payload' => 'array'
+        'payload' => 'array',
     ];
 
     public function company(): BelongsTo

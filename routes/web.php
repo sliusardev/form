@@ -31,11 +31,11 @@ Route::prefix('dashboard')
         Route::put('/forms/{form}', [FormController::class, 'update'])->name('forms.update');
         Route::delete('/forms/{form}', [FormController::class, 'destroy'])->name('forms.destroy');
 
-        Route::get('/forms/submissions', [SubmissionController::class, 'submissions'])
-            ->name('forms.submissions');
+        Route::get('/forms/submissions', [SubmissionController::class, 'index'])->name('submissions.index');
 
         Route::get('/forms/{form}/submissions', [SubmissionController::class, 'formSubmissions'])->
             name('forms.submissions.form');
+        Route::get('/submissions/{submission}', [SubmissionController::class, 'show'])->name('submissions.show');
 
         Route::get('integrations', function () {
             return view('dashboard.integrations');

@@ -5,12 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use App\Models\Submission;
 use Illuminate\Http\Request;
+use Str;
 
 class SubmissionController extends Controller
 {
-    public function submissions()
+    public function index()
     {
-        return view('dashboard.submissions');
+        $submissions = Submission::query()
+            ->where('company_id', session('company_id'))
+            ->with(['form'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+
+        return view('dashboard.submissions.index', compact('submissions'));
+    }
+
+    public function show(Submission $submission)
+    {
+        // Check if submission belongs to the company
+        if ($submission->company_id != session('company_id')) {
+            abort(403);
+        }
+
+        $submission = Submission::query()
+            ->where('id', $submission->id)
+            ->with(['form'])
+            ->first();
+
+        return view('dashboard.submissions.detail', compact('submission'));
     }
 
     public function formSubmissions(Form $form)
@@ -42,6 +64,7 @@ class SubmissionController extends Controller
             'ip_address' => $request->ip(),
             'company_id' => $form->company_id,
             'status' => 'success',
+            'hash' => Str::random(20)
         ]);
 
         // Optionally, send notifications or perform other actions

@@ -41,6 +41,11 @@ class Form extends Model
         return $this->hasMany(Permission::class, 'form_id', 'id');
     }
 
+    public function submissions(): HasMany|Form
+    {
+        return $this->hasMany(Submission::class, 'form_id', 'id');
+    }
+
     public function scopeEnabled(Builder $query): void
     {
         $query->where('is_enabled', true);
