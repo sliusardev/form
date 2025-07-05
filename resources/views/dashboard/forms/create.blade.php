@@ -8,16 +8,14 @@
 
                 <div>
                     <label for="title" class="block text-gray-700 font-medium mb-1">{{ __('dashboard.title') }}</label>
-                    <input type="text" id="title" name="title" value="{{ old('title') }}" class="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300 @error('title') border-red-500 @enderror" required>
-                    @error('title')
+                    <input type="text" id="title" name="title" value="{{ old('title') }}" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300 @error('title') border-red-500 @enderror" required>                    @error('title')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div>
                     <label for="description" class="block text-gray-700 font-medium mb-1">{{ __('dashboard.description') }}</label>
-                    <textarea id="description" name="description" rows="4" class="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300 @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
-                    @error('description')
+                    <textarea id="description" name="description" rows="4" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300 @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>                    @error('description')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>

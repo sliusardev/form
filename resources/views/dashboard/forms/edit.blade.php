@@ -9,12 +9,12 @@
 
             <div>
                 <label for="form_utl" class="block text-gray-700 font-medium mb-1">{{ __('dashboard.form_url') }}</label>
-                <input type="text" id="form_utl" name="form_url" value="{{ $form->formUrl() }}" class="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300" disabled>
+                <input type="text" id="form_utl" name="form_url" value="{{ $form->formUrl() }}" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300" disabled>
             </div>
 
             <div>
                 <label for="title" class="block text-gray-700 font-medium mb-1">{{ __('dashboard.title') }}</label>
-                <input type="text" id="title" name="title" value="{{ old('title', $form->title) }}" class="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300 @error('title') border-red-500 @enderror" required>
+                <input type="text" id="title" name="title" value="{{ old('title', $form->title) }}" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300 @error('title') border-red-500 @enderror" required>
                 @error('title')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
@@ -22,8 +22,7 @@
 
             <div>
                 <label for="description" class="block text-gray-700 font-medium mb-1">{{ __('dashboard.description') }}</label>
-                <textarea id="description" name="description" rows="4" class="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300 @error('description') border-red-500 @enderror">{{ old('description', $form->description) }}</textarea>
-                @error('description')
+                <textarea id="description" name="description" rows="4" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300 @error('description') border-red-500 @enderror">{{ old('description', $form->description) }}</textarea>                @error('description')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('head')
+
+@endpush
+
 @section('content')
     <h2 class="text-2xl font-semibold text-gray-800">{{ __('dashboard.welcome_dashboard') }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-4">
@@ -30,34 +34,6 @@
 
 @push('scripts')
     <script>
-        const ctx = document.getElementById('submissionChart');
-        if (ctx) {
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                    datasets: [{
-                        label: '{{ __('dashboard.submissions_label') }}',
-                        data: [12, 19, 3, 5, 2, 3, 7],
-                        borderColor: 'rgba(59, 130, 246, 1)',
-                        tension: 0.4,
-                        fill: false
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: true
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
+
     </script>
 @endpush
