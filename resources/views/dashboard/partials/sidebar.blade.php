@@ -1,4 +1,4 @@
-<div id="sidebar" class="w-64 bg-gray-800 text-white flex-col p-4 hidden md:flex absolute md:relative md:translate-x-0 transition-transform z-30 h-full">
+<div id="sidebar" class="w-64 bg-gray-800 text-white flex-col p-4 sm:hidden md:flex z-30 h-full">
     <div class="flex justify-between items-center mb-4">
         <h4 class="text-lg font-semibold">FormPost</h4>
         <button id="sidebarCollapse" class="text-white focus:outline-none lg:hidden">
@@ -29,14 +29,25 @@
 
 @push('scripts')
     <script>
-        const sidebar = document.getElementById('sidebar');
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('sidebarToggle');
+            const toggleSidebarBtn = document.getElementById('sidebarCollapse');
 
-        document.getElementById('sidebarToggle').addEventListener('click', () => {
-            sidebar.classList.toggle('hidden');
-        });
+            function toggleSidebar() {
+                sidebar.classList.remove('md:flex');
+                sidebar.classList.remove('flex-col');
+                sidebar.classList.remove('xs:hidden');
+                sidebar.classList.toggle('hidden');
+            }
 
-        document.getElementById('sidebarCollapse').addEventListener('click', () => {
-            sidebar.classList.add('hidden');
+            function sidebarCollapse() {
+                toggleSidebar();
+                toggleBtn.classList.toggle('hidden');
+            }
+
+            toggleBtn.addEventListener('click', toggleSidebar);
+            toggleSidebarBtn.addEventListener('click', toggleSidebar);
         });
     </script>
 @endpush
