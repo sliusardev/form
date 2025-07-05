@@ -5,12 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use App\Models\Submission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Str;
 
 class SubmissionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('view')) {
+            $view = $request->input('view');
+            Cookie::queue('submissions_view_preference', $view, 43200); // Cookie lasts 30 days
+        } else {
+            // If no view parameter, check for cookie and redirect if exists
+            $view = $request->cookie('submissions_view_preference', 'table');
+            if ($view) {
+                return redirect()->route('submissions.index', ['view' => $view]);
+            }
+        }
+
         $submissions = Submission::query()
             ->where('company_id', session('company_id'))
             ->with(['form'])

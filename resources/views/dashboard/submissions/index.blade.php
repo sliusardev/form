@@ -31,3 +31,27 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Save preference when clicking on view buttons
+            document.querySelectorAll('a[href*="view="]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const viewType = this.href.includes('view=cards') ? 'cards' : 'table';
+                    localStorage.setItem('submissions_view_preference', viewType);
+                });
+            });
+
+            // Set default view if no URL parameter is provided
+            if (!window.location.href.includes('view=')) {
+                const savedView = localStorage.getItem('submissions_view_preference') || 'table';
+                if (savedView && window.location.href.indexOf('?') === -1) {
+                    window.location.href = "{{ route('submissions.index') }}?view=" + savedView;
+                } else if (savedView && window.location.href.indexOf('view=') === -1) {
+                    window.location.href = window.location.href + (window.location.href.indexOf('?') !== -1 ? '&' : '?') + 'view=' + savedView;
+                }
+            }
+        });
+    </script>
+@endpush
