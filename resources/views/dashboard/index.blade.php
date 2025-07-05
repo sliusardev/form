@@ -15,11 +15,11 @@
 
         <div class="bg-white rounded-lg shadow p-6 text-center">
             <h4 class="text-lg font-medium">{{ __('dashboard.total_submissions') }}</h4>
-            <p class="text-3xl">1,245</p>
+            <p class="text-3xl">{{$submissionsCount}}</p>
         </div>
         <div class="bg-white rounded-lg shadow p-6 text-center">
             <h4 class="text-lg font-medium">{{ __('dashboard.new_this_week') }}</h4>
-            <p class="text-3xl">87</p>
+            <p class="text-3xl">{{$submissionsThisWeekCount}}</p>
         </div>
     </div>
     <div class="bg-white rounded-lg shadow mt-6 p-6">
