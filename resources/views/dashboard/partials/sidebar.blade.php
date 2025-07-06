@@ -1,4 +1,4 @@
-<div id="sidebar" class="w-64 bg-gray-800 text-white flex-col p-4 hidden absolute md:relative md:flex z-30 h-full ">
+<div id="sidebar" class="w-64 bg-gray-800 text-white flex-col p-4 hidden absolute lg:relative lg:flex z-30 h-full ">
     <div class="flex justify-between items-center mb-4">
         <h4 class="text-lg font-semibold">FormPost</h4>
         <button id="sidebarCollapse" class="text-white focus:outline-none lg:hidden">
@@ -36,13 +36,7 @@
 
             function toggleSidebar() {
                 sidebar.classList.toggle('hidden');
-                sidebar.classList.toggle('md:flex');
-                sidebar.classList.toggle('flex-col');
-            }
-
-            function sidebarCollapse() {
-                toggleSidebar();
-                toggleBtn.classList.toggle('hidden');
+                sidebar.classList.toggle('lg:hidden');
             }
 
             toggleBtn.addEventListener('click', toggleSidebar);

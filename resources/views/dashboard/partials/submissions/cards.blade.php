@@ -1,5 +1,5 @@
 <div class="max-w-full mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         @forelse($submissions as $submission)
             <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
                 <div class="p-6">
