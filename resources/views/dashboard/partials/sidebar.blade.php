@@ -1,4 +1,4 @@
-<div id="sidebar" class="w-64 bg-gray-800 text-white flex-col p-4 hidden absolute lg:relative lg:flex z-30 h-full ">
+<div id="sidebar" class="w-64 bg-gray-800 text-white flex-col p-4 hidden absolute xl:relative xl:flex z-30 h-full ">
     <div class="flex justify-between items-center mb-4">
         <h4 class="text-lg font-semibold">FormPost</h4>
         <button id="sidebarCollapse" class="text-white focus:outline-none lg:hidden">
@@ -28,19 +28,4 @@
 </div>
 
 @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sidebar = document.getElementById('sidebar');
-            const toggleBtn = document.getElementById('sidebarToggle');
-            const toggleSidebarBtn = document.getElementById('sidebarCollapse');
-
-            function toggleSidebar() {
-                sidebar.classList.toggle('hidden');
-                sidebar.classList.toggle('lg:hidden');
-            }
-
-            toggleBtn.addEventListener('click', toggleSidebar);
-            toggleSidebarBtn.addEventListener('click', toggleSidebar);
-        });
-    </script>
 @endpush
