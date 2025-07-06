@@ -1,8 +1,4 @@
 <div class="max-w-full mx-auto">
-    @if(!isset($hideTitle) || !$hideTitle)
-        <h2 class="text-3xl font-semibold text-gray-800 mb-6">Form Submissions</h2>
-    @endif
-
     <div class="overflow-x-auto bg-white rounded-lg shadow">
         <table class="min-w-full table-auto text-sm">
             <thead class="bg-gray-200 border-b">
