@@ -5,6 +5,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\FormSubmissionMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -44,7 +45,8 @@ Route::prefix('dashboard')
 
 Route::post('f/{hash}', [SubmissionController::class, 'store'])
     ->where('hash', '[a-zA-Z0-9]+')
-    ->name('forms.store-submission');
+    ->name('forms.store-submission')
+    ->middleware([FormSubmissionMiddleware::class]);
 
 
 require __DIR__.'/auth.php';

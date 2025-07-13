@@ -24,7 +24,15 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.hash')}}</label>
-                <input type="text" name="hash" id="hash" value="{{ old('hash', $company->hash ?? '') }}" required class="w-full bg-white border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled/>
+                <input type="text" name="hash" id="hash" value="{{ old('hash', $company->hash ?? '') }}" required class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled/>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.submission_limit')}}</label>
+                <input type="text" name="submission_limit" id="submission_limit" value="{{ old('hash', $company->submission_limit ?? '') }}" class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled/>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.form_limit')}}</label>
+                <input type="text" name="form_limit" id="form_limit" value="{{ old('hash', $company->form_limit ?? '') }}" class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled/>
             </div>
             <div>
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">{{__('dashboard.save')}}</button>

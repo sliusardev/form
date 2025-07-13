@@ -16,6 +16,7 @@ class Company extends Model
         'hash',
         'data',
         'submission_limit',
+        'form_limit',
     ];
 
     protected function casts(): array
@@ -24,6 +25,7 @@ class Company extends Model
             'data' => 'array',
             'hash' => 'string',
             'submission_limit' => 'integer',
+            'form_limit' => 'integer',
         ];
     }
 

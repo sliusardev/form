@@ -15,16 +15,26 @@
             @forelse($submissions as $submission)
                 <tr>
                     <td class="px-6 py-4 text-gray-800">#{{ $submission->id }}</td>
-                    <td class="px-6 py-4 text-gray-800">{{ $submission->form->title ?? 'Unknown Form' }}</td>
+                    <td class="px-6 py-4 text-gray-800">
+                        <a href="{{ route('submissions.show', $submission) }}" class="text-gray-800 hover:underline">
+                            {{ $submission->form->title ?? 'Unknown Form' }}
+                        </a>
+                    </td>
                     <td class="px-6 py-4 text-gray-800">{{ $submission->created_at->format('Y-m-d H:i') }}</td>
                     <td class="px-6 py-4">
-                            <span class="px-2 py-1 text-xs rounded-full {{ $submission->status === 'success' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
-                                {{ ucfirst($submission->status) }}
-                            </span>
+                        <span class="px-2 py-1 text-xs rounded-full {{ $submission->status === 'success' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                            {{ ucfirst($submission->status) }}
+                        </span>
                     </td>
                     <td class="px-6 py-4 text-gray-800">{{ $submission->hash }}</td>
                     <td class="px-6 py-4">
-                        <a href="{{ route('submissions.show', $submission) }}" class="text-blue-500 hover:underline">View</a>
+                        <a href="{{ route('submissions.show', $submission) }}" class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span>View</span>
+                        </a>
                     </td>
                 </tr>
             @empty

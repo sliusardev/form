@@ -58,4 +58,6 @@
         'account_settings' => 'Account Settings',
         'company_settings' => 'Company Settings',
         'settings' => 'Settings',
+        'submission_limit' => 'Submission Limit',
+        'form_limit' => 'Form Limit',
     ];

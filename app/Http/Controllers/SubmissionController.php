@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSubmissionRequest;
 use App\Models\Form;
 use App\Models\Submission;
+use App\Services\SubmissionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Str;
@@ -65,40 +67,21 @@ class SubmissionController extends Controller
 
     }
 
-    public function store(Request $request, string $hash)
+    public function store(StoreSubmissionRequest $request, string $hash, SubmissionService $submissionService)
     {
-        // Validate the hash and find the form
-        $form = Form::query()->where('hash', $hash)->firstOrFail();
+        $form = $request->form; // Added by middleware
+        $formData = $request->validated();
 
-        if(!$form) {
-            return response()->json([
-                'status' => 'form_not_found',
-                'data' => [],
-            ]);
-        }
-
-//        dd($request->all());
-
-        // Validate the submission data
-//        $validated = request()->validate($form->getValidationRules());
-
-        $formData = $request->all();
-        $submission = Submission::query()->create([
-            'form_id' => $form->id,
-            'payload' => $formData,
-            'ip_address' => $request->ip(),
-            'company_id' => $form->company_id,
-            'status' => 'success',
-            'hash' => Str::random(20)
-        ]);
-
-        // Optionally, send notifications or perform other actions
+        $submission = $submissionService->createSubmission(
+            $form,
+            $formData,
+            $request->ip()
+        );
 
         return response()->json([
             'success' => true,
             'message' => 'Submission successful',
             'submission_id' => $submission->id,
         ]);
-
     }
 }
