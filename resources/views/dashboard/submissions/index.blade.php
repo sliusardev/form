@@ -26,7 +26,8 @@
         <div class="mb-6">
             <div method="GET" action="" class="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-2 md:space-y-0">
                 <label for="form_filter" class="sr-only">Filter by Form</label>
-                <select id="form_filter" name="form_id" class="w-full md:w-64 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:border-blue-300">
+
+                <select class="select" id="form_filter" name="form_id">
                     <option value="">All Forms</option>
                     @foreach($forms as $form)
                         <option value="{{ $form->id }}" {{ request('form_id') == $form->id ? 'selected' : '' }}>{{ $form->title }}</option>
