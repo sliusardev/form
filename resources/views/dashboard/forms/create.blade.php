@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="flex items-center">
-                    <input type="checkbox" id="is_enabled" name="is_enabled" class="mr-2" {{ old('is_enabled') ? 'checked' : '' }}>
+                    <input type="checkbox" id="is_enabled" name="is_enabled" class="mr-2" checked>
                     <label for="is_enabled" class="text-gray-700">{{ __('dashboard.enabled') }}</label>
                     @error('is_enabled')
                         <p class="text-red-500 text-sm ml-2">{{ $message }}</p>

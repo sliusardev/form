@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('slug')->unique()->index()->nullable();
             $table->string('hash')->unique();
             $table->json('data')->nullable();
+            $table->unsignedInteger('submission_limit')->default(50);
+            $table->unsignedInteger('form_limit')->default(3);
             $table->timestamps();
         });
     }

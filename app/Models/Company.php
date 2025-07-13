@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Company extends Model
@@ -13,7 +14,8 @@ class Company extends Model
         'name',
         'slug',
         'hash',
-        'data'
+        'data',
+        'submission_limit',
     ];
 
     protected function casts(): array
@@ -21,11 +23,17 @@ class Company extends Model
         return [
             'data' => 'array',
             'hash' => 'string',
+            'submission_limit' => 'integer',
         ];
     }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function submissions(): HasMany
+    {
+        return $this->hasMany(Submission::class, 'company_id', 'id');
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFormRequest;
+use App\Http\Requests\UpdateFormRequest;
 use App\Models\Form;
 use Illuminate\Http\Request;
 use Str;
@@ -24,23 +26,12 @@ class FormController extends Controller
         return view('dashboard.forms.create');
     }
 
-public function store(Request $request)
-{
-    $validated = $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string',
-    ]);
+    public function store(StoreFormRequest $request)
+    {
+        $form = Form::query()->create($request->validated());
 
-    // Convert checkbox values properly
-    $validated['is_enabled'] = $request->has('is_enabled');
-    $validated['send_notify'] = $request->has('send_notify');
-    $validated['company_id'] = selectedCompanyId();
-    $validated['hash'] = Str::random(15);
-
-    $form = Form::query()->create($validated);
-
-    return redirect()->route('forms.edit', $form)->with('success', 'Form created successfully');
-}
+        return redirect()->route('forms.edit', $form)->with('success', 'Form created successfully');
+    }
 
     public function edit(Form $form)
     {
@@ -52,23 +43,9 @@ public function store(Request $request)
         return view('dashboard.forms.edit', compact('form'));
     }
 
-    public function update(Request $request, Form $form)
+    public function update(UpdateFormRequest $request, Form $form)
     {
-        // Check if the form belongs to the selected company
-        if ($form->company_id !== selectedCompanyId()) {
-            abort(403);
-        }
-
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ]);
-
-        // Convert checkbox values properly
-        $validated['is_enabled'] = $request->has('is_enabled');
-        $validated['send_notify'] = $request->has('send_notify');
-
-        $form->update($validated);
+        $form->update($request->validated());
 
         return redirect()->route('forms.index')
             ->with('success', 'Form updated successfully');
