@@ -1,11 +1,11 @@
-<div class="relative border rounded-md" style="min-height: 150px;">
+<div class="relative border rounded-md">
     <button
         id="copy-json"
         class="absolute top-2 right-2 z-10 bg-gray-800 text-white text-xs px-2 py-1 rounded hover:bg-gray-700"
     >
         Copy
     </button>
-    <div id="json-editor" style="height: 100%; min-height: 150px;"></div>
+    <div id="json-editor"></div>
 </div>
 
 <script src="https://www.unpkg.com/ace-builds@latest/src-noconflict/ace.js" crossorigin="anonymous"></script>
@@ -18,8 +18,27 @@
         editor.setValue(JSON.stringify(@json($submission->payload), null, 4));
         editor.setReadOnly(true);
         editor.setOptions({
-            fontSize: "12pt"
+            fontSize: "12pt",
+            maxLines: Infinity,
+            autoScrollEditorIntoView: true,
+            wrap: true
         });
+
+        // Auto-resize function
+        const updateEditorHeight = function() {
+            // Get the number of lines
+            const lineCount = editor.session.getLength();
+            // Calculate height based on line count and font size (approx. 20px per line)
+            const newHeight = Math.max(400, lineCount * 20);
+            document.getElementById('json-editor').style.height = newHeight + 'px';
+            editor.resize();
+        };
+
+        // Initial height adjustment
+        updateEditorHeight();
+
+        // Update height when content changes
+        editor.session.on('change', updateEditorHeight);
 
         window.jsonEditor = editor;
 

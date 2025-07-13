@@ -40,49 +40,29 @@
             <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2">Form Data</h3>
 
             <div x-data="tabs" class="tab-switcher">
-                <div class="mb-6">
-                    <div class="flex space-x-1">
-                        <button
-                            data-tab="formatted-view"
-                            @click="setActiveTab('formatted-view')"
-                            :class="{'border-gray-600 text-gray-600 font-semibold': isActive('formatted-view')}"
-                            class="py-3 px-5 border-b-2 transition-all duration-200 rounded-t-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50">
-                            <div class="flex items-center space-x-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
-                                </svg>
-                                <span>Formatted</span>
-                            </div>
-                        </button>
 
-                        <button
-                            data-tab="json-view"
-                            @click="setActiveTab('json-view')"
-                            :class="{'border-gray-600 text-gray-600 font-semibold': isActive('json-view')}"
-                            class="py-3 px-5 border-b-2 transition-all duration-200 rounded-t-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50">
-                            <div class="flex items-center space-x-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                                </svg>
-                                <span>JSON</span>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="tabs border border-gray-200 p-4" id="views">
-                    <div id="formatted-view" class="tab-content"
-                         x-show="isActive('formatted-view')"
-                         x-transition:enter="transition ease-out duration-200"
-                         x-transition:enter-start="opacity-0 transform -translate-y-2"
-                         x-transition:enter-end="opacity-100 transform translate-y-0">
+                <!-- name of each tab group should be unique -->
+                <div class="tabs tabs-lift">
+                    <label class="tab">
+                        <input type="radio" name="my_tabs_4"  checked="checked" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                        </svg>
+                        Formatted
+                    </label>
+                    <div class="tab-content bg-base-100 border-base-300 p-6">
                         @includeIf('dashboard.partials.submissions.formatted-view')
                     </div>
-                    <div id="json-view" class="tab-content"
-                         x-show="isActive('json-view')"
-                         x-transition:enter="transition ease-out duration-200"
-                         x-transition:enter-start="opacity-0 transform -translate-y-2"
-                         x-transition:enter-end="opacity-100 transform translate-y-0">
+
+                    <label class="tab">
+                        <input type="radio" name="my_tabs_4"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+
+                        JSON
+                    </label>
+                    <div class="tab-content bg-base-100 border-base-300 p-6">
                         @includeIf('dashboard.partials.submissions.json-view')
                     </div>
                 </div>

@@ -60,4 +60,6 @@
         'settings' => 'Settings',
         'submission_limit' => 'Submission Limit',
         'form_limit' => 'Form Limit',
+        'limits' => 'Limits',
+        'limit' => 'Limit',
     ];

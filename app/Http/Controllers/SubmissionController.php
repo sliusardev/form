@@ -67,10 +67,29 @@ class SubmissionController extends Controller
 
     }
 
-    public function store(StoreSubmissionRequest $request, string $hash, SubmissionService $submissionService)
+    public function store(Request $request, string $hash, SubmissionService $submissionService)
     {
-        $form = $request->form; // Added by middleware
-        $formData = $request->validated();
+        $form = Form::query()
+            ->where('hash', $hash)
+            ->where('is_enabled', true)
+            ->with('company')
+            ->first();
+
+        if (!$form) {
+            return response()->json([
+                'status' => 'form_not_found',
+                'data' => [],
+            ], 404);
+        }
+
+        if ($form->company->submission_limit === 0) {
+            return response()->json([
+                'status' => 'submission_limit_reached',
+                'data' => [],
+            ], 403);
+        }
+
+        $formData = $request->all();
 
         $submission = $submissionService->createSubmission(
             $form,
