@@ -62,4 +62,8 @@
         'form_limit' => 'Form Limit',
         'limits' => 'Limits',
         'limit' => 'Limit',
+        'billing_plans' => 'Billing plans',
+        'billing_plan' => 'Billing plan',
+        'subscriptions' => 'Subscriptions',
+        'subscription' => 'Subscription',
     ];

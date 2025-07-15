@@ -25,7 +25,20 @@
             {{__('dashboard.company')}}
         </a>
     </nav>
+
+
+    @if(auth()->user()->isAdmin())
+        <hr class="border-gray-600 my-4">
+
+        <nav class="space-y-2">
+            <a href="{{route('billing-plans.index')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
+                {{__('dashboard.billing_plans')}}
+            </a>
+        </nav>
+    @endif
+
 </div>
+
 
 @push('scripts')
 @endpush
