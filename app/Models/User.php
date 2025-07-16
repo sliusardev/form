@@ -83,9 +83,4 @@ class User extends Authenticatable
     {
         return $this->roles()->pluck('name')->implode(', ');
     }
-
-    public function subscriptions(): HasMany
-    {
-        return $this->hasMany(Subscription::class);
-    }
 }
