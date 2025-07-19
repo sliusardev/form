@@ -15,6 +15,7 @@ class Payment extends Model
         'currency',
         'status',
         'payload',
+        'company_id',
     ];
 
     protected $casts = [
@@ -22,4 +23,9 @@ class Payment extends Model
         'status' => PaymentStatusEnum::class,
         'provider' => PaymentProviderEnum::class,
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(\App\Models\Company::class);
+    }
 }

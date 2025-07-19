@@ -38,4 +38,14 @@ class Company extends Model
     {
         return $this->hasMany(Submission::class, 'company_id', 'id');
     }
+
+    public function forms(): HasMany
+    {
+        return $this->hasMany(Form::class, 'company_id', 'id');
+    }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'company_id', 'id');
+    }
 }

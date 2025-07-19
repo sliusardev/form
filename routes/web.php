@@ -47,13 +47,11 @@ Route::prefix('dashboard')
         })->name('integrations.index');
 
         Route::get('/billing', [BillingController::class, 'index'])->name('billing.index');
-
-        Route::middleware(['admin'])->group(function () {
-
-        });
+        Route::post('/billing/wayforpay-pay', [BillingController::class, 'pay'])->name('billing.pay');
     });
 
-
+Route::match(['get', 'post'], 'billing/callback/wayforpay', [BillingController::class, 'wayforpayCallback'])
+    ->name('billing.wayforpay.callback');
 
 Route::post('f/{hash}', [SubmissionController::class, 'store'])
     ->where('hash', '[a-zA-Z0-9]+')

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->constrained()->onDelete('cascade'); // ID компанії
             $table->string('provider'); // wayforpay, monobank, liqpay
             $table->string('payment_id')->unique(); // ID від провайдера
             $table->decimal('amount', 10, 2);
