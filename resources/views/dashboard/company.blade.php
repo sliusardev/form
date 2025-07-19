@@ -12,9 +12,9 @@
         <div class="tab-content bg-base-100 border-base-300 p-6">
             <div class="gap-4 grid grid-cols-1">
                 <div class="billing-item flex items-center gap-3 border-b border-gray-100 pb-4">
-                    <button type="button" class="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700 transition mt-6">
+                    <a href="" type="button" class="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700 transition mt-6">
                         {{__('dashboard.increase')}}
-                    </button>
+                    </a>
                     <div class="flex-grow">
                         <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.submission_limit')}}</label>
                         <input type="text" name="submission_limit" id="submission_limit" value="{{ old('hash', $company->submission_limit ?? '') }}" class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled/>
@@ -22,9 +22,9 @@
 
                 </div>
                 <div class="billing-item flex items-center gap-3 border-b border-gray-100 pb-4">
-                    <button type="button" class="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700 transition mt-6">
+                    <a type="button" class="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700 transition mt-6">
                         {{__('dashboard.increase')}}
-                    </button>
+                    </a>
                     <div class="flex-grow">
                         <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.form_limit')}}</label>
                         <input type="text" name="form_limit" id="form_limit" value="{{ old('hash', $company->form_limit ?? '') }}" class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled/>

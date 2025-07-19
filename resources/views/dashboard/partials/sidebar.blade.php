@@ -24,6 +24,10 @@
         <a href="{{route('company.index')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
             {{__('dashboard.company')}}
         </a>
+
+        <a href="{{route('billing.index')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
+            {{__('dashboard.billing')}}
+        </a>
     </nav>
 
 

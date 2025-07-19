@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\BillingPlanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CompanyController;
@@ -45,6 +46,7 @@ Route::prefix('dashboard')
             return view('dashboard.integrations');
         })->name('integrations.index');
 
+        Route::get('/billing', [BillingController::class, 'index'])->name('billing.index');
 
         Route::middleware(['admin'])->group(function () {
 

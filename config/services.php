@@ -53,4 +53,10 @@ return [
         'sandbox' => env('LIQPAY_SANDBOX', false),
     ],
 
+    'wayforpay' => [
+        'login' => env('WAYFORPAY_LOGIN'),
+        'secret_key' => env('WAYFORPAY_SECRET_KEY'),
+        'password' => env('WAYFORPAY_PASSWORD'),
+    ],
+
 ];
