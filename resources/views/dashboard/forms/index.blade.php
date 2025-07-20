@@ -3,7 +3,7 @@
 @section('content')
     <div class="card bg-base-100 shadow-xl w-full">
         <div class="card-body">
-            <div class="flex flex-row md:justify-between items-center mb-6">
+            <div class="flex flex-col md:flex-row md:justify-between items-center mb-6">
                 <h2 class="card-title text-center md:text-2xl font-semibold my-3">Your Forms</h2>
                 <a href="{{ route('forms.create') }}" class="btn btn-primary">
                     {{__('dashboard.create')}}
