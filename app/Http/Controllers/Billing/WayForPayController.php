@@ -83,6 +83,6 @@ class WayForPayController extends Controller
 
         resolve(WayForPayService::class)->handlePostCallback($request);
 
-        return response()->json(['status' => 'success'], 200);
+        return response()->redirectToRoute('payment-success');
     }
 }

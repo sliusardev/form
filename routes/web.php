@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('landing');
-});
+})->name('home');
+
+Route::get('/payment-success', function () {
+    return view('pages.payment-success');
+})->name('payment-success');
 
 Route::prefix('dashboard')
     ->middleware(['auth'])
@@ -63,10 +67,14 @@ Route::prefix('dashboard')
     });
 
 Route::post('/billing/callback/way-for-pay/update-status', [WayForPayController::class, 'updateStatus'])
-    ->name('billing.way-for-pay.update-status');
+    ->name('billing.way-for-pay.update-status')
+    ->middleware('web') // Only web middleware, no auth
+    ->withoutMiddleware(['csrf']);  // Important: exclude CSRF for external callbacks
 
 Route::match(['get', 'post'],'/billing/callback/way-for-pay/callback', [WayForPayController::class, 'callback'])
-    ->name('billing.way-for-pay.callback');
+    ->name('billing.way-for-pay.callback')
+    ->middleware('web')  // Only web middleware, no auth
+    ->withoutMiddleware(['csrf']);
 
 Route::post('f/{hash}', [SubmissionController::class, 'store'])
     ->where('hash', '[a-zA-Z0-9]+')

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\PaymentStatusEnum;
 use App\Models\Payment;
 use App\Models\Company;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -53,11 +54,10 @@ class WayForPayService
         return $paymentData;
     }
 
-    public function handleGetCallback(Request $request): \Illuminate\Http\RedirectResponse
+    public function handleGetCallback(Request $request): RedirectResponse
     {
         $orderReference = $request->query('orderReference');
         if (!$orderReference) {
-            // Always redirect to a public page, never to login
             return redirect()->route('company.index')
                 ->with('error', 'Payment reference not found. Please contact support.');
         }
@@ -68,15 +68,23 @@ class WayForPayService
                 ->with('error', 'Payment not found. Please contact support.');
         }
 
-        // No session/auth required, always redirect to company.index
+        // Add a redirect to login if user isn't authenticated
+        if (!auth()->check()) {
+            // Store a success message in session before redirecting to login
+            if ($payment->status->value === 'paid') {
+                session()->flash('payment_success', 'Payment completed successfully. Your limits have been updated.');
+            }
+            return redirect()->route('login')->with('redirect_after_login', route('billing.index'));
+        }
+
         if ($payment->status->value === 'paid') {
-            return redirect()->route('company.index')
+            return redirect()->route('billing.index')
                 ->with('success', 'Payment completed successfully. Your limits have been updated.');
         } elseif ($payment->status->value === 'pending') {
-            return redirect()->route('company.index')
+            return redirect()->route('billing.index')
                 ->with('info', 'Your payment is being processed. Limits will be updated once payment is confirmed.');
         } else {
-            return redirect()->route('company.index')
+            return redirect()->route('billing.index')
                 ->with('error', 'Payment failed. Please try again or contact support.');
         }
     }
@@ -97,41 +105,66 @@ class WayForPayService
             'merchantSignature'
         ];
 
+        $missingFields = [];
         foreach ($requiredFields as $field) {
             if (!isset($data[$field])) {
-                Log::error('WayForPay POST callback: Missing field ' . $field);
+                $missingFields[] = $field;
             }
         }
 
+        if (!empty($missingFields)) {
+            Log::error('WayForPay POST callback: Missing fields: ' . implode(', ', $missingFields));
+            return;
+        }
+
         $signatureFields = [
-            $data['merchantAccount'] ?? '',
-            $data['orderReference'] ?? '',
-            $data['amount'] ?? '',
-            $data['currency'] ?? '',
+            $data['merchantAccount'],
+            $data['orderReference'],
+            $data['amount'],
+            $data['currency'],
             $data['authCode'] ?? '',
             $data['cardPan'] ?? '',
-            $data['transactionStatus'] ?? '',
-            $data['reasonCode'] ?? '',
+            $data['transactionStatus'],
+            $data['reasonCode'],
         ];
 
         $signatureString = implode(';', $signatureFields);
         $expectedSignature = hash_hmac('md5', $signatureString, $merchantSecretKey);
 
-        if (($data['merchantSignature'] ?? '') !== $expectedSignature) {
-            Log::error('Invalid signature');
+        if ($data['merchantSignature'] !== $expectedSignature) {
+            Log::error('Invalid signature in WayForPay callback', [
+                'received' => $data['merchantSignature'],
+                'expected' => $expectedSignature
+            ]);
+            return;
         }
 
         $payment = Payment::where('payment_id', $data['orderReference'])->first();
+        if (!$payment) {
+            Log::error('Payment not found for orderReference: ' . $data['orderReference']);
+            return;
+        }
 
         $paymentUpdated = $this->paymentUpdated($payment, $data);
+        Log::info('Payment update result: ' . ($paymentUpdated ? 'success' : 'failed'));
 
-        $company = Company::find($payment->company_id);
-        if ($company && $paymentUpdated) {
-            $submissionLimit = $payment->payload['submission_limit'] ?? 0;
-            $formLimit = $payment->payload['form_limit'] ?? 0;
-            $company->submission_limit += $submissionLimit;
-            $company->form_limit += $formLimit;
-            $company->save();
+        if ($paymentUpdated) {
+            $company = Company::find($payment->company_id);
+            if ($company) {
+                $submissionLimit = $payment->payload['submission_limit'] ?? 0;
+                $formLimit = $payment->payload['form_limit'] ?? 0;
+                $company->submission_limit += $submissionLimit;
+                $company->form_limit += $formLimit;
+                $company->save();
+
+                Log::info('Company limits updated', [
+                    'company_id' => $company->id,
+                    'submission_limit' => $submissionLimit,
+                    'form_limit' => $formLimit
+                ]);
+            } else {
+                Log::error('Company not found for payment', ['company_id' => $payment->company_id]);
+            }
         }
     }
 
