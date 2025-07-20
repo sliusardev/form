@@ -26,11 +26,12 @@ class WayForPayController extends Controller
         $submissionLimit = $request->input('submission_limit');
         $formLimit = $request->input('form_limit');
         $totalCost = ($submissionLimit * $submissionCost) + ($formLimit * $formCost);
-        $totalCost = 1;
 
         if ($totalCost < $minPayment) {
             return back()->withErrors(['total_cost' => 'Minimum payment is ' . $minPayment . ' ' . $currency]);
         }
+
+        $totalCost = 1;
 
         $productName = trans('dashboard.billing') .': '
             . $submissionLimit  . ' ' . trans('dashboard.submissions') . ', '

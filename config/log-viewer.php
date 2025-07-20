@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'back_to_system_url' => url('/dashboard'),
+    'back_to_system_url' => '/dashboard',
 
     'back_to_system_label' => null, // Displayed by default: "Back to {{ app.name }}"
 
