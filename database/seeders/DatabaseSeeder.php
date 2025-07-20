@@ -42,12 +42,12 @@ class DatabaseSeeder extends Seeder
             resolve(CompanyService::class)->createNew($user);
         }
 
-        $clientRole = Role::query()->where('name', RoleEnum::CLIENT->value)->first();
-
-        $fabricUsers = User::factory(1000)->create();
-
-        foreach ($fabricUsers as $fabricUser) {
-            $fabricUser->assignRole($clientRole);
-        }
+//        $clientRole = Role::query()->where('name', RoleEnum::CLIENT->value)->first();
+//
+//        $fabricUsers = User::factory(1000)->create();
+//
+//        foreach ($fabricUsers as $fabricUser) {
+//            $fabricUser->assignRole($clientRole);
+//        }
     }
 }
