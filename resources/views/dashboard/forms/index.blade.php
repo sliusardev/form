@@ -48,7 +48,7 @@
 
                             <div class="divider my-2"></div>
 
-                            <div class="flex items-start justify-between text-xs opacity-70">
+                            <div class="flex items-start justify-between text-sm opacity-70">
                                 <x-ui.copy-text :id="'form-url-' . $form->id" :text="$form->formUrl()" />
                             </div>
                         </div>
