@@ -26,9 +26,9 @@ if (!function_exists('selectedCompany')) {
 }
 
 if (!function_exists('settings')) {
-    function settings(): Collection
+    function settings(): array
     {
         $setting = Settings::query()->first();
-        return $setting ? $setting->data : collect([]);
+        return $setting ? $setting->data : [];
     }
 }

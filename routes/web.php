@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\BillingController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Billing\BillingController;
+use App\Http\Controllers\Billing\WayForPayController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\UserController;
@@ -47,8 +47,14 @@ Route::prefix('dashboard')
             return view('dashboard.integrations');
         })->name('integrations.index');
 
-        Route::get('/billing', [BillingController::class, 'index'])->name('billing.index');
-        Route::post('/billing/wayforpay-pay', [BillingController::class, 'pay'])->name('billing.pay');
+        Route::get('/billing', [BillingController::class, 'index'])
+            ->name('billing.index');
+
+        Route::post('/billing/way-for-pay/pay', [WayForPayController::class, 'pay'])
+            ->name('way-for-pay.pay');
+
+        Route::get('/billing/callback/way-for-pay/show-status', [WayForPayController::class, 'showStatus'])
+            ->name('billing.way-for-pay.show-status');
 
         Route::middleware([AdminMiddleware::class])->group(function () {
             Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
@@ -56,10 +62,11 @@ Route::prefix('dashboard')
         });
     });
 
-Route::match(['get', 'post'], 'billing/callback/wayforpay', [BillingController::class, 'wayforpayCallback'])
-    ->name('billing.wayforpay.callback');
+Route::post('/billing/callback/way-for-pay/update-status', [WayForPayController::class, 'updateStatus'])
+    ->name('billing.way-for-pay.update-status');
 
-Route::post('/payment/webhook', [PaymentController::class, 'webhook'])->name('payment.webhook');
+Route::match(['get', 'post'],'/billing/callback/way-for-pay/callback', [WayForPayController::class, 'callback'])
+    ->name('billing.way-for-pay.callback');
 
 Route::post('f/{hash}', [SubmissionController::class, 'store'])
     ->where('hash', '[a-zA-Z0-9]+')

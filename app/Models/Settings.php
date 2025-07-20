@@ -13,7 +13,7 @@ class Settings extends Model
     protected function casts(): array
     {
         return [
-            'data' => 'collection'
+            'data' => 'array'
         ];
     }
 }

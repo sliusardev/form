@@ -10,11 +10,11 @@
             {{__('dashboard.billing')}}
         </label>
         <div class="tab-content bg-base-100 border-base-300 p-6">
-            <form class="space-y-4" action="{{ route('settings.update') }}" method="POST">
+            <form class="space-y-4 grid grid-cols-1 md:grid-cols-3 gap-2" action="{{ route('settings.update') }}" method="POST">
                 @csrf
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.one_submission_cost', ['currency' => 'UAH'])}}</label>
-                    <input type="number" name="one_submission_cost_uah" id="one_submission_cost_uah" value="{{ old('one_submission_cost_uah', $settings['one_submission_cost_uah'] ?? '') }}"  min="0" step="0.5" required class="w-full bg-white border @error('name') border-red-500 @else border-gray-300 @enderror rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                    <input type="number" name="one_submission_cost_uah" id="one_submission_cost_uah" value="{{ old('one_submission_cost_uah', $settings['one_submission_cost_uah'] ?? '') }}"  min="0" step="0.1" required class="w-full bg-white border @error('name') border-red-500 @else border-gray-300 @enderror rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.one_form_cost', ['currency' => 'UAH'])}}</label>

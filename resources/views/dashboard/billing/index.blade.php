@@ -4,7 +4,7 @@
     <div class="max-w-full mx-auto bg-white p-6 rounded-lg shadow-md">
         <h2 class="text-3xl font-semibold text-gray-800 mb-6">Billing</h2>
 
-        <form action="{{ route('billing.pay') }}" method="POST" class="space-y-6">
+        <form action="{{ route('way-for-pay.pay') }}" method="POST" class="space-y-6">
             @csrf
 
             <div class="gap-4 grid grid-cols-1">
@@ -46,22 +46,25 @@
         const formOne = {{ $formOne }};
         const currency = "{{ $currency }}";
 
+        updateSubmissionCost()
+        updateFormCost()
         updateTotalCost();
 
-        submissionLimitInput.addEventListener('input', function () {
-            const value = parseInt(submissionLimitInput.value, 10);
-            if (!isNaN(value)) {
-                const cost = value * submissionOne;
-                submissionLimitInput.nextElementSibling.textContent = `Cost: ${cost} ${currency}`;
-            }
-        });
-        formLimitInput.addEventListener('input', function () {
+        function updateFormCost() {
             const value = parseInt(formLimitInput.value, 10);
             if (!isNaN(value)) {
                 const cost = value * formOne;
                 formLimitInput.nextElementSibling.textContent = `Cost: ${cost} ${currency}`;
             }
-        });
+        }
+
+        function updateSubmissionCost() {
+            const value = parseInt(submissionLimitInput.value, 10);
+            if (!isNaN(value)) {
+                const cost = value * submissionOne;
+                submissionLimitInput.nextElementSibling.textContent = `Cost: ${cost} ${currency}`;
+            }
+        }
 
         function updateTotalCost() {
             const submissionLimit = parseInt(submissionLimitInput.value, 10) || 0;
@@ -69,6 +72,10 @@
             const totalCost = (submissionLimit * submissionOne) + (formLimit * formOne);
             document.getElementById('total_cost').value = totalCost + ' ' + currency;
         }
+
+        submissionLimitInput.addEventListener('input', updateSubmissionCost);
+        formLimitInput.addEventListener('input', updateFormCost);
+
         submissionLimitInput.addEventListener('input', updateTotalCost);
         formLimitInput.addEventListener('input', updateTotalCost);
 

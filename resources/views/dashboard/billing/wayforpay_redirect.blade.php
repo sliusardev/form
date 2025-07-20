@@ -14,7 +14,7 @@
                 @endif
             @endforeach
         </form>
-        <p class="text-gray-600">Please wait, you are being redirected to the payment page...</p>
+        <p class="text-gray-600">{{__('dashboard.redirected_to_payment_page_message')}}</p>
     </div>
     <script>
         document.getElementById('wayforpayForm').submit();
