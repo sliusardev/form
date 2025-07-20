@@ -34,8 +34,8 @@ class WayForPayService
             'clientEmail' => auth()->user()->email,
             'language' => 'UA',
             'serviceUrl' => route('billing.way-for-pay.update-status'),
-            'callbackUrl' => route('billing.way-for-pay.show-status'),
-//            'returnUrl' => route('billing.way-for-pay.callback'),
+            'callbackUrl' => route('billing.way-for-pay.callback'),
+            'returnUrl' => route('billing.way-for-pay.show-status'),
         ];
 
         $signatureString = implode(';', [
