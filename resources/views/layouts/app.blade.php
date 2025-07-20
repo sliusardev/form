@@ -23,7 +23,7 @@
     @includeIf('dashboard.partials.sidebar')
 
     <!-- Main Content -->
-    <div class="flex-1 flex flex-col overflow-y-auto">
+    <div class="flex-1 flex flex-col overflow-y-auto py-10">
         <!-- Topbar -->
         @includeIf('dashboard.partials.toolbar')
         <!-- Dashboard -->
