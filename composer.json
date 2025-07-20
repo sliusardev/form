@@ -14,6 +14,7 @@
         "laravel/socialite": "^5.21",
         "laravel/tinker": "^2.10.1",
         "liqpay/liqpay": "^1.4",
+        "opcodesio/log-viewer": "^3.18",
         "spatie/laravel-permission": "^6.20"
     },
     "require-dev": {

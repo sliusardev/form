@@ -73,5 +73,6 @@
         'one_submission_cost' => 'One submission costs :currency',
         'one_form_cost' => 'One form costs :currency',
         'min_payment' => 'Minimum payment :currency',
-        'redirected_to_payment_page_message' => 'Please wait, you are being redirected to the payment page...'
+        'redirected_to_payment_page_message' => 'Please wait, you are being redirected to the payment page...',
+        'log_viewer' => 'Log Viewer',
     ];

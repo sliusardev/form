@@ -38,6 +38,10 @@
             <a href="{{route('settings.index')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
                 {{__('dashboard.settings')}}
             </a>
+
+            <a href="{{url('dashboard/log-viewer')}}" class="block px-4 py-2 hover:bg-gray-700 rounded">
+                {{__('dashboard.log_viewer')}}
+            </a>
         </nav>
     @endif
 
