@@ -58,6 +58,7 @@
         'account_settings' => 'Account Settings',
         'company_settings' => 'Company Settings',
         'settings' => 'Settings',
+        'setting' => 'Setting',
         'submission_limit' => 'Submission Limit',
         'form_limit' => 'Form Limit',
         'limits' => 'Limits',
@@ -69,4 +70,7 @@
         'subscription' => 'Subscription',
         'buy_more' => 'Buy more',
         'increase' => 'Increase',
+        'one_submission_cost' => 'One submission costs :currency',
+        'one_form_cost' => 'One form costs :currency',
+        'min_payment' => 'Minimum payment :currency',
     ];

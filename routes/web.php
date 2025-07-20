@@ -1,14 +1,14 @@
 <?php
 
 use App\Http\Controllers\BillingController;
-use App\Http\Controllers\BillingPlanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubmissionController;
-use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\FormSubmissionMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +19,7 @@ Route::get('/', function () {
 Route::prefix('dashboard')
     ->middleware(['auth'])
     ->group(function () {
+
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('/company', [CompanyController::class, 'index'])->name('company.index');
@@ -48,10 +49,17 @@ Route::prefix('dashboard')
 
         Route::get('/billing', [BillingController::class, 'index'])->name('billing.index');
         Route::post('/billing/wayforpay-pay', [BillingController::class, 'pay'])->name('billing.pay');
+
+        Route::middleware([AdminMiddleware::class])->group(function () {
+            Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+            Route::post('/settings/update', [SettingsController::class, 'update'])->name('settings.update');
+        });
     });
 
 Route::match(['get', 'post'], 'billing/callback/wayforpay', [BillingController::class, 'wayforpayCallback'])
     ->name('billing.wayforpay.callback');
+
+Route::post('/payment/webhook', [PaymentController::class, 'webhook'])->name('payment.webhook');
 
 Route::post('f/{hash}', [SubmissionController::class, 'store'])
     ->where('hash', '[a-zA-Z0-9]+')
@@ -60,3 +68,4 @@ Route::post('f/{hash}', [SubmissionController::class, 'store'])
 
 
 require __DIR__.'/auth.php';
+

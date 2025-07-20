@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Company;
+use App\Models\Settings;
+use Illuminate\Support\Collection;
+
 if (!function_exists('setSelectedCompanyId')) {
     function setSelectedCompanyId($companyId): void
     {
@@ -17,6 +21,14 @@ if (!function_exists('selectedCompanyId')) {
 if (!function_exists('selectedCompany')) {
     function selectedCompany()
     {
-        return \App\Models\Company::query()->find(selectedCompanyId());
+        return Company::query()->find(selectedCompanyId());
+    }
+}
+
+if (!function_exists('settings')) {
+    function settings(): Collection
+    {
+        $setting = Settings::query()->first();
+        return $setting ? $setting->data : collect([]);
     }
 }

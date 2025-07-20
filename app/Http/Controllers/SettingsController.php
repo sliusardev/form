@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Settings;
+use Illuminate\Http\Request;
+
+class SettingsController extends Controller
+{
+    public function index()
+    {
+        $setting = Settings::query()->firstOrCreate();
+        $settings = $setting->data ?? [];
+        return view('dashboard.settings', [
+            'settings' => $settings
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $settings = Settings::query()->first();
+
+        $data = $request->except(['_token', '_method']);
+
+        $settings->update([
+           'data' => $data
+        ]);
+
+        return redirect()->back()->with('success', 'Settings updated successfully.');
+    }
+
+}
