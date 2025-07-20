@@ -38,13 +38,17 @@ function sidebarToggle() {
 function mainChart() {
     const ctx = document.getElementById('submissionChart');
     if (ctx) {
+        // Use real data from backend if available
+        const labels = window.submissionChartLabels || ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const data = window.submissionChartCounts || [0, 0, 0, 0, 0, 0, 0];
+
         const submissionChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                labels: labels,
                 datasets: [{
                     label: 'Submissions',
-                    data: [12, 19, 3, 5, 2, 3, 7],
+                    data: data,
                     borderColor: 'rgba(59, 130, 246, 1)',
                     tension: 0.4,
                     fill: false
@@ -66,4 +70,3 @@ function mainChart() {
         });
     }
 }
-

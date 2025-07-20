@@ -34,6 +34,7 @@
 
 @push('scripts')
     <script>
-
+        window.submissionChartLabels = @json($labels ?? []);
+        window.submissionChartCounts = @json($counts ?? []);
     </script>
 @endpush
