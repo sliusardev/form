@@ -21,6 +21,7 @@ class PaymentService
                 'status' => PaymentStatusEnum::PENDING,
                 'payload' => $paymentData,
                 'company_id' => $company->id,
+                'user_id' => auth()->id(),
             ]);
         } catch (\Exception $e) {
             Log::error('Failed to save payment: ' . $e->getMessage());

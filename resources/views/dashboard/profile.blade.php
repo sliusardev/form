@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('head')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
+@endpush
+
 @section('content')
     <h2 class="text-2xl font-semibold text-gray-800 mb-6">{{ __('dashboard.profile_settings') }}</h2>
 
@@ -15,12 +19,22 @@
                        class="w-full bg-white border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                        required />
             </div>
+
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('dashboard.email') }}</label>
                 <input type="email" name="email" value="{{ old('email', $user->email) }}"
                        class="w-full bg-white border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                        required />
             </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('dashboard.phone') }}</label>
+                <input type="tel" id="phone" name="phone" value="{{ old('phone', $user->phone) }}"
+                       class="w-full bg-white border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="123-456-7890" />
+                <input type="hidden" name="phone_country_code" id="phone_country_code" value="{{ old('phone_country_code', $user->phone_country_code) }}">
+            </div>
+
             <div>
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">{{ __('dashboard.save') }}</button>
             </div>
@@ -65,3 +79,73 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.querySelector("#phone");
+            const phoneCountryCode = document.querySelector("#phone_country_code");
+
+            const iti = window.intlTelInput(phoneInput, {
+                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+                preferredCountries: ["ua", "us", "pl", 'gb', 'nl', 'de', 'fr', 'it', 'es'],
+                separateDialCode: true,
+                initialCountry: "auto",
+                geoIpLookup: function(callback) {
+                    // Use user's saved country code if available
+                    const savedCountryCode = phoneCountryCode.value;
+                    if (savedCountryCode) {
+                        // Try to match saved country by dial code
+                        fetch('https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/index.json')
+                            .then(res => res.json())
+                            .then(countries => {
+                                const dialCode = savedCountryCode.replace('+', '');
+                                // Find country with matching dial code
+                                for (let country of countries) {
+                                    if (country.phone === dialCode) {
+                                        return callback(country.code.toLowerCase());
+                                    }
+                                }
+                                // Fallback
+                                callback('ua');
+                            })
+                            .catch(() => callback('ua'));
+                    } else {
+                        // Use IP-based geolocation
+                        fetch('https://ipapi.co/json/')
+                            .then(res => res.json())
+                            .then(data => {
+                                callback(data.country_code.toLowerCase());
+                            })
+                            .catch(() => callback('ua'));
+                    }
+                }
+            });
+
+            // Update hidden country code field before form submission
+            const form = phoneInput.closest('form');
+            form.addEventListener('submit', function() {
+                const dialCode = iti.getSelectedCountryData().dialCode;
+                phoneCountryCode.value = '+' + dialCode;
+            });
+
+            // Alternative approach - set country directly if we have a saved dial code
+            if (phoneCountryCode.value) {
+                setTimeout(() => {
+                    // Try to find a country that matches our saved dial code
+                    const allCountries = iti.getCountryData();
+                    const dialCode = phoneCountryCode.value.replace('+', '');
+
+                    const matchingCountry = allCountries.find(country =>
+                        country.dialCode === dialCode
+                    );
+
+                    if (matchingCountry) {
+                        iti.setCountry(matchingCountry.iso2);
+                    }
+                }, 100);
+            }
+        });
+    </script>
+@endpush

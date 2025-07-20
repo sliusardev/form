@@ -139,11 +139,7 @@ class WayForPayService
             return;
         }
 
-        $payment = Payment::where('payment_id', $data['orderReference'])->first();
-        if (!$payment) {
-            Log::error('Payment not found for orderReference: ' . $data['orderReference']);
-            return;
-        }
+        $payment = Payment::query()->where('payment_id', $data['orderReference'])->first();
 
         $paymentUpdated = $this->paymentUpdated($payment, $data);
         Log::info('Payment update result: ' . ($paymentUpdated ? 'success' : 'failed'));
@@ -171,7 +167,7 @@ class WayForPayService
     public function paymentUpdated($payment, $data): bool
     {
         if (!$payment) {
-            Log::error('Payment not found ');
+            Log::error('Payment not found for orderReference: ' . $data['orderReference']);
             return false;
         }
 

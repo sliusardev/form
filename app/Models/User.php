@@ -28,6 +28,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'phone_country_code',
         'avatar',
     ];
 
@@ -69,6 +70,11 @@ class User extends Authenticatable
         return $this->hasMany(AuthProviders::class);
     }
 
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'user_id', 'id');
+    }
+
     public function company(): HasOne
     {
         return $this->hasOne(Company::class, 'user_id', 'id');
@@ -83,4 +89,11 @@ class User extends Authenticatable
     {
         return $this->roles()->pluck('name')->implode(', ');
     }
+
+    public function getPermissionsNames(): string
+    {
+        return $this->getAllPermissions()->pluck('name')->implode(', ');
+    }
+
+
 }

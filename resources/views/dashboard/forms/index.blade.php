@@ -3,9 +3,9 @@
 @section('content')
 
     <div class="max-w-full mx-auto bg-white p-4 rounded-lg shadow-md">
-        <div class="flex flex-wrap items-center justify-center lg:justify-between mb-6 gap-3">
-            <h2 class="text-3xl font-semibold text-gray-800">Your Forms</h2>
-            <a href="{{ route('forms.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition flex gap-2 items-center uppercase text-center">
+        <div class="flex flex-col justify-center md:flex-row md:justify-between items-center mb-6">
+            <h2 class="text-center md:text-2xl font-semibold text-gray-800 my-3">Your Forms</h2>
+            <a href="{{ route('forms.create') }}"  class="btn btn-primary">
                 {{__('dashboard.create')}}
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
             </a>
@@ -57,13 +57,9 @@
 
             @if($forms->isEmpty())
                 <div class="col-span-full flex justify-center items-center p-10">
-                    <h2 class="text-2xl text-center">Create your first form</h2>
-                </div>
-                <div class="col-span-full flex justify-center mt-4">
-                    <a href="{{ route('forms.create') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition flex gap-2 items-center uppercase">
-                        {{__('dashboard.create')}}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
-                    </a>
+                    <h2 class="text-2xl text-center">
+                        {{__('dashboard.create_your_first_form')}}
+                    </h2>
                 </div>
             @endif
 
