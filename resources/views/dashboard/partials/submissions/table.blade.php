@@ -8,6 +8,7 @@
                 <th class="px-6 py-3 text-left font-medium text-gray-600">Date</th>
                 <th class="px-6 py-3 text-left font-medium text-gray-600">Status</th>
                 <th class="px-6 py-3 text-left font-medium text-gray-600">Hash</th>
+                <th class="px-6 py-3 text-left font-medium text-gray-600">Method</th>
                 <th class="px-6 py-3 text-left font-medium text-gray-600">Actions</th>
             </tr>
             </thead>
@@ -27,6 +28,7 @@
                         </span>
                     </td>
                     <td class="px-6 py-4 text-gray-800">{{ $submission->hash }}</td>
+                    <td class="px-6 py-4 text-gray-800">{{ $submission->method }}</td>
                     <td class="px-6 py-4">
                         <a href="{{ route('submissions.show', $submission) }}" class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">

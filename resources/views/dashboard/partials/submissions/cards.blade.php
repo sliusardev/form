@@ -13,6 +13,7 @@
                         <p class="text-gray-700"><span class="font-medium">Form:</span> {{ $submission->form->title ?? 'Unknown Form' }}</p>
                         <p class="text-gray-700"><span class="font-medium">Date:</span> {{ $submission->created_at->format('Y-m-d H:i') }}</p>
                         <p class="text-gray-700"><span class="font-medium">Hash:</span> {{ $submission->hash }}</p>
+                        <p class="text-gray-700"><span class="font-medium">Method:</span> {{ $submission->method }}</p>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-200">
                         <a href="{{ route('submissions.show', $submission) }}" class="text-blue-500 hover:underline">View Details</a>

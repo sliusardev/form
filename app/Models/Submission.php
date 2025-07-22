@@ -15,6 +15,7 @@ class Submission extends Model
         'status',
         'ip_address',
         'hash',
+        'method',
     ];
 
     protected $casts = [

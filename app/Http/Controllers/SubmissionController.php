@@ -94,7 +94,8 @@ class SubmissionController extends Controller
         $submission = $submissionService->createSubmission(
             $form,
             $formData,
-            $request->ip()
+            $request->ip(),
+            $request->getMethod()
         );
 
         return response()->json([

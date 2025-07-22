@@ -28,6 +28,10 @@
                     <p class="font-medium">{{ $submission->ip_address }}</p>
                 </div>
                 <div>
+                    <p class="text-sm text-gray-500">IP {{ __('dashboard.method') }}</p>
+                    <p class="font-medium">{{ $submission->method }}</p>
+                </div>
+                <div>
                     <p class="text-sm text-gray-500">{{ __('dashboard.status') }}</p>
                     <p class="font-medium">
                         <span class="px-2 py-1 text-xs rounded-full {{ $submission->status === 'success' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">

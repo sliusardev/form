@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('ip_address')->nullable();
             $table->string('hash')->nullable();
+            $table->string('method')->nullable();
             $table->timestamps();
         });
     }
