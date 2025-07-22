@@ -91,6 +91,10 @@ class SubmissionController extends Controller
 
         $formData = $request->all();
 
+        if ($request->isJson()) {
+            $formData = $request->json()->all();
+        }
+
         $submission = $submissionService->createSubmission(
             $form,
             $formData,
