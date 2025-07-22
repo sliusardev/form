@@ -4,11 +4,11 @@
             <thead class="bg-gray-200 border-b">
             <tr>
                 <th class="px-6 py-3 text-left font-medium text-gray-600">ID</th>
+                <th class="px-6 py-3 text-left font-medium text-gray-600">Method</th>
                 <th class="px-6 py-3 text-left font-medium text-gray-600">Form</th>
                 <th class="px-6 py-3 text-left font-medium text-gray-600">Date</th>
                 <th class="px-6 py-3 text-left font-medium text-gray-600">Status</th>
                 <th class="px-6 py-3 text-left font-medium text-gray-600">Hash</th>
-                <th class="px-6 py-3 text-left font-medium text-gray-600">Method</th>
                 <th class="px-6 py-3 text-left font-medium text-gray-600">Actions</th>
             </tr>
             </thead>
@@ -16,19 +16,21 @@
             @forelse($submissions as $submission)
                 <tr>
                     <td class="px-6 py-4 text-gray-800">#{{ $submission->id }}</td>
-                    <td class="px-6 py-4 text-gray-800">
+                    <td class="px-6 py-4">
+                        @if(strtoupper($submission->method) === 'POST')
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">{{ $submission->method }}</span>
+                        @elseif(strtoupper($submission->method) === 'GET')
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">{{ $submission->method }}</span>
+                        @else
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">{{ $submission->method }}</span>
+                        @endif
+                    </td>                    <td class="px-6 py-4 text-gray-800">
                         <a href="{{ route('submissions.show', $submission) }}" class="text-gray-800 hover:underline">
                             {{ $submission->form->title ?? 'Unknown Form' }}
                         </a>
                     </td>
                     <td class="px-6 py-4 text-gray-800">{{ $submission->created_at->format('Y-m-d H:i') }}</td>
-                    <td class="px-6 py-4">
-                        <span class="px-2 py-1 text-xs rounded-full {{ $submission->status === 'success' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
-                            {{ ucfirst($submission->status) }}
-                        </span>
-                    </td>
                     <td class="px-6 py-4 text-gray-800">{{ $submission->hash }}</td>
-                    <td class="px-6 py-4 text-gray-800">{{ $submission->method }}</td>
                     <td class="px-6 py-4">
                         <a href="{{ route('submissions.show', $submission) }}" class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
