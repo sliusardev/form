@@ -24,7 +24,8 @@
                         @else
                             <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">{{ $submission->method }}</span>
                         @endif
-                    </td>                    <td class="px-6 py-4 text-gray-800">
+                    </td>
+                    <td class="px-6 py-4 text-gray-800">
                         <a href="{{ route('submissions.show', $submission) }}" class="text-gray-800 hover:underline">
                             {{ $submission->form->title ?? 'Unknown Form' }}
                         </a>
