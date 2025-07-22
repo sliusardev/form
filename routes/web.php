@@ -57,9 +57,6 @@ Route::prefix('dashboard')
         Route::post('/billing/way-for-pay/pay', [WayForPayController::class, 'pay'])
             ->name('way-for-pay.pay');
 
-        Route::get('/billing/callback/way-for-pay/show-status', [WayForPayController::class, 'showStatus'])
-            ->name('billing.way-for-pay.show-status');
-
         Route::middleware([AdminMiddleware::class])->group(function () {
             Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
             Route::post('/settings/update', [SettingsController::class, 'update'])->name('settings.update');
@@ -75,6 +72,9 @@ Route::match(['get', 'post'],'/billing/callback/way-for-pay/callback', [WayForPa
     ->name('billing.way-for-pay.callback')
     ->middleware('web')  // Only web middleware, no auth
     ->withoutMiddleware(['csrf']);
+
+Route::get('/billing/callback/way-for-pay/show-status', [WayForPayController::class, 'showStatus'])
+    ->name('billing.way-for-pay.show-status');
 
 Route::post('f/{hash}', [SubmissionController::class, 'store'])
     ->where('hash', '[a-zA-Z0-9]+')

@@ -33,9 +33,12 @@ class WayForPayService
             'clientFirstName' => $company->name,
             'clientEmail' => auth()->user()->email,
             'language' => 'UA',
-            'serviceUrl' => route('billing.way-for-pay.update-status'),
-            'callbackUrl' => route('billing.way-for-pay.callback'),
-            'returnUrl' => route('billing.way-for-pay.callback'),
+//            'serviceUrl' => route('billing.way-for-pay.update-status'),
+//            'callbackUrl' => route('billing.way-for-pay.callback'),
+//            'returnUrl' => route('billing.way-for-pay.callback'),
+            'serviceUrl' => 'https://formpost.org/f/dKPRWXh55ifs6bw',
+            'callbackUrl' => 'https://formpost.org/f/GXFDgfwnKZS9TAo',
+            'returnUrl' => 'https://formpost.org/f/LSAxXmthKpG9tbc',
         ];
 
         $signatureString = implode(';', [
@@ -145,22 +148,7 @@ class WayForPayService
         Log::info('Payment update result: ' . ($paymentUpdated ? 'success' : 'failed'));
 
         if ($paymentUpdated) {
-            $company = Company::find($payment->company_id);
-            if ($company) {
-                $submissionLimit = $payment->payload['submission_limit'] ?? 0;
-                $formLimit = $payment->payload['form_limit'] ?? 0;
-                $company->submission_limit += $submissionLimit;
-                $company->form_limit += $formLimit;
-                $company->save();
-
-                Log::info('Company limits updated', [
-                    'company_id' => $company->id,
-                    'submission_limit' => $submissionLimit,
-                    'form_limit' => $formLimit
-                ]);
-            } else {
-                Log::error('Company not found for payment', ['company_id' => $payment->company_id]);
-            }
+            $this->updateCompany($payment, $data);
         }
     }
 
@@ -188,6 +176,26 @@ class WayForPayService
         $payment->save();
 
         return true;
+    }
+
+    public function updateCompany(Payment $payment, $data): void
+    {
+        $company = Company::find($payment->company_id);
+        if ($company) {
+            $submissionLimit = $payment->payload['submission_limit'] ?? 0;
+            $formLimit = $payment->payload['form_limit'] ?? 0;
+            $company->submission_limit += $submissionLimit;
+            $company->form_limit += $formLimit;
+            $company->save();
+
+            Log::info('Company limits updated', [
+                'company_id' => $company->id,
+                'submission_limit' => $submissionLimit,
+                'form_limit' => $formLimit
+            ]);
+        } else {
+            Log::error('Company not found for payment', ['company_id' => $payment->company_id]);
+        }
     }
 
 }
