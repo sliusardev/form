@@ -91,6 +91,37 @@ class SubmissionController extends Controller
 
         $formData = $request->all();
 
+        // Check if we have a JSON string as a key (the WayForPay response pattern)
+        if (is_array($formData) && count($formData) === 1) {
+            $keys = array_keys($formData);
+            $firstKey = reset($keys);
+
+            // Check if the first key looks like a JSON string
+            if (is_string($firstKey) && str_starts_with($firstKey, '{')) {
+                try {
+                    // First, replace escaped quotes with actual quotes
+                    $jsonString = str_replace('\"', '"', $firstKey);
+                    // Also fix the underscores in decimal numbers like 0_02 to 0.02
+                    $jsonString = preg_replace('/_(\d+)/', '.\1', $jsonString);
+                    // Also fix underscores in text like JSC_UNIVERSAL_BANK
+                    $jsonString = str_replace('_', ' ', $jsonString);
+
+                    // Now decode the JSON string
+                    $decodedData = json_decode($jsonString, true);
+
+                    if (json_last_error() === JSON_ERROR_NONE && is_array($decodedData)) {
+                        $formData = $decodedData;
+                    }
+                } catch (\Exception $e) {
+                    // If decoding fails, keep original data
+                    \Log::error('Failed to parse payment data: ' . $e->getMessage());
+                }
+            }
+        } elseif ($request->isJson()) {
+            $formData = $request->json()->all();
+        }
+
+
         if ($request->isJson()) {
             $formData = $request->json()->all();
         }
