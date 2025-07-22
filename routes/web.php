@@ -76,7 +76,7 @@ Route::match(['get', 'post'],'/billing/callback/way-for-pay/callback', [WayForPa
 Route::get('/billing/callback/way-for-pay/show-status', [WayForPayController::class, 'showStatus'])
     ->name('billing.way-for-pay.show-status');
 
-Route::post('f/{hash}', [SubmissionController::class, 'store'])
+Route::match(['get', 'post'], 'f/{hash}', [SubmissionController::class, 'store'])
     ->where('hash', '[a-zA-Z0-9]+')
     ->name('forms.store-submission')
     ->middleware([FormSubmissionMiddleware::class]);
