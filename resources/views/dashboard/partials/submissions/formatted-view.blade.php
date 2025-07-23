@@ -1,4 +1,4 @@
-@foreach($submission->payload as $key => $value)
+@foreach($submission->formated() as $key => $value)
     @if(!is_array($value))
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-2 border-b border-gray-100">
             <div class="col-span-1 text-gray-700 font-medium md:border-r border-gray-100 bg-gray-50 overflow-x-auto break-words whitespace-normal">

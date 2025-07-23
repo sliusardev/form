@@ -27,8 +27,9 @@ class Submission extends Model
      * @param  mixed  $value
      * @return array
      */
-    public function getPayloadAttribute($value)
+    public function formated(): array
     {
+        $value = $this->attributes['payload'];
         $payload = is_array($value) ? $value : json_decode($value, true);
 
         // Handle special payload format where the payload is a JSON object with a single key
