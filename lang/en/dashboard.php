@@ -108,4 +108,7 @@
         'ip_address' => 'IP Address',
         'users' => 'Users',
         'user' => 'User',
+        'id' => 'ID',
+        'date' => 'Date',
+        'unknown_form' => 'Unknown Form',
     ];

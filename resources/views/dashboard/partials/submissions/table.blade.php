@@ -3,13 +3,11 @@
         <table class="min-w-full table-auto text-sm">
             <thead class="bg-gray-200 border-b">
             <tr>
-                <th class="px-6 py-3 text-left font-medium text-gray-600">ID</th>
-                <th class="px-6 py-3 text-left font-medium text-gray-600">Method</th>
-                <th class="px-6 py-3 text-left font-medium text-gray-600">Form</th>
-                <th class="px-6 py-3 text-left font-medium text-gray-600">Date</th>
-                <th class="px-6 py-3 text-left font-medium text-gray-600">Status</th>
-                <th class="px-6 py-3 text-left font-medium text-gray-600">Hash</th>
-                <th class="px-6 py-3 text-left font-medium text-gray-600">Actions</th>
+                <th class="px-6 py-3 text-left font-medium text-gray-600">{{ __('dashboard.id') }}</th>
+                <th class="px-6 py-3 text-left font-medium text-gray-600">{{ __('dashboard.method') }}</th>
+                <th class="px-6 py-3 text-left font-medium text-gray-600">{{ __('dashboard.form') }}</th>
+                <th class="px-6 py-3 text-left font-medium text-gray-600">{{ __('dashboard.date') }}</th>
+                <th class="px-6 py-3 text-left font-medium text-gray-600">{{ __('dashboard.hash') }}</th>
             </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
@@ -27,24 +25,15 @@
                     </td>
                     <td class="px-6 py-4 text-gray-800">
                         <a href="{{ route('submissions.show', $submission) }}" class="text-gray-800 hover:underline">
-                            {{ $submission->form->title ?? 'Unknown Form' }}
+                            {{ $submission->form->title ?? __('dashboard.unknown_form') }}
                         </a>
                     </td>
                     <td class="px-6 py-4 text-gray-800">{{ $submission->created_at->format('Y-m-d H:i') }}</td>
                     <td class="px-6 py-4 text-gray-800">{{ $submission->hash }}</td>
-                    <td class="px-6 py-4">
-                        <a href="{{ route('submissions.show', $submission) }}" class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-                            </svg>
-                            <span>View</span>
-                        </a>
-                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="px-6 py-4 text-center text-gray-500">No submissions found</td>
+                    <td colspan="6" class="px-6 py-4 text-center text-gray-500">{{ __('dashboard.no_submissions_yet') }}</td>
                 </tr>
             @endforelse
             </tbody>
