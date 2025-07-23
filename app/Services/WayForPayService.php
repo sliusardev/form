@@ -206,22 +206,29 @@ class WayForPayService
         Log::info('WayForPay POST handleServiceUrl: ', $data);
         $secretKey = config('services.wayforpay.secret_key');
 
-        $expected = base64_encode(hash_hmac('md5', implode(';', [
-            $data['merchantAccount'],
-            $data['orderReference'],
-            $data['amount'],
-            $data['currency'],
-            $data['authCode'],
-            $data['cardPan'],
-            $data['transactionStatus'],
-            $data['reasonCode'],
-        ]), $secretKey));
+        $signatureString = implode(';', [
+            $data['merchantAccount'] ?? '',
+            $data['orderReference'] ?? '',
+            $data['amount'] ?? '',
+            $data['currency'] ?? '',
+            $data['authCode'] ?? '',
+            $data['cardPan'] ?? '',
+            $data['transactionStatus'] ?? '',
+            $data['reasonCode'] ?? '',
+        ]);
 
-        if ($data['merchantSignature'] !== $expected) {
+        $expectedSignature = hash_hmac('md5', $signatureString, $secretKey);
+
+        if (($data['merchantSignature'] ?? '') !== $expectedSignature) {
+            Log::error('Invalid signature in WayForPay service URL callback', [
+                'received' => $data['merchantSignature'] ?? 'not_provided',
+                'expected' => $expectedSignature,
+                'data' => $data
+            ]);
             return response()->json(['reason' => 'Invalid signature'], 403);
         }
 
-        $status = $data['transactionStatus'] === 'Approved' ? PaymentStatusEnum::PAID : PaymentStatusEnum::FAILED;
+        $status = ($data['transactionStatus'] ?? '') === 'Approved' ? PaymentStatusEnum::PAID : PaymentStatusEnum::FAILED;
 
         $payment = Payment::query()->where('payment_id', $data['orderReference'])->first();
 
@@ -249,6 +256,8 @@ class WayForPayService
         return response()->json([
             'orderReference' => $data['orderReference'],
             'status' => 'accept',
+            'time' => time(),
+            'signature' => hash_hmac('md5', implode(';', [$data['orderReference'], 'accept', time()]), $secretKey)
         ]);
     }
 
