@@ -62,13 +62,13 @@ class WayForPayController extends Controller
         ));
     }
 
-    public function updateStatus(Request $request)
+    public function serviceUrl(Request $request)
     {
         \Log::info('WayForPay updateStatus Request: ', $request->all());
         resolve(WayForPayService::class)->handlePostCallback($request);
     }
 
-    public function showStatus(Request $request)
+    public function returnUrl(Request $request)
     {
         \Log::info('WayForPay showStatus Request: ', $request->all());
         return resolve(WayForPayService::class)->handleGetCallback($request);

@@ -65,8 +65,8 @@ Route::prefix('dashboard')
         });
     });
 
-Route::post('/billing/callback/way-for-pay/update-status', [WayForPayController::class, 'updateStatus'])
-    ->name('billing.way-for-pay.update-status')
+Route::post('/billing/callback/way-for-pay/service-url', [WayForPayController::class, 'serviceUrl'])
+    ->name('billing.way-for-pay.service-url')
     ->middleware('web') // Only web middleware, no auth
     ->withoutMiddleware(['csrf']);  // Important: exclude CSRF for external callbacks
 
@@ -75,8 +75,8 @@ Route::match(['get', 'post'],'/billing/callback/way-for-pay/callback', [WayForPa
     ->middleware('web')  // Only web middleware, no auth
     ->withoutMiddleware(['csrf']);
 
-Route::get('/billing/callback/way-for-pay/show-status', [WayForPayController::class, 'showStatus'])
-    ->name('billing.way-for-pay.show-status');
+Route::get('/billing/callback/way-for-pay/return-url', [WayForPayController::class, 'returnUrl'])
+    ->name('billing.way-for-pay.return-url');
 
 Route::match(['get', 'post'], 'f/{hash}', [SubmissionController::class, 'store'])
     ->where('hash', '[a-zA-Z0-9]+')
