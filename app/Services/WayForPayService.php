@@ -32,6 +32,7 @@ class WayForPayService
             'productCount' => [1],
             'productPrice' => [$totalCost],
             'clientFirstName' => $company->name,
+            'clientPhone' => $company->phone ?? '',
             'clientEmail' => auth()->user()->email,
             'language' => 'UA',
             'serviceUrl' => route('billing.way-for-pay.service-url'),
