@@ -202,7 +202,14 @@ class WayForPayService
 
     public function handleServiceUrl(Request $request): JsonResponse
     {
-        $data = $request->all();
+        $content = $request->getContent();
+        $data = json_decode($content, true);
+    
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            Log::error('WayForPay POST handleServiceUrl: Invalid JSON received.', ['content' => $content]);
+            return response()->json(['reason' => 'Invalid JSON'], 400);
+        }
+
         Log::info('WayForPay POST handleServiceUrl: ', $data);
         $secretKey = config('services.wayforpay.secret_key');
 
@@ -250,14 +257,18 @@ class WayForPayService
 
         if ($status == PaymentStatusEnum::FAILED) {
             $reason = $data['reason'] ?? ($data['reasonCode'] ?? 'Unknown error');
-            Log::error('Payment failed for orderReference: ' . $data['orderReference'] . ' - ' . $reason);
+            Log::error('Payment failed for orderReference: ' . ($data['orderReference'] ?? 'N/A') . ' - ' . $reason);
         }
 
+        $orderReference = $data['orderReference'] ?? '';
+        $time = time();
+        $responseSignature = hash_hmac('md5', implode(';', [$orderReference, 'accept', $time]), $secretKey);
+
         return response()->json([
-            'orderReference' => $data['orderReference'],
+            'orderReference' => $orderReference,
             'status' => 'accept',
-            'time' => time(),
-            'signature' => hash_hmac('md5', implode(';', [$data['orderReference'], 'accept', time()]), $secretKey)
+            'time' => $time,
+            'signature' => $responseSignature
         ]);
     }
 
