@@ -12,7 +12,7 @@
             </thead>
             <tbody class="divide-y divide-gray-200">
             @forelse($submissions as $submission)
-                <tr>
+                <tr class="cursor-pointer hover:bg-gray-50" data-href="{{ route('submissions.show', $submission) }}">
                     <td class="px-6 py-4 text-gray-800">#{{ $submission->id }}</td>
                     <td class="px-6 py-4">
                         @if(strtoupper($submission->method) === 'POST')
@@ -40,3 +40,19 @@
         </table>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const rows = document.querySelectorAll('tr[data-href]');
+        rows.forEach(row => {
+            row.addEventListener('click', function(event) {
+                if (event.target.closest('a, button')) {
+                    return;
+                }
+                window.location.href = this.dataset.href;
+            });
+        });
+    });
+</script>
+@endpush
