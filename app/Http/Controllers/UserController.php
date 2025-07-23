@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateUserProfileRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -10,9 +11,31 @@ use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
+    public function index(Request $request)
+    {
+        $query = User::query();
+
+        if ($request->filled('search')) {
+            $query->where('email', 'like', '%' . $request->input('search') . '%');
+        }
+
+        if ($request->filled('sort')) {
+            $direction = $request->input('direction', 'asc');
+            if (in_array($direction, ['asc', 'desc'])) {
+                $query->orderBy($request->input('sort'), $direction);
+            }
+        }
+
+        $users = $query->paginate(15);
+
+        return view('dashboard.users.index', [
+            'users' => $users
+        ]);
+    }
+
     public function profile()
     {
-        return view('dashboard.profile', [
+        return view('dashboard.users.profile', [
             'user' => Auth::user()
         ]);
     }

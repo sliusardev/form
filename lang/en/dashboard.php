@@ -106,4 +106,6 @@
         'phone' => 'Phone',
         'method' => 'Method',
         'ip_address' => 'IP Address',
+        'users' => 'Users',
+        'user' => 'User',
     ];
