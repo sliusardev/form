@@ -14,15 +14,15 @@
                         @endif
                     </div>
                     <div class="space-y-2">
-                        <p class="text-gray-700"><span class="font-medium">Form:</span> {{ $submission->form->title ?? 'Unknown Form' }}</p>
-                        <p class="text-gray-700"><span class="font-medium">Hash:</span> {{ $submission->hash }}</p>
+                        <p class="text-gray-700"><span class="font-medium">{{ __('dashboard.form_label') }}:</span> {{ $submission->form->title ?? __('dashboard.unknown_form') }}</p>
+                        <p class="text-gray-700"><span class="font-medium">{{ __('dashboard.hash') }}:</span> {{ $submission->hash }}</p>
                         <p class="text-black-700 border-t border-gray-100 pt-2"> {{ $submission->created_at->format('Y-m-d H:i') }}</p>
                     </div>
                 </a>
             </div>
         @empty
             <div class="col-span-full bg-white rounded-lg shadow p-6 text-center text-gray-500">
-                No submissions found
+                {{ __('dashboard.no_submissions_found') }}
             </div>
         @endforelse
     </div>

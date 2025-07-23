@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex flex-col items-center justify-center min-h-screen">
-        <h2 class="text-2xl font-semibold mb-4">Redirecting to WayForPay...</h2>
+        <h2 class="text-2xl font-semibold mb-4">{{ __('dashboard.redirecting_to_wayforpay') }}</h2>
         <form id="wayforpayForm" action="{{ $wayforpayUrl }}" method="POST">
             @foreach($paymentData as $key => $value)
                 @if(is_array($value))
@@ -20,4 +20,3 @@
         document.getElementById('wayforpayForm').submit();
     </script>
 @endsection
-

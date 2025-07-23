@@ -4,7 +4,7 @@
     <div class="card bg-base-100 shadow-xl w-full">
         <div class="card-body">
             <div class="flex flex-col md:flex-row md:justify-between items-center mb-6">
-                <h2 class="card-title text-center md:text-2xl font-semibold my-3">Your Forms</h2>
+                <h2 class="card-title text-center md:text-2xl font-semibold my-3">{{ __('dashboard.your_forms') }}</h2>
                 <a href="{{ route('forms.create') }}" class="btn btn-primary">
                     {{__('dashboard.create')}}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
@@ -18,17 +18,17 @@
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="text-lg font-semibold text-gray-800">#{{ $form->id }}</h3>
                                 @if($form->is_enabled)
-                                    <span class="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">{{ucfirst('Enabled')}}</span>
+                                    <span class="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">{{ __('dashboard.enabled_status') }}</span>
                                 @else
-                                    <span class="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">{{ucfirst('Disabled')}}</span>
+                                    <span class="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">{{ __('dashboard.disabled_status') }}</span>
                                 @endif
                             </div>
                             <div class="space-y-2">
-                                <p class="text-gray-700"><span class="font-medium">Form:</span> {{ $form->title ?? 'Unknown Form' }}</p>
+                                <p class="text-gray-700"><span class="font-medium">{{ __('dashboard.form_label') }}:</span> {{ $form->title ?? __('dashboard.unknown_form') }}</p>
                                 <p class="text-gray-700">
-                                    {{$form->description ?: 'No description provided.'}}
+                                    {{$form->description ?: __('dashboard.no_description_provided')}}
                                 </p>
-                                <p class="text-black-700"> Submissions: {{$form->submissions_count}}</p>
+                                <p class="text-black-700"> {{ __('dashboard.submissions') }}: {{$form->submissions_count}}</p>
                                 <div class="flex justify-between items-center text-sm opacity-70 border-t border-gray-100  py-2">
                                     <p class="text-black-700"> {{ $form->created_at->format('Y-m-d') }}</p>
                                     <div class="flex gap-2">

@@ -4,7 +4,7 @@
     <div class="card bg-base-100 shadow-xl w-full">
         <div class="card-body">
             <div class="flex flex-col md:flex-row md:justify-between items-center mb-6">
-                <h2 class="card-title text-center md:text-2xl font-semibold my-3">Users</h2>
+                <h2 class="card-title text-center md:text-2xl font-semibold my-3">{{ __('dashboard.users') }}</h2>
                 <a href="#" class="btn btn-primary">
                     {{__('dashboard.create')}}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
@@ -14,8 +14,8 @@
             <div class="data-list">
                 <div class="mb-4">
                     <form action="{{ route('users.index') }}" method="GET" class="join">
-                        <input type="text" name="search" placeholder="Search by name or email..." value="{{ request('search') }}" class="input input-bordered join-item w-full max-w-xs">
-                        <button class="btn btn-primary join-item">Search</button>
+                        <input type="text" name="search" placeholder="{{ __('dashboard.search_by_name_or_email') }}" value="{{ request('search') }}" class="input input-bordered join-item w-full max-w-xs">
+                        <button class="btn btn-primary join-item">{{ __('dashboard.search') }}</button>
                     </form>
                 </div>
 
@@ -25,7 +25,7 @@
                             <tr>
                                 <th>
                                     <a href="{{ route('users.index', array_merge(request()->query(), ['sort' => 'id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}" class="inline-flex items-center gap-1">
-                                        ID
+                                        {{ __('dashboard.id') }}
                                         @if(request('sort') === 'id')
                                             @if(request('direction', 'asc') === 'asc')
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
@@ -35,9 +35,9 @@
                                         @endif
                                     </a>
                                 </th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Created At</th>
+                                <th>{{ __('dashboard.name') }}</th>
+                                <th>{{ __('dashboard.email') }}</th>
+                                <th>{{ __('dashboard.created_at') }}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -50,14 +50,14 @@
                                     <td>{{ $user->created_at->format('Y-m-d') }}</td>
                                     <td>
                                         <div class="flex justify-end gap-2">
-                                            <a href="#" class="btn btn-ghost btn-xs">Edit</a>
-                                            <a href="#" class="btn btn-ghost btn-xs text-error">Delete</a>
+                                            <a href="#" class="btn btn-ghost btn-xs">{{ __('dashboard.edit') }}</a>
+                                            <a href="#" class="btn btn-ghost btn-xs text-error">{{ __('dashboard.delete') }}</a>
                                         </div>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">No users found.</td>
+                                    <td colspan="5" class="text-center">{{ __('dashboard.no_users_found') }}</td>
                                 </tr>
                             @endforelse
                         </tbody>
