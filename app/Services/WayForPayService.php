@@ -204,7 +204,7 @@ class WayForPayService
     {
         $content = $request->getContent();
         $data = json_decode($content, true);
-    
+
         if (json_last_error() !== JSON_ERROR_NONE) {
             Log::error('WayForPay POST handleServiceUrl: Invalid JSON received.', ['content' => $content]);
             return response()->json(['reason' => 'Invalid JSON'], 400);
