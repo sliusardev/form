@@ -14,7 +14,7 @@
             <div class="data-list">
                 <div class="mb-4">
                     <form action="{{ route('users.index') }}" method="GET" class="join">
-                        <input type="text" name="search" placeholder="Search by email..." value="{{ request('search') }}" class="input input-bordered join-item w-full max-w-xs">
+                        <input type="text" name="search" placeholder="Search by name or email..." value="{{ request('search') }}" class="input input-bordered join-item w-full max-w-xs">
                         <button class="btn btn-primary join-item">Search</button>
                     </form>
                 </div>
