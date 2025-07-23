@@ -10,7 +10,7 @@
         </div>
 
         <div class="bg-white rounded-lg shadow p-6 mb-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6 border-b border-gray-200 pb-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6 border-b border-gray-200 pb-4">
                 <div>
                     <p class="text-sm text-gray-600">{{ __('dashboard.submission') }} ID</p>
                     <p class="font-medium">#{{ $submission->id }}</p>
@@ -24,20 +24,22 @@
                     <p class="font-medium">{{ $submission->created_at->format('M d, Y H:i') }}</p>
                 </div>
                 <div>
+                    <p class="text-sm text-gray-500">{{ __('dashboard.method') }}</p>
+                    @if(strtoupper($submission->method) === 'POST')
+                        <span class="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">{{ $submission->method }}</span>
+                    @elseif(strtoupper($submission->method) === 'GET')
+                        <span class="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">{{ $submission->method }}</span>
+                    @else
+                        <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">{{ $submission->method }}</span>
+                    @endif
+                </div>
+                <div>
                     <p class="text-sm text-gray-500">IP {{ __('dashboard.address') }}</p>
                     <p class="font-medium">{{ $submission->ip_address }}</p>
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500">IP {{ __('dashboard.method') }}</p>
-                    <p class="font-medium">{{ $submission->method }}</p>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500">{{ __('dashboard.status') }}</p>
-                    <p class="font-medium">
-                        <span class="px-2 py-1 text-xs rounded-full {{ $submission->status === 'success' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
-                            {{ ucfirst($submission->status) }}
-                        </span>
-                    </p>
+                    <p class="text-sm text-gray-500">IP {{ __('dashboard.hash') }}</p>
+                    <p class="font-medium">{{ $submission->hash }}</p>
                 </div>
             </div>
 

@@ -28,7 +28,7 @@
     </div>
     <div class="bg-white rounded-lg shadow mt-6 p-6">
         <h5 class="text-xl font-medium mb-4">{{ __('dashboard.submission_trends') }}</h5>
-        <canvas id="submissionChart" height="180"></canvas>
+        <canvas id="submissionChart" height="100%"></canvas>
     </div>
 @endsection
 
