@@ -73,7 +73,7 @@ Route::post('/billing/callback/way-for-pay/service-url', [WayForPayController::c
 Route::match(['get', 'post'],'/billing/callback/way-for-pay/callback', [WayForPayController::class, 'callback'])
     ->name('billing.way-for-pay.callback');
 
-Route::get('/billing/callback/way-for-pay/return-url', [WayForPayController::class, 'returnUrl'])
+Route::match(['get', 'post'], '/billing/callback/way-for-pay/return-url', [WayForPayController::class, 'returnUrl'])
     ->name('billing.way-for-pay.return-url');
 
 Route::match(['get', 'post'], 'f/{hash}', [SubmissionController::class, 'store'])
