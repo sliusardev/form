@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Billing;
 
 use App\Enums\PaymentProviderEnum;
+use App\Enums\PaymentStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BillingRequest;
+use App\Models\Payment;
 use App\Services\PaymentService;
 use App\Services\WayForPayService;
 use Illuminate\Http\Request;
@@ -64,14 +66,34 @@ class WayForPayController extends Controller
 
     public function serviceUrl(Request $request)
     {
-        \Log::info('WayForPay updateStatus Request: ', $request->all());
-        resolve(WayForPayService::class)->handlePostCallback($request);
+        \Log::info('WayForPay serviceUrl Request: ', $request->all());
+        return resolve(WayForPayService::class)->handleServiceUrl($request);
     }
 
     public function returnUrl(Request $request)
     {
-        \Log::info('WayForPay showStatus Request: ', $request->all());
-        return resolve(WayForPayService::class)->handleGetCallback($request);
+        \Log::info('WayForPay returnUrl Request: ', $request->all());
+        $orderId = $request->get('orderReference'); // іноді передається в URL
+        $payment = Payment::query()->where('payment_id', $orderId)->first();
+
+        if (!$payment) {
+            return view('pages.payment-result', [
+                'status' => 'error',
+                'message' => 'Платіж не знайдено.',
+            ]);
+        }
+
+        if ($payment->status === PaymentStatusEnum::PAID) {
+            return view('pages.payment-result', [
+                'status' => 'success',
+                'message' => 'Оплата пройшла успішно!',
+            ]);
+        }
+
+        return view('pages.payment-result', [
+            'status' => 'failed',
+            'message' => 'Оплата не вдалася.',
+        ]);
     }
 
     public function callback(Request $request)

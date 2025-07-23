@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\PaymentStatusEnum;
 use App\Models\Payment;
 use App\Models\Company;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -34,8 +35,8 @@ class WayForPayService
             'clientEmail' => auth()->user()->email,
             'language' => 'UA',
             'serviceUrl' => route('billing.way-for-pay.service-url'),
-            'callbackUrl' => route('billing.way-for-pay.callback'),
             'returnUrl' => route('billing.way-for-pay.return-url'),
+//            'callbackUrl' => route('billing.way-for-pay.callback'),
 //            'serviceUrl' => 'https://formpost.org/f/q7d5DXLhWekoYoi',
 //            'callbackUrl' => 'https://formpost.org/f/oiYfBzCHdrsxkCx',
 //            'returnUrl' => 'https://formpost.org/f/DzguzbgKNmSVYNd',
@@ -178,7 +179,7 @@ class WayForPayService
         return true;
     }
 
-    public function updateCompany(Payment $payment, $data): void
+    public function updateCompany(Payment $payment): void
     {
         $company = Company::find($payment->company_id);
         if ($company) {
@@ -197,5 +198,58 @@ class WayForPayService
             Log::error('Company not found for payment', ['company_id' => $payment->company_id]);
         }
     }
+
+    public function handleServiceUrl(Request $request): JsonResponse
+    {
+        $data = $request->all();
+        Log::info('WayForPay POST handleServiceUrl: ', $data);
+        $secretKey = config('services.wayforpay.secret_key');
+
+        $expected = base64_encode(hash_hmac('md5', implode(';', [
+            $data['merchantAccount'],
+            $data['orderReference'],
+            $data['amount'],
+            $data['currency'],
+            $data['authCode'],
+            $data['cardPan'],
+            $data['transactionStatus'],
+            $data['reasonCode'],
+        ]), $secretKey));
+
+        if ($data['merchantSignature'] !== $expected) {
+            return response()->json(['reason' => 'Invalid signature'], 403);
+        }
+
+        $status = $data['transactionStatus'] === 'Approved' ? PaymentStatusEnum::PAID : PaymentStatusEnum::FAILED;
+
+        $payment = Payment::query()->where('payment_id', $data['orderReference'])->first();
+
+        if ($payment && $status == PaymentStatusEnum::PAID) {
+            $this->updateCompany($payment);
+        }
+
+        if ($payment) {
+            $payment->update([
+                'status' => $status,
+                'payload' => $data,
+            ]);
+        }
+
+        Log::info('WayForPay serviceUrl processed', [
+            'orderReference' => $data['orderReference'],
+            'status' => $status->value,
+        ]);
+
+        if ($status == PaymentStatusEnum::FAILED) {
+            $reason = $data['reason'] ?? ($data['reasonCode'] ?? 'Unknown error');
+            Log::error('Payment failed for orderReference: ' . $data['orderReference'] . ' - ' . $reason);
+        }
+
+        return response()->json([
+            'orderReference' => $data['orderReference'],
+            'status' => 'accept',
+        ]);
+    }
+
 
 }
