@@ -5,6 +5,7 @@
         <h2 class="md:text-2xl font-bold mb-6">{{ __('dashboard.edit_form') }}</h2>
         <div class="card">
             <div class="card-body p-0">
+
                 <form action="{{ route('forms.update', $form) }}" method="POST" class="space-y-5">
                     @csrf
                     @method('PUT')
@@ -13,8 +14,7 @@
                         <label for="form_utl" class="label">
                             <span class="label-text">{{ __('dashboard.form_url') }}</span>
                         </label>
-                        <input type="text" id="form_utl" name="form_url" value="{{ $form->formUrl() }}"
-                               class="input input-bordered w-full" disabled>
+                        <x-ui.copy-text :id="'form-url-' . $form->id" :text="$form->formUrl()" />
                     </div>
 
                     <div class="form-control w-full">
