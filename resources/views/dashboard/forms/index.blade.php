@@ -30,7 +30,7 @@
                                 </p>
                                 <p class="text-black-700"> Submissions: {{$form->submissions_count}}</p>
                                 <div class="flex justify-between items-center text-sm opacity-70 border-t border-gray-100  py-2">
-                                    <p class="text-black-700"> {{ $form->created_at->format('Y-m-d H:i') }}</p>
+                                    <p class="text-black-700"> {{ $form->created_at->format('Y-m-d') }}</p>
                                     <div class="flex gap-2">
                                         <button onclick="copyToClipboard('{{ $form->formUrl() }}', this)" class="btn btn-sm btn-outline gap-1" title="{{__('dashboard.copy_url')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
