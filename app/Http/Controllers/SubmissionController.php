@@ -14,37 +14,30 @@ class SubmissionController extends Controller
 {
    public function index(Request $request)
    {
+       $view = $request->input('view', $request->cookie('submissions_view_preference', 'table'));
+
        if ($request->has('view')) {
-           $view = $request->input('view');
-           Cookie::queue('submissions_view_preference', $view, 43200); // Cookie lasts 30 days
-       } else {
-           // If no view parameter, check for cookie and redirect if exists
-           $view = $request->cookie('submissions_view_preference', 'table');
-           if ($view) {
-               return redirect()->route('submissions.index', ['view' => $view]);
-           }
+           Cookie::queue('submissions_view_preference', $view, 43200); // 30 days
        }
 
        $companyId = selectedCompanyId();
 
-       $query = Submission::query()
+       $submissions = Submission::query()
            ->where('company_id', $companyId)
-           ->with(['form'])
-           ->orderBy('created_at', 'desc');
+           ->with('form:id,title')
+           ->when($request->filled('form_id'), function ($query) use ($request) {
+               $query->where('form_id', $request->form_id);
+           })
+           ->latest()
+           ->paginate(20);
 
-       // Apply form filter if provided
-       if ($request->has('form_id') && $request->form_id) {
-           $query->where('form_id', $request->form_id);
-       }
-
-       $submissions = $query->paginate(20);
-
-       // Get all forms for the dropdown
-       $forms = Form::query()->where('company_id', $companyId)
+       $forms = Form::query()
+           ->where('company_id', $companyId)
            ->orderBy('title')
-           ->get(['id', 'title']);
+           ->select('title', 'id')
+           ->get();
 
-       return view('dashboard.submissions.index', compact('submissions', 'forms'));
+       return view('dashboard.submissions.index', compact('submissions', 'forms', 'view'));
    }
 
     public function show(Submission $submission)
