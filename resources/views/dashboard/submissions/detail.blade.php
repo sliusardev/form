@@ -34,11 +34,11 @@
                     @endif
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500">IP {{ __('dashboard.address') }}</p>
+                    <p class="text-sm text-gray-500">{{ __('dashboard.ip_address') }}</p>
                     <p class="font-medium">{{ $submission->ip_address }}</p>
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500">IP {{ __('dashboard.hash') }}</p>
+                    <p class="text-sm text-gray-500">{{ __('dashboard.hash') }}</p>
                     <p class="font-medium">{{ $submission->hash }}</p>
                 </div>
             </div>

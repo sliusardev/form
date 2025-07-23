@@ -105,4 +105,5 @@
         'back_to' => 'Back to',
         'phone' => 'Phone',
         'method' => 'Method',
+        'ip_address' => 'IP Address',
     ];
