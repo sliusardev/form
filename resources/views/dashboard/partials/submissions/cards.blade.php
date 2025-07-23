@@ -26,4 +26,4 @@
             </div>
         @endforelse
     </div>
-</div><?php
+</div>
