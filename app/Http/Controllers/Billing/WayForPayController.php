@@ -73,6 +73,7 @@ class WayForPayController extends Controller
     public function returnUrl(Request $request)
     {
         \Log::info('WayForPay returnUrl Request: ', $request->all());
+        \Log::info('Method: '. $request->getMethod());
         $orderId = $request->get('orderReference'); // іноді передається в URL
         $payment = Payment::query()->where('payment_id', $orderId)->first();
 
