@@ -6,7 +6,6 @@ use App\Enums\PaymentStatusEnum;
 use App\Models\Payment;
 use App\Models\Company;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -57,127 +56,6 @@ class WayForPayService
         $paymentData['merchantSignature'] = hash_hmac('md5', $signatureString, $merchantSecretKey);
 
         return $paymentData;
-    }
-
-    public function handleGetCallback(Request $request): RedirectResponse
-    {
-        $orderReference = $request->query('orderReference');
-        if (!$orderReference) {
-            return redirect()->route('company.index')
-                ->with('error', 'Payment reference not found. Please contact support.');
-        }
-
-        $payment = Payment::where('payment_id', $orderReference)->first();
-        if (!$payment) {
-            return redirect()->route('billing.index')
-                ->with('error', 'Payment not found. Please contact support.');
-        }
-
-        // Add a redirect to login if user isn't authenticated
-        if (!auth()->check()) {
-            // Store a success message in session before redirecting to login
-            if ($payment->status->value === 'paid') {
-                session()->flash('payment_success', 'Payment completed successfully. Your limits have been updated.');
-            }
-            return redirect()->route('login')->with('redirect_after_login', route('billing.index'));
-        }
-
-        if ($payment->status->value === 'paid') {
-            return redirect()->route('billing.index')
-                ->with('success', 'Payment completed successfully. Your limits have been updated.');
-        } elseif ($payment->status->value === 'pending') {
-            return redirect()->route('billing.index')
-                ->with('info', 'Your payment is being processed. Limits will be updated once payment is confirmed.');
-        } else {
-            return redirect()->route('billing.index')
-                ->with('error', 'Payment failed. Please try again or contact support.');
-        }
-    }
-
-    public function handlePostCallback(Request $request): void
-    {
-        $data = $request->all();
-        Log::info('WayForPay POST callback: ', $data);
-        $merchantSecretKey = config('services.wayforpay.secret_key');
-
-        $requiredFields = [
-            'merchantAccount',
-            'orderReference',
-            'amount',
-            'currency',
-            'transactionStatus',
-            'reasonCode',
-            'merchantSignature'
-        ];
-
-        $missingFields = [];
-        foreach ($requiredFields as $field) {
-            if (!isset($data[$field])) {
-                $missingFields[] = $field;
-            }
-        }
-
-        if (!empty($missingFields)) {
-            Log::error('WayForPay POST callback: Missing fields: ' . implode(', ', $missingFields));
-            return;
-        }
-
-        $signatureFields = [
-            $data['merchantAccount'],
-            $data['orderReference'],
-            $data['amount'],
-            $data['currency'],
-            $data['authCode'] ?? '',
-            $data['cardPan'] ?? '',
-            $data['transactionStatus'],
-            $data['reasonCode'],
-        ];
-
-        $signatureString = implode(';', $signatureFields);
-        $expectedSignature = hash_hmac('md5', $signatureString, $merchantSecretKey);
-
-        if ($data['merchantSignature'] !== $expectedSignature) {
-            Log::error('Invalid signature in WayForPay callback', [
-                'received' => $data['merchantSignature'],
-                'expected' => $expectedSignature
-            ]);
-            return;
-        }
-
-        $payment = Payment::query()->where('payment_id', $data['orderReference'])->first();
-
-        $paymentUpdated = $this->paymentUpdated($payment, $data);
-        Log::info('Payment update result: ' . ($paymentUpdated ? 'success' : 'failed'));
-
-        if ($paymentUpdated) {
-            $this->updateCompany($payment, $data);
-        }
-    }
-
-    public function paymentUpdated($payment, $data): bool
-    {
-        if (!$payment) {
-            Log::error('Payment not found for orderReference: ' . $data['orderReference']);
-            return false;
-        }
-
-        if ($payment->status->value === 'paid') {
-            Log::error('Payment already processed.');
-            return false;
-        }
-
-        if ($data['transactionStatus'] !== 'Approved') {
-            $payment->status = PaymentStatusEnum::FAILED;
-            $payment->save();
-            $reason = $data['reason'] ?? ($data['reasonCode'] ?? 'Unknown error');
-            Log::error('Payment failed: ' . $reason);
-            return false;
-        }
-
-        $payment->status = PaymentStatusEnum::PAID;
-        $payment->save();
-
-        return true;
     }
 
     public function updateCompany(Payment $payment): void

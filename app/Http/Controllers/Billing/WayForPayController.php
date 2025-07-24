@@ -96,18 +96,4 @@ class WayForPayController extends Controller
             'message' => 'Оплата не вдалася.',
         ]);
     }
-
-    public function callback(Request $request)
-    {
-        Log::info('WayForPay Callback Request: ', $request->all());
-
-        if ($request->isMethod('get')) {
-            Log::info('WayForPay get');
-            return resolve(WayForPayService::class)->handleGetCallback($request);
-        }
-
-        resolve(WayForPayService::class)->handlePostCallback($request);
-
-        return response()->redirectToRoute('payment-success');
-    }
 }
