@@ -18,9 +18,9 @@
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="text-lg font-semibold text-gray-800">#{{ $form->id }}</h3>
                                 @if($form->is_enabled)
-                                    <span class="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">{{ __('dashboard.enabled_status') }}</span>
+                                    <span class="px-2 py-1 rounded-md text-xs font-medium bg-green-100 text-green-800">{{ __('dashboard.enabled_status') }}</span>
                                 @else
-                                    <span class="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">{{ __('dashboard.disabled_status') }}</span>
+                                    <span class="px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-800">{{ __('dashboard.disabled_status') }}</span>
                                 @endif
                             </div>
                             <div class="space-y-2">
