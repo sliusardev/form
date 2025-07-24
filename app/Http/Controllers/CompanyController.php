@@ -13,15 +13,15 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function show()
     {
-        $company = Company::query()->where('user_id', auth()->user()->id)->first(); // Fetch the first company record
+        $company = Company::query()->where('user_id', selectedCompanyId())->first(); // Fetch the first company record
         return view('dashboard.company', compact('company'));
     }
 
 public function update(UpdateCompanyRequest $request)
 {
-    $company = Company::query()->firstOrNew(['user_id' => auth()->user()->id]);
+    $company = Company::query()->firstOrNew(['user_id' => selectedCompanyId()]);
 
     $company->fill($request->validated());
     $company->user_id = auth()->user()->id;

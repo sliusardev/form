@@ -26,8 +26,8 @@ Route::prefix('dashboard')
 
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::get('/company', [CompanyController::class, 'index'])->name('company.index');
-        Route::put('/company', [CompanyController::class, 'update'])->name('company.update');
+        Route::get('/company', [CompanyController::class, 'show'])->name('company.show');
+        Route::put('/company/update', [CompanyController::class, 'update'])->name('company.update');
 
         Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
         Route::put('/profile', [UserController::class, 'update'])->name('user.update');
