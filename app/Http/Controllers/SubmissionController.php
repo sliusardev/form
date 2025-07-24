@@ -60,19 +60,28 @@ class SubmissionController extends Controller
 
     }
 
-    public function store(Request $request, string $hash, SubmissionService $submissionService)
+    public function store(StoreSubmissionRequest $request, string $hash, SubmissionService $submissionService)
     {
-        $form = Form::query()
-            ->where('hash', $hash)
-            ->where('is_enabled', true)
-            ->with('company')
-            ->first();
+        // Get the form from the request attributes (set by the middleware)
+        $form = $request->attributes->get('form');
 
+        // If the form is not in the request attributes, load it (fallback)
         if (!$form) {
-            return response()->json([
-                'status' => 'form_not_found',
-                'data' => [],
-            ], 404);
+            $form = Form::query()
+                ->where('hash', $hash)
+                ->where('is_enabled', true)
+                ->with('company')
+                ->first();
+
+            if (!$form) {
+                return response()->json([
+                    'status' => 'form_not_found',
+                    'data' => [],
+                ], 404);
+            }
+        } else {
+            // Ensure company relationship is loaded
+            $form->load('company');
         }
 
         if ($form->company->submission_limit === 0) {
@@ -82,10 +91,24 @@ class SubmissionController extends Controller
             ], 403);
         }
 
-        $formData = $request->all();
+        // Use validated data instead of all request data
+        $formData = $request->validated();
 
+        // If the request is JSON, merge the validated data with JSON data
+        // This ensures we're still using validated data even with JSON requests
         if ($request->isJson()) {
-            $formData = $request->json()->all();
+            $jsonData = $request->json()->all();
+            // Re-validate JSON data through the request validator
+            $validator = validator($jsonData, $request->rules());
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 'validation_error',
+                    'errors' => $validator->errors(),
+                ], 422);
+            }
+
+            $formData = $validator->validated();
         }
 
         $submission = $submissionService->createSubmission(
