@@ -5,7 +5,7 @@
         <div class="card-body">
             <div class="flex flex-col md:flex-row md:justify-between items-center mb-6">
                 <h2 class="card-title text-center md:text-2xl font-semibold my-3">{{ __('dashboard.your_forms') }}</h2>
-                <a href="{{ route('forms.create') }}" class="btn btn-primary">
+                <a href="{{ route('forms.create') }}" class="btn bg-gray-700 text-white hover:bg-gray-500 transition-colors flex items-center gap-2">
                     {{__('dashboard.create')}}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
                 </a>
@@ -32,13 +32,13 @@
                                 <div class="flex justify-between items-center text-sm opacity-70 border-t border-gray-100  py-2">
                                     <p class="text-black-700"> {{ $form->created_at->format('Y-m-d') }}</p>
                                     <div class="flex gap-2">
-                                        <button onclick="copyToClipboard('{{ $form->formUrl() }}', this)" class="btn btn-sm btn-outline gap-1" title="{{__('dashboard.copy_url')}}">
+                                        <button onclick="copyToClipboard('{{ $form->formUrl() }}', this)" class="btn btn-sm btn-outline bt-info gap-1" title="{{__('dashboard.copy_url')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                                         </button>
-                                        <a href="{{ route('submissions.index', ['form_id' => $form->id]) }}" class="btn btn-sm btn-primary gap-1" title="{{__('dashboard.view')}}">
+                                        <a href="{{ route('submissions.index', ['form_id' => $form->id]) }}" class="btn btn-sm btn-outline bg-gray-800 text-white gap-1" title="{{__('dashboard.view')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                                         </a>
-                                        <a href="{{route('forms.edit', $form)}}" class="btn btn-sm btn-outline gap-1" title="{{__('dashboard.edit')}}">
+                                        <a href="{{route('forms.edit', $form)}}" class="btn btn-sm btn-outline btn-soft gap-1" title="{{__('dashboard.edit')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
                                         </a>
                                     </div>

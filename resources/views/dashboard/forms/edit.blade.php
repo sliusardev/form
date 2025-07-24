@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="mt-6">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn bg-gray-700 text-white hover:bg-gray-500 transition-colors flex items-center gap-2y">
                             {{ __('dashboard.save') }}
                         </button>
                     </div>
