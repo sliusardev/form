@@ -25,7 +25,7 @@
                     <input type="number" name="min_payment_uah" id="min_payment_uah" value="{{ old('min_payment_uah', $settings['min_payment_uah'] ?? '') }}" required class="w-full bg-white border @error('slug') border-red-500 @else border-gray-300 @enderror rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"/>
                 </div>
                 <div>
-                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">{{__('dashboard.save')}}</button>
+                    <button type="submit" class="btn bg-gray-700 text-white hover:bg-gray-500 transition-colors flex items-center gap-2">{{__('dashboard.save')}}</button>
                 </div>
             </form>
         </div>

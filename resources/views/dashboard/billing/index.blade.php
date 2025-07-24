@@ -32,7 +32,7 @@
                 <small class="text-green-800">{{ __('dashboard.min_payment_note', ['min' => $minPayment, 'currency' => $currency]) }}</small>
             </div>
 
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">{{ __('dashboard.pay') }}</button>
+            <button type="submit" class="btn bg-gray-700 text-white hover:bg-gray-500 transition-colors flex items-center gap-2">{{ __('dashboard.pay') }}</button>
         </form>
     </div>
 @endsection

@@ -12,7 +12,7 @@
         <div class="tab-content bg-base-100 border-base-300 p-6">
             <div class="gap-4 grid grid-cols-1">
                 <div class="billing-item flex items-center gap-3 border-b border-gray-100 pb-4">
-                    <a href="{{route('billing.index')}}" type="button" class="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700 transition mt-6">
+                    <a href="{{route('billing.index')}}" type="button" class="bg-gray-700 text-white px-3 py-2 rounded hover:bg-green-700 transition mt-6">
                         {{__('dashboard.increase')}}
                     </a>
                     <div class="flex-grow">
@@ -22,7 +22,7 @@
 
                 </div>
                 <div class="billing-item flex items-center gap-3 border-b border-gray-100 pb-4">
-                    <a href="{{route('billing.index')}}" type="button" class="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700 transition mt-6">
+                    <a href="{{route('billing.index')}}" type="button" class="bg-gray-700 text-white px-3 py-2 rounded hover:bg-green-700 transition mt-6">
                         {{__('dashboard.increase')}}
                     </a>
                     <div class="flex-grow">
