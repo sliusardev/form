@@ -6,7 +6,6 @@ use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\Company;
 use App\Models\User;
 use App\Services\CompanyService;
 use Illuminate\Auth\Events\Registered;
@@ -14,7 +13,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
