@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
-use App\Services\CompanyService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -37,17 +34,7 @@ class AuthController extends Controller
 
         event(new Registered($user));
 
-        $clientRole = Role::query()->where('name', RoleEnum::CLIENT->value)->first();
-
-        $user->assignRole($clientRole);
-
         Auth::login($user);
-
-        $request->session()->regenerate();
-
-        $company = resolve(CompanyService::class)->createNew($user);
-
-        session()->put('company_id', $company->id);
 
         return to_route('dashboard');
     }
@@ -60,10 +47,6 @@ class AuthController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        $company = resolve(CompanyService::class)->createNew(auth()->user());
-
-        session()->put('company_id', $company->id);
 
         return redirect()->intended(route('dashboard', absolute: false));
     }
