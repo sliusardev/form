@@ -14,7 +14,6 @@ class ProviderRedirectController extends Controller
      */
     public function __invoke(string $provider)
     {
-
         if (!in_array($provider, ['google', 'github'])) {
             return redirect(route('login'))->withErrors(['provider' => 'Invalid provider']);
         }
@@ -24,10 +23,6 @@ class ProviderRedirectController extends Controller
 
             return Socialite::driver($provider)->redirect();
         } catch (\Exception $e) {
-            Log::error('Socialite redirect error: ' . $e->getMessage(), [
-                'provider' => $provider,
-                'exception' => $e
-            ]);
             return redirect(route('login'))->withErrors(['provider' => 'Something went wrong']);
         }
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AuthProviders;
 use App\Models\User;
 use App\Services\CompanyService;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
@@ -22,8 +23,6 @@ class ProviderCallbackController extends Controller
         if (!in_array($provider, ['google', 'github'])) {
             return redirect(route('login'))->withErrors(['provider' => 'Invalid provider']);
         }
-
-        Log::error($provider. ' callback');
 
         $socialUser = Socialite::driver($provider)->user();
 
@@ -43,7 +42,6 @@ class ProviderCallbackController extends Controller
         ]);
 
         if (!$user) {
-            $role = Role::query()->where('name', RoleEnum::CLIENT->value)->first();
 
             $user = User::query()->create([
                 'name' => $socialUser->name,
@@ -53,14 +51,10 @@ class ProviderCallbackController extends Controller
 
             $providerUser->update(['user_id' => $user->id]);
 
-            $user->assignRole($role);
+            event(new Registered($user));
         }
 
         Auth::login($user);
-
-        $company = resolve(CompanyService::class)->createNew($user);
-
-        session()->put('company_id', $company->id);
 
         return redirect('/dashboard');
     }
