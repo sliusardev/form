@@ -21,7 +21,7 @@ Route::get('/payment-success', function () {
 })->name('payment-success');
 
 Route::prefix('dashboard')
-    ->middleware(['auth'])
+    ->middleware(['auth', 'verified'])
     ->group(function () {
 
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
