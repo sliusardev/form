@@ -3,7 +3,7 @@
 @section('title', __('Email Verification'))
 
 @section('content')
-    <div class="min-h-screen flex items-center justify-center p-4">
+    <div class="min-h-3 lg:min-h-screen flex items-center justify-center p-4">
         <div class="max-w-md w-full bg-white shadow-md rounded-lg p-8">
             <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Email Verification</h2>
 
