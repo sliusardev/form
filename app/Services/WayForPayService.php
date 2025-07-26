@@ -60,10 +60,12 @@ class WayForPayService
 
     public function updateCompany(Payment $payment): void
     {
+        $order = $payment->order ?? [];
+
         $company = Company::find($payment->company_id);
         if ($company) {
-            $submissionLimit = $payment->payload['submission_limit'] ?? 0;
-            $formLimit = $payment->payload['form_limit'] ?? 0;
+            $submissionLimit = $order['submission_limit'] ?? 0;
+            $formLimit = $order['form_limit'] ?? 0;
             $company->submission_limit += $submissionLimit;
             $company->form_limit += $formLimit;
             $company->save();

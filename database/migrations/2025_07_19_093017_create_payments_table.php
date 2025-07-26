@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('currency', 10)->default('UAH');
             $table->string('status')->default('pending'); // оновлено: enum в моделі
             $table->json('payload')->nullable(); // зберігаємо все що приходить
+            $table->json('order')->nullable(); // зберігаємо все що приходить
             $table->timestamps();
         });
     }

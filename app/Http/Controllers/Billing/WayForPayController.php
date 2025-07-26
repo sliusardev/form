@@ -50,12 +50,19 @@ class WayForPayController extends Controller
         $paymentData['submission_limit'] = $submissionLimit;
         $paymentData['form_limit'] = $formLimit;
 
+        $order = [
+            'productName' => $productName,
+            'submission_limit' => $submissionLimit,
+            'form_limit' => $formLimit,
+        ];
+
         resolve(PaymentService::class)->init(
             PaymentProviderEnum::WAYFORPAY->value,
             $paymentData,
             $totalCost,
             $currency,
-            $company
+            $company,
+            $order
         );
 
         return view('dashboard.billing.wayforpay_redirect', compact(

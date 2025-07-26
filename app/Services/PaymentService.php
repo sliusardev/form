@@ -10,8 +10,14 @@ use Illuminate\Support\Facades\Log;
 
 class PaymentService
 {
-    public function init(string $provider, array $paymentData, int $totalCost, string $currency, Company $company)
-    {
+    public function init(
+        string $provider,
+        array $paymentData,
+        int $totalCost,
+        string $currency,
+        Company $company,
+        array $order
+    ) {
         try {
             Payment::query()->create([
                 'provider' => $provider,
@@ -22,6 +28,7 @@ class PaymentService
                 'payload' => $paymentData,
                 'company_id' => $company->id,
                 'user_id' => auth()->id(),
+                'order' => $order,
             ]);
         } catch (\Exception $e) {
             Log::error('Failed to save payment: ' . $e->getMessage());

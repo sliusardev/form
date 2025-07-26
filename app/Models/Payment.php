@@ -18,10 +18,12 @@ class Payment extends Model
         'payload',
         'company_id',
         'user_id',
+        'order',
     ];
 
     protected $casts = [
         'payload' => 'array',
+        'order' => 'array',
         'status' => PaymentStatusEnum::class,
         'provider' => PaymentProviderEnum::class,
     ];
