@@ -17,6 +17,7 @@ class CustomVerifyEmail extends BaseVerifyEmail
     protected function buildMailMessage($url)
     {
         return (new MailMessage)
+            ->from(config('mail.from.address'), config('mail.from.name'))
             ->subject(Lang::get('Welcome to Our Application - Verify Your Email'))
             ->greeting(Lang::get('Hello!'))
             ->line(Lang::get('Thank you for registering with our application.'))

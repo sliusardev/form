@@ -47,6 +47,7 @@ class ProviderCallbackController extends Controller
                 'name' => $socialUser->name,
                 'email' => $socialUser->email,
                 'avatar' => $socialUser->avatar,
+                'email_verified_at' => now(),
             ]);
 
             $providerUser->update(['user_id' => $user->id]);
