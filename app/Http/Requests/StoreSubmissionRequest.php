@@ -55,7 +55,7 @@ class StoreSubmissionRequest extends FormRequest
      * @param string $prefix
      * @return void
      */
-    protected function validateForMaliciousContent($validator, array $data, string $prefix = '')
+    protected function validateForMaliciousContent($validator, array $data, string $prefix = ''): void
     {
         foreach ($data as $key => $value) {
             $fieldName = $prefix ? "{$prefix}.{$key}" : $key;
