@@ -119,6 +119,7 @@ return [
     'cost' => 'Cost',
     'redirecting_to_wayforpay' => 'Redirecting to WayForPay...',
     'your_forms' => 'Your Forms',
+    'my_forms' => 'My Forms',
     'form_label' => 'Form',
     'no_description_provided' => 'No description provided.',
     'copy_url' => 'Copy URL',
