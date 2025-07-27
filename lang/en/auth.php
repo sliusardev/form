@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Language Lines
@@ -33,6 +32,7 @@ return [
     'forgot_password' => 'Forgot Your Password?',
     'reset_password' => 'Reset Password',
     'send_reset_link' => 'Send Password Reset Link',
+    'send_password_reset_link' => 'Send Password Reset Link',
     'verify_email' => 'Verify Your Email Address',
     'verification_link_sent' => 'A fresh verification link has been sent to your email address.',
     'check_your_email' => 'Before proceeding, please check your email for a verification link.',
@@ -69,4 +69,6 @@ return [
     'email_verification_email_subject' => 'Email Verification Required',
     'email_verification_email_body' => 'You are receiving this email because you need to verify your email address for your account. Please click the link below to verify your email address.',
     'email_verification_email_footer' => 'If you did not create an account, no further action is required.',
+    'new_password' => 'New Password',
+    'back_to_login' => 'Back to Login',
 ];

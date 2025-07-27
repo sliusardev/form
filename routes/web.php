@@ -83,4 +83,3 @@ Route::match(['get', 'post'], 'f/{hash}', [SubmissionController::class, 'store']
 
 
 require __DIR__.'/auth.php';
-

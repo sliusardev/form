@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CurrenciesEnum;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,12 @@ class SettingsController extends Controller
     {
         $setting = Settings::query()->firstOrCreate();
         $settings = $setting->data ?? [];
+
+        $currencies = CurrenciesEnum::all();
+
         return view('dashboard.settings', [
-            'settings' => $settings
+            'settings' => $settings,
+            'currencies' => $currencies,
         ]);
     }
 

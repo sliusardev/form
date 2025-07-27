@@ -16,12 +16,12 @@ class WayForPayController extends Controller
 {
     public function pay(BillingRequest $request)
     {
-        $settings = settings();
+        $prices = resolve(PaymentService::class)->preparedPrices();
+        $submissionCost = $prices['submissionCost'];
+        $formCost = $prices['formCost'];
+        $minPayment = $prices['minPayment'];
+        $currency = $prices['currency'];
 
-        $submissionCost = $settings['one_submission_cost_uah'];
-        $formCost = $settings['one_form_cost_uah'];
-        $minPayment = $settings['min_payment_uah'];
-        $currency = 'UAH';
         $wayforpayUrl = 'https://secure.wayforpay.com/pay';
 
         $company = selectedCompany();
@@ -33,8 +33,6 @@ class WayForPayController extends Controller
             return back()->withErrors(['total_cost' => 'Minimum payment is ' . $minPayment . ' ' . $currency]);
         }
 
-        $totalCost = 1;
-
         $productName = trans('dashboard.billing') .': '
             . $submissionLimit  . ' ' . trans('dashboard.submissions') . ', '
             . $formLimit  . ' '  . trans('dashboard.forms');
@@ -44,7 +42,8 @@ class WayForPayController extends Controller
                 $request,
                 $company,
                 $productName,
-                $totalCost
+                $totalCost,
+                $currency
             );
 
         $paymentData['submission_limit'] = $submissionLimit;

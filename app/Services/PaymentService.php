@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\CurrenciesEnum;
 use App\Enums\PaymentProviderEnum;
 use App\Enums\PaymentStatusEnum;
 use App\Models\Company;
@@ -34,5 +35,23 @@ class PaymentService
             Log::error('Failed to save payment: ' . $e->getMessage());
             return back()->with('error', 'Failed to process payment. Please try again.');
         }
+    }
+
+    public function preparedPrices(): array
+    {
+        $settings = settings();
+
+        $currency = app()->getLocale() == 'uk' ? CurrenciesEnum::UAH->value : CurrenciesEnum::USD->value;
+
+        $submissionCost = $settings['one_submission_cost_' . $currency];
+        $formCost = $settings['one_form_cost_' . $currency];
+        $minPayment = $settings['min_payment_' . $currency];
+
+        return [
+            'submissionCost' => $submissionCost,
+            'formCost' => $formCost,
+            'minPayment' => $minPayment,
+            'currency' => $currency,
+        ];
     }
 }

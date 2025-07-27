@@ -12,21 +12,27 @@
         <div class="tab-content bg-base-100 border-base-300 p-6">
             <form class="space-y-4 grid grid-cols-1 md:grid-cols-3 gap-2" action="{{ route('settings.update') }}" method="POST">
                 @csrf
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.one_submission_cost', ['currency' => 'UAH'])}}</label>
-                    <input type="number" name="one_submission_cost_uah" id="one_submission_cost_uah" value="{{ old('one_submission_cost_uah', $settings['one_submission_cost_uah'] ?? '') }}"  min="0" step="0.1" required class="w-full bg-white border @error('name') border-red-500 @else border-gray-300 @enderror rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.one_form_cost', ['currency' => 'UAH'])}}</label>
-                    <input type="number" name="one_form_cost_uah" id="one_form_cost_uah" value="{{ old('one_form_cost_uah', $settings['one_form_cost_uah'] ?? '') }}" required class="w-full bg-white border @error('slug') border-red-500 @else border-gray-300 @enderror rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.min_payment', ['currency' => 'UAH'])}}</label>
-                    <input type="number" name="min_payment_uah" id="min_payment_uah" value="{{ old('min_payment_uah', $settings['min_payment_uah'] ?? '') }}" required class="w-full bg-white border @error('slug') border-red-500 @else border-gray-300 @enderror rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"/>
-                </div>
+
+                @foreach($currencies as $currency)
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.one_submission_cost', ['currency' => $currency, 'cost' => ''])}}</label>
+                        <input type="number" step="0.01" name="one_submission_cost_{{$currency}}" id="one_submission_cost_{{$currency}}" value="{{ old('one_submission_cost_' . $currency, $settings['one_submission_cost_' . $currency] ?? '') }}"  required class="w-full bg-white border @error('name') border-red-500 @else border-gray-300 @enderror rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.one_form_cost', ['currency' => $currency, 'cost' => ''])}}</label>
+                        <input type="number" step="0.01" name="one_form_cost_{{$currency}}" id="one_form_cost_{{$currency}}" value="{{ old('one_form_cost_' . $currency, $settings['one_form_cost_' . $currency] ?? '') }}" required class="w-full bg-white border @error('slug') border-red-500 @else border-gray-300 @enderror rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.min_payment', ['currency' => $currency, 'cost' => ''])}}</label>
+                        <input type="number" step="0.01" name="min_payment_{{$currency}}" id="min_payment_{{$currency}}" value="{{ old('min_payment_' . $currency, $settings['min_payment_' . $currency] ?? '') }}" required class="w-full bg-white border @error('slug') border-red-500 @else border-gray-300 @enderror rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"/>
+                    </div>
+                @endforeach
+
                 <div>
                     <button type="submit" class="btn bg-gray-700 text-white hover:bg-gray-500 transition-colors flex items-center gap-2">{{__('dashboard.save')}}</button>
                 </div>
+
             </form>
         </div>
     </div>

@@ -18,6 +18,21 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/auth/{provider}/callback', ProviderCallbackController::class)
         ->name('socialite.auth.callback');
+
+    // Forgot Password Routes
+    Route::get('/forgot-password', function () {
+        return view('auth.forgot-password');
+    })->middleware('guest')->name('password.request');
+
+    Route::post('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])
+        ->middleware('guest')->name('password.email');
+
+    Route::get('/reset-password/{token}', function ($token) {
+        return view('auth.reset-password', ['token' => $token]);
+    })->middleware('guest')->name('password.reset');
+
+    Route::post('/reset-password', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])
+        ->middleware('guest')->name('password.update');
 });
 
 Route::middleware('auth')->group(function () {

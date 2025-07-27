@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 class WayForPayService
 {
-    private const CURRENCY = 'UAH';
-    public function preparePaymentData(Request $request, $company, $productName, $totalCost): array
+    public function preparePaymentData(Request $request, $company, $productName, $totalCost, $currency): array
     {
         $orderReference = 'order_' . uniqid();
         $orderDate = time();
@@ -26,14 +25,14 @@ class WayForPayService
             'orderReference' => $orderReference,
             'orderDate' => $orderDate,
             'amount' => $totalCost,
-            'currency' => self::CURRENCY,
+            'currency' => $currency,
             'productName' => [$productName],
             'productCount' => [1],
             'productPrice' => [$totalCost],
             'clientFirstName' => $company->name,
             'clientPhone' => $company->phone ?? '',
             'clientEmail' => auth()->user()->email,
-            'language' => 'UA',
+            'language' => app()->getLocale(),
             'serviceUrl' => route('billing.way-for-pay.service-url'),
             'returnUrl' => route('billing.way-for-pay.return-url'),
 //            'callbackUrl' => route('billing.way-for-pay.callback'),
@@ -48,7 +47,7 @@ class WayForPayService
             $orderReference,
             $orderDate,
             $totalCost,
-            self::CURRENCY,
+            $currency,
             $productName,
             1,
             $totalCost,

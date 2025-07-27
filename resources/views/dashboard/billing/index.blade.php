@@ -10,7 +10,7 @@
             <div class="gap-4 grid grid-cols-1">
                 <div class="billing-item flex items-center gap-3 border-b border-gray-100 pb-4">
                     <div class="flex-grow">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.submission_limit')}} | {{__('dashboard.current')}} {{$company->submission_limit }}</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.submission_limit')}}</label>
                         <input type="number" value="1000" step="0" min="0" name="submission_limit" id="submission_limit"  class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"/>
                         <small class="text-blue-500">{{ __('dashboard.one_submission_cost', ['cost' => $submissionOne, 'currency' => $currency]) }}</small>
                     </div>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="billing-item flex items-center gap-3 border-b border-gray-100 pb-4">
                     <div class="flex-grow">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.form_limit')}}  | {{__('dashboard.current')}} {{$company->form_limit }}</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">{{__('dashboard.form_limit')}}</label>
                         <input type="number" value="10" step="0" min="0" name="form_limit" id="form_limit" class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"/>
                         <small class="text-blue-500">{{ __('dashboard.one_form_cost', ['cost' => $formOne, 'currency' => $currency]) }}</small>
                     </div>
@@ -68,10 +68,10 @@
         }
 
         function updateTotalCost() {
-            const submissionLimit = parseInt(submissionLimitInput.value, 10) || 0;
-            const formLimit = parseInt(formLimitInput.value, 10) || 0;
+            const submissionLimit = parseFloat(submissionLimitInput.value) || 0;
+            const formLimit = parseFloat(formLimitInput.value) || 0;
             const totalCost = (submissionLimit * submissionOne) + (formLimit * formOne);
-            document.getElementById('total_cost').value = totalCost + ' ' + currency;
+            document.getElementById('total_cost').value = totalCost.toFixed(2) + ' ' + currency;
         }
 
         submissionLimitInput.addEventListener('input', updateSubmissionCost);
