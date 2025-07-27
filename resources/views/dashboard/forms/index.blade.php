@@ -24,11 +24,11 @@
                                 @endif
                             </div>
                             <div class="space-y-2">
-                                <p class="text-gray-700"><span class="font-medium">{{ __('dashboard.form_label') }}:</span> {{ $form->title ?? __('dashboard.unknown_form') }}</p>
+                                <p class="text-gray-700 text-2xl font-bold">{{ $form->title ?? __('dashboard.unknown_form') }}</p>
                                 <p class="text-gray-700">
                                     {{$form->description ?: __('dashboard.no_description_provided')}}
                                 </p>
-                                <p class="text-black-700"> {{ __('dashboard.submissions') }}: {{$form->submissions_count}}</p>
+                                <p class="text-black-700 font-bold"> {{ __('dashboard.submissions') }}: {{$form->submissions_count}}</p>
                                 <div class="flex justify-between items-center text-sm opacity-70 border-t border-gray-100  py-2">
                                     <p class="text-black-700"> {{ $form->created_at->format('Y-m-d') }}</p>
                                     <div class="flex gap-2">
