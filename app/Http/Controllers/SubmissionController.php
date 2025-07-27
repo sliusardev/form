@@ -59,7 +59,6 @@ class SubmissionController extends Controller
     {
 
     }
-
     public function store(StoreSubmissionRequest $request, string $hash, SubmissionService $submissionService)
     {
         // Get the form from the request attributes (set by the middleware)
@@ -95,10 +94,8 @@ class SubmissionController extends Controller
         $formData = $request->validated();
 
         // If the request is JSON, merge the validated data with JSON data
-        // This ensures we're still using validated data even with JSON requests
         if ($request->isJson()) {
             $jsonData = $request->json()->all();
-            // Re-validate JSON data through the request validator
             $validator = validator($jsonData, $request->rules());
 
             if ($validator->fails()) {
@@ -111,9 +108,12 @@ class SubmissionController extends Controller
             $formData = $validator->validated();
         }
 
+        // Merge GET params with validated data
+        $allData = array_merge($formData, $request->query());
+
         $submission = $submissionService->createSubmission(
             $form,
-            $formData,
+            $allData,
             $request->ip(),
             $request->getMethod()
         );
