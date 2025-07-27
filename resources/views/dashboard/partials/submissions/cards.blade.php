@@ -14,7 +14,7 @@
                         @endif
                     </div>
                     <div class="space-y-2">
-                        <p class="text-gray-700"><span class="font-medium">{{ __('dashboard.form_label') }}:</span> {{ $submission->form->title ?? __('dashboard.unknown_form') }}</p>
+                        <p class="text-gray-700 font-bold"><span class="font-medium">{{ __('dashboard.form_label') }}:</span> {{ $submission->form->title ?? __('dashboard.unknown_form') }}</p>
                         <p class="text-gray-700"><span class="font-medium">{{ __('dashboard.hash') }}:</span> {{ $submission->hash }}</p>
                         <p class="text-black-700 border-t border-gray-100 pt-2"> {{ $submission->created_at->format('Y-m-d H:i') }}</p>
                     </div>
