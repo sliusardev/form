@@ -1,148 +1,239 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="transition-colors duration-300">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FormPilot — Smart Form Backend</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Tailwind config to enable class-based dark mode
-        tailwind.config = {
-            darkMode: 'class',
+    <title>FormPilot – Simple Form Submissions</title>
+
+    <!-- Font to match your dashboard vibe -->
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+
+    <!-- Tailwind CSS v4 (CDN for dev; compile for prod) -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @layer base {
+            html { font-family: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif; }
         }
-    </script>
+    </style>
 </head>
-<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+<body class="bg-white text-gray-800 leading-relaxed">
 
-<!-- Toggle Button -->
-<div class="fixed top-4 right-4 z-50">
-{{--    <button onclick="document.documentElement.classList.toggle('dark')" class="bg-gray-200 dark:bg-gray-700 text-sm text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg shadow hover:bg-gray-300 dark:hover:bg-gray-600 transition">--}}
-{{--        Toggle Theme--}}
-{{--    </button>--}}
+<!-- Header / Navigation -->
+<header class="w-full border-b border-gray-200 bg-white">
+    <div class="container mx-auto px-4 flex items-center justify-between py-4">
+        <!-- Brand -->
+        <a href="#" class="text-2xl font-semibold text-gray-800">FormPilot</a>
 
-    <a href="{{route('login')}}" type="button" class="bg-gray-200 dark:bg-gray-700 text-sm text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg shadow-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-        Login
+        <!-- Nav (desktop) -->
+        <nav id="navMenu" class="hidden md:flex space-x-8 text-sm">
+            <a href="#features" class="hover:text-gray-900">Features</a>
+            <a href="#pricing" class="hover:text-gray-900">Pricing</a>
+            <a href="#integration" class="hover:text-gray-900">How It Works</a>
+            <a href="#" class="hover:text-gray-900">Docs</a>
+            <a href="#" class="hover:text-gray-900">Contact</a>
+        </nav>
+
+        <!-- Right-side -->
+        <div class="hidden md:flex items-center space-x-4">
+            <a href="#" class="text-sm hover:text-gray-900">Login</a>
+            <a href="#pricing" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg shadow">
+                Get Started
+            </a>
+        </div>
+
+        <!-- Mobile menu btn -->
+        <button id="menuBtn" class="md:hidden focus:outline-none" aria-label="Toggle Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Mobile menu panel -->
+    <div id="mobilePanel" class="md:hidden hidden border-t border-gray-200 bg-white">
+        <div class="px-4 py-3 space-y-2 text-sm">
+            <a href="#features" class="block hover:text-gray-900">Features</a>
+            <a href="#pricing" class="block hover:text-gray-900">Pricing</a>
+            <a href="#integration" class="block hover:text-gray-900">How It Works</a>
+            <a href="#" class="block hover:text-gray-900">Docs</a>
+            <a href="#" class="block hover:text-gray-900">Contact</a>
+            <div class="pt-2 flex items-center gap-3">
+                <a href="#" class="text-sm hover:text-gray-900">Login</a>
+                <a href="#pricing" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg shadow">Get Started</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Hero -->
+<section class="container mx-auto px-4 py-16 text-center" id="hero">
+    <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+        Get Started with Simple Form Submissions
+    </h1>
+    <p class="text-lg text-gray-600 mb-8">
+        Collect form submissions without writing a backend. Pay only for what you need – no subscriptions, no hassle.
+    </p>
+    <a href="#pricing" class="bg-gray-800 hover:bg-gray-900 text-white font-medium py-3 px-6 rounded-lg shadow-md">
+        Start Now
     </a>
-</div>
+</section>
 
-<!-- Hero Section -->
-<section class="bg-gradient-to-tr from-blue-600 to-purple-700 text-white py-20 text-center">
-    <div class="container mx-auto px-4">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Simplify Your Form Backend</h1>
-        <p class="text-lg md:text-xl mb-6">Collect form submissions without coding a backend. Fast. Secure. Reliable.</p>
-        <a href="#pricing" class="bg-white text-blue-700 font-semibold py-3 px-6 rounded-lg shadow hover:bg-gray-100 transition">Start for Free</a>
+<!-- Features -->
+<section class="container mx-auto px-4 py-12" id="features">
+    <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-8">Why Choose FormPilot?</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+        <div class="p-4">
+            <div class="text-4xl mb-2">🚫</div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">No Subscriptions</h3>
+            <p class="text-gray-600">No monthly fees or contracts. <strong>Pay-as-you-go</strong> for the submissions you actually use.</p>
+        </div>
+        <div class="p-4">
+            <div class="text-4xl mb-2">💰</div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Usage-Based Pricing</h3>
+            <p class="text-gray-600">Transparent pricing – $10 per 1000 submissions, $10 per 10 forms. Minimum purchase $15.</p>
+        </div>
+        <div class="p-4">
+            <div class="text-4xl mb-2">⚡</div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Easy Integration</h3>
+            <p class="text-gray-600">Add our endpoint to your form and you’re done – <strong>no server code required</strong>.</p>
+        </div>
     </div>
 </section>
 
-<!-- Benefits -->
-<section class="py-16">
-    <div class="container mx-auto px-4 text-center">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <div>
-                <div class="text-4xl mb-2">🚀</div>
-                <h5 class="text-xl font-semibold mb-2">Fast Integration</h5>
-                <p>Connect your HTML form in seconds with no backend setup.</p>
+<!-- Pricing -->
+<section class="container mx-auto px-4 py-12 bg-gray-50" id="pricing">
+    <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-6">Simple, Pay-As-You-Go Pricing</h2>
+    <p class="text-center text-gray-700 mb-8">No subscriptions or hidden fees – just purchase the capacity you need.</p>
+
+    <div class="max-w-xl mx-auto bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+        <ul class="text-gray-800 mb-6 list-disc list-inside">
+            <li><strong>$10</strong> per 1,000 submissions</li>
+            <li><strong>$10</strong> per 10 forms</li>
+            <li><strong>$15</strong> minimum purchase</li>
+        </ul>
+
+        <!-- Calculator -->
+        <div class="text-gray-800">
+            <p class="font-medium mb-2">Calculate your cost:</p>
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+                <div class="flex flex-col">
+                    <label for="subInput" class="text-sm text-gray-700 mb-1"># of Submissions</label>
+                    <input id="subInput" type="number" min="0" step="1000" value="1000"
+                           class="w-28 border border-gray-300 rounded px-3 py-1 text-gray-800" />
+                </div>
+                <div class="flex flex-col">
+                    <label for="formInput" class="text-sm text-gray-700 mb-1"># of Forms</label>
+                    <input id="formInput" type="number" min="0" step="10" value="10"
+                           class="w-24 border border-gray-300 rounded px-3 py-1 text-gray-800" />
+                </div>
+                <div class="flex flex-col text-center sm:text-right">
+                    <div class="text-lg font-semibold mt-2 sm:mt-0">
+                        Total Cost: <span id="totalCost" class="text-gray-900">$20.00</span>
+                    </div>
+                    <div class="text-sm text-gray-500">(Minimum $15)</div>
+                </div>
             </div>
-            <div>
-                <div class="text-4xl mb-2">🛡️</div>
-                <h5 class="text-xl font-semibold mb-2">Spam Protection</h5>
-                <p>Built-in honeypot & reCAPTCHA v3 support.</p>
-            </div>
-            <div>
-                <div class="text-4xl mb-2">📊</div>
-                <h5 class="text-xl font-semibold mb-2">Analytics</h5>
-                <p>Track submissions and user behavior with our dashboard.</p>
+
+            <div class="mt-6 text-center">
+                <a href="#" class="inline-block bg-gray-800 hover:bg-gray-900 text-white font-medium py-2.5 px-5 rounded-lg shadow">
+                    Buy Capacity
+                </a>
             </div>
         </div>
     </div>
 </section>
 
 <!-- How It Works -->
-<section class="bg-gray-100 dark:bg-gray-800 py-16">
-    <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-8">How It Works</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <div>
-                <h5 class="text-xl font-semibold mb-2">1. Copy your HTML form</h5>
-                <p>Add our form endpoint URL in the action attribute.</p>
-            </div>
-            <div>
-                <h5 class="text-xl font-semibold mb-2">2. Deploy & Collect</h5>
-                <p>Deploy your site and start collecting submissions.</p>
-            </div>
-            <div>
-                <h5 class="text-xl font-semibold mb-2">3. Get Notified</h5>
-                <p>Get instant email or Slack notifications with every form.</p>
-            </div>
-        </div>
+<section class="container mx-auto px-4 py-12" id="integration">
+    <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-8">How It Works</h2>
+
+    <div class="max-w-3xl mx-auto mb-8 text-gray-800">
+        <ol class="list-decimal list-inside space-y-3 text-lg">
+            <li><strong>Add our endpoint</strong> to your HTML form’s action URL (we generate a unique URL for you).</li>
+            <li><strong>Deploy your form</strong> on your site. Submissions are sent to our secure backend.</li>
+            <li><strong>Receive & manage</strong> submissions in real-time in your dashboard or via email.</li>
+        </ol>
+    </div>
+
+    <div class="max-w-xl mx-auto bg-gray-100 border border-gray-200 rounded-lg p-4 text-sm">
+<pre class="text-left overflow-x-auto"><code class="language-html text-gray-800">
+&lt;!-- Example HTML Form Integration --&gt;
+&lt;form action="https://formpilot.io/your-form-endpoint" method="POST"&gt;
+  &lt;label&gt;Your Email:&lt;/label&gt;
+  &lt;input type="email" name="email" required&gt;
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+    </div>
+
+    <p class="text-center text-gray-600 mt-4">
+        See our <a href="#" class="text-gray-800 underline decoration-gray-300 hover:decoration-gray-800">Documentation</a> for more details and examples.
+    </p>
+</section>
+
+<!-- Testimonials (optional) -->
+<section class="container mx-auto px-4 py-12 text-center">
+    <h2 class="text-2xl font-bold text-gray-900 mb-8">What Our Users Say</h2>
+    <div class="max-w-2xl mx-auto">
+        <figure class="mb-8">
+            <blockquote class="text-gray-800 italic text-lg">“We set up contact forms in minutes. No backend code. It just works.”</blockquote>
+            <figcaption class="text-gray-600 mt-2">— Jane D., Frontend Developer</figcaption>
+        </figure>
+        <figure>
+            <blockquote class="text-gray-800 italic text-lg">“Pay-per-use keeps costs low for our small business.”</blockquote>
+            <figcaption class="text-gray-600 mt-2">— John S., Small Business Owner</figcaption>
+        </figure>
     </div>
 </section>
 
-<!-- Pricing -->
-<section id="pricing" class="py-16">
-    <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-10">Simple Pricing</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Free -->
-            <div class="border rounded-xl p-6 hover:scale-[1.02] transition dark:border-gray-700">
-                <h4 class="text-2xl font-bold mb-2">Free</h4>
-                <p class="text-gray-500 dark:text-gray-400">Perfect to get started</p>
-                <h3 class="text-3xl font-bold my-4">$0<span class="text-base font-normal">/mo</span></h3>
-                <ul class="mb-6 space-y-1">
-                    <li>50 submissions/mo</li>
-                    <li>Email notifications</li>
-                    <li>Spam protection</li>
-                </ul>
-                <a href="{{route('register')}}" class="inline-block px-5 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900">Get Started</a>
-            </div>
-
-            <!-- Pro -->
-            <div class="border-2 border-blue-600 rounded-xl p-6 hover:scale-[1.02] transition shadow dark:border-blue-400">
-                <h4 class="text-2xl font-bold mb-2">Pro</h4>
-                <p class="text-gray-500 dark:text-gray-400">For growing teams</p>
-                <h3 class="text-3xl font-bold my-4">$15<span class="text-base font-normal">/mo</span></h3>
-                <ul class="mb-6 space-y-1">
-                    <li>5,000 submissions</li>
-                    <li>Slack/Discord/Webhook</li>
-                    <li>File uploads</li>
-                </ul>
-                <a href="#" class="inline-block px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Upgrade</a>
-            </div>
-
-            <!-- Enterprise -->
-            <div class="border rounded-xl p-6 hover:scale-[1.02] transition dark:border-gray-700">
-                <h4 class="text-2xl font-bold mb-2">Enterprise</h4>
-                <p class="text-gray-500 dark:text-gray-400">Custom solution</p>
-                <h3 class="text-3xl font-bold my-4">Contact Us</h3>
-                <ul class="mb-6 space-y-1">
-                    <li>Unlimited forms</li>
-                    <li>Custom branding</li>
-                    <li>SOC 2 / GDPR</li>
-                </ul>
-                <a href="#" class="inline-block px-5 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900">Contact</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA -->
-<section class="py-16 bg-blue-700 text-white text-center">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-4">Start collecting forms now</h2>
-        <p class="mb-6">Sign up and get your first form running in under 2 minutes.</p>
-        <form class="flex flex-col md:flex-row items-center justify-center gap-3 max-w-xl mx-auto">
-            <input type="email" class="w-full px-4 py-2 rounded-lg text-gray-800" placeholder="Enter your email" required />
-            <button class="bg-white text-blue-700 font-semibold px-6 py-2 rounded-lg hover:bg-gray-100 transition" type="submit">Get Started</button>
-        </form>
-    </div>
+<!-- CTA band with gray-800 brand color -->
+<section class="container mx-auto px-4 py-12 text-center bg-gray-800 text-white rounded-lg shadow-md">
+    <h2 class="text-2xl sm:text-3xl font-bold mb-4">Ready to Simplify Your Forms?</h2>
+    <p class="text-lg mb-6">Get started today and receive 50 free submissions on sign-up. No credit card required.</p>
+    <a href="#" class="bg-white text-gray-800 font-semibold py-3 px-6 rounded-lg shadow hover:bg-gray-100">
+        Get Started for Free
+    </a>
 </section>
 
 <!-- Footer -->
-<footer class="py-6 bg-gray-900 text-white text-center">
-    <div class="container mx-auto px-4">
-        <small>&copy; 2025 FormPilot. All rights reserved.</small>
+<footer class="container mx-auto px-4 py-6 text-center text-sm text-gray-600 mt-8 border-t border-gray-200">
+    <div>&copy; 2025 FormPilot. All rights reserved.</div>
+    <div class="mt-2">
+        <a href="#" class="mx-2 hover:underline">Terms of Service</a>
+        <a href="#" class="mx-2 hover:underline">Privacy Policy</a>
     </div>
 </footer>
 
+<!-- Scripts -->
+<script>
+    // Mobile menu toggle (separate panel for better control)
+    const menuBtn = document.getElementById('menuBtn');
+    const mobilePanel = document.getElementById('mobilePanel');
+    menuBtn.addEventListener('click', () => {
+        mobilePanel.classList.toggle('hidden');
+    });
+
+    // Pricing calculator
+    const subInput = document.getElementById('subInput');
+    const formInput = document.getElementById('formInput');
+    const totalCostSpan = document.getElementById('totalCost');
+
+    function updateCost() {
+        const subs = Number(subInput.value) || 0;
+        const forms = Number(formInput.value) || 0;
+
+        const costSubs = Math.ceil(subs / 1000) * 10; // $10 per 1000
+        const costForms = Math.ceil(forms / 10) * 10; // $10 per 10
+        let total = costSubs + costForms;
+        if (total < 15) total = 15;                   // $15 minimum
+
+        totalCostSpan.textContent = '$' + total.toFixed(2);
+    }
+
+    subInput.addEventListener('input', updateCost);
+    formInput.addEventListener('input', updateCost);
+    updateCost();
+</script>
 </body>
 </html>

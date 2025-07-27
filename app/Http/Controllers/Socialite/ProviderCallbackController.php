@@ -39,6 +39,7 @@ class ProviderCallbackController extends Controller
             'nickname' => $socialUser->nickname,
             'token' => $socialUser->token,
             'refresh_token' => $socialUser->refreshToken,
+            'email_verified_at' => now(),
         ]);
 
         if (!$user) {
