@@ -93,26 +93,21 @@
                 separateDialCode: true,
                 initialCountry: "auto",
                 geoIpLookup: function(callback) {
-                    // Use user's saved country code if available
                     const savedCountryCode = phoneCountryCode.value;
                     if (savedCountryCode) {
-                        // Try to match saved country by dial code
                         fetch('https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/index.json')
                             .then(res => res.json())
                             .then(countries => {
                                 const dialCode = savedCountryCode.replace('+', '');
-                                // Find country with matching dial code
                                 for (let country of countries) {
                                     if (country.phone === dialCode) {
                                         return callback(country.code.toLowerCase());
                                     }
                                 }
-                                // Fallback
                                 callback('ua');
                             })
                             .catch(() => callback('ua'));
                     } else {
-                        // Use IP-based geolocation
                         fetch('https://ipapi.co/json/')
                             .then(res => res.json())
                             .then(data => {
@@ -126,25 +121,22 @@
             // Update hidden country code field before form submission
             const form = phoneInput.closest('form');
             form.addEventListener('submit', function() {
-                const dialCode = iti.getSelectedCountryData().dialCode;
-                if (dialCode) {
-                    phoneCountryCode.value = '+' + dialCode;
+                const selectedCountry = iti.getSelectedCountryData();
+                if (selectedCountry && selectedCountry.dialCode) {
+                    phoneCountryCode.value = '+' + selectedCountry.dialCode;
                 } else {
                     phoneCountryCode.value = '';
                 }
             });
 
-            // Alternative approach - set country directly if we have a saved dial code
+            // Set country if we have a saved dial code
             if (phoneCountryCode.value) {
                 setTimeout(() => {
-                    // Try to find a country that matches our saved dial code
                     const allCountries = iti.getCountryData();
                     const dialCode = phoneCountryCode.value.replace('+', '');
-
                     const matchingCountry = allCountries.find(country =>
                         country.dialCode === dialCode
                     );
-
                     if (matchingCountry) {
                         iti.setCountry(matchingCountry.iso2);
                     }
