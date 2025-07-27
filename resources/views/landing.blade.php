@@ -75,12 +75,12 @@
             <a href="#screens" class="block hover:text-gray-900">Screenshots</a>
             <a href="#" class="block hover:text-gray-900">Docs</a>
             <a href="#" class="block hover:text-gray-900">Contact</a>
-            <div class="pt-2 flex items-center gap-3">
-                <a href="#" class="text-sm hover:text-gray-900">Login</a>
-                <a href="#pricing" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg shadow">
-                    Get Started
-                </a>
-            </div>
+{{--            <div class="pt-2 flex items-center gap-3">--}}
+{{--                <a href="#" class="text-sm hover:text-gray-900">Login</a>--}}
+{{--                <a href="#pricing" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg shadow">--}}
+{{--                    Get Started--}}
+{{--                </a>--}}
+{{--            </div>--}}
         </div>
     </div>
 </header>
