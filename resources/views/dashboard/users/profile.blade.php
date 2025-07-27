@@ -32,7 +32,7 @@
                 <input type="tel" id="phone" name="phone" value="{{ old('phone', $user->phone) }}"
                        class="w-full bg-white border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                        placeholder="123-456-7890" />
-                <input type="hidden" name="phone_country_code" id="phone_country_code" value="{{ old('phone_country_code', $user->phone_country_code) }}">
+                <input type="hidden" name="phone_country_code" id="phone_country_code" value="{{ $user->phone_country_code}}">
             </div>
 
             <div>
@@ -127,7 +127,11 @@
             const form = phoneInput.closest('form');
             form.addEventListener('submit', function() {
                 const dialCode = iti.getSelectedCountryData().dialCode;
-                phoneCountryCode.value = '+' + dialCode;
+                if (dialCode) {
+                    phoneCountryCode.value = '+' + dialCode;
+                } else {
+                    phoneCountryCode.value = '';
+                }
             });
 
             // Alternative approach - set country directly if we have a saved dial code
