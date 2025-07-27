@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers\Socialite;
 
-use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Models\AuthProviders;
 use App\Models\User;
-use App\Services\CompanyService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
-use Spatie\Permission\Models\Role;
 
 class ProviderCallbackController extends Controller
 {
@@ -28,7 +24,22 @@ class ProviderCallbackController extends Controller
 
         $user = User::query()->where('email', $socialUser->email)->first();
 
-        $providerUser = AuthProviders::query()->updateOrCreate([
+        $providerUser = $this->updateOrCreateProvider($user, $provider, $socialUser);
+
+        if (!$user) {
+            $user = $this->createAndRegisterUser($socialUser, $providerUser);
+        }
+
+        $this->verifyEmail($user);
+
+        Auth::login($user);
+
+        return redirect('/dashboard');
+    }
+
+    public function updateOrCreateProvider($user, $provider, $socialUser)
+    {
+        return AuthProviders::query()->updateOrCreate([
             'provider_id' => $socialUser->id,
             'provider_name' => $provider,
         ], [
@@ -39,25 +50,29 @@ class ProviderCallbackController extends Controller
             'nickname' => $socialUser->nickname,
             'token' => $socialUser->token,
             'refresh_token' => $socialUser->refreshToken,
-            'email_verified_at' => now(),
+        ]);
+    }
+
+    public function createAndRegisterUser($socialUser, $providerUser)
+    {
+        $user = User::query()->create([
+            'name' => $socialUser->name,
+            'email' => $socialUser->email,
+            'avatar' => $socialUser->avatar,
         ]);
 
-        if (!$user) {
+        $providerUser->update(['user_id' => $user->id]);
 
-            $user = User::query()->create([
-                'name' => $socialUser->name,
-                'email' => $socialUser->email,
-                'avatar' => $socialUser->avatar,
-                'email_verified_at' => now(),
-            ]);
+        event(new Registered($user));
 
-            $providerUser->update(['user_id' => $user->id]);
+        return $user;
+    }
 
-            event(new Registered($user));
+
+    public function verifyEmail($user)
+    {
+        if (! $user->hasVerifiedEmail()) {
+            $user->markEmailAsVerified();
         }
-
-        Auth::login($user);
-
-        return redirect('/dashboard');
     }
 }
