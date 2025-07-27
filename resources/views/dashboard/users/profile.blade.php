@@ -29,10 +29,10 @@
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('dashboard.phone') }}</label>
-                <input type="tel" id="phone" name="phone" value="{{$user->phone_country_code . $user->phone }}"
+                <input type="tel" id="phone" name="phone" value="{{$user->phone_country_code . old('phone', $user->phone) }}"
                        class="w-full bg-white border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                        placeholder="123-456-7890" />
-                <input type="hidden" name="phone_country_code" id="phone_country_code" value="{{ $user->phone_country_code}}">
+                <input type="hidden" name="phone_country_code" id="phone_country_code" value="{{ old('phone_country_code', $user->phone_country_code) }}">
             </div>
 
             <div>
@@ -89,7 +89,7 @@
 
             const iti = window.intlTelInput(phoneInput, {
                 utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-                preferredCountries: ["ua", "us", "pl", 'gb', 'nl', 'de', 'fr', 'it', 'es'],
+                preferredCountries: ["ua", "us", "pl", "gb", "nl", "de", "fr", "it", "es"],
                 separateDialCode: true,
                 initialCountry: "auto",
                 geoIpLookup: function(callback) {
@@ -118,18 +118,7 @@
                 }
             });
 
-            // Update hidden country code field before form submission
-            const form = phoneInput.closest('form');
-            form.addEventListener('submit', function() {
-                const selectedCountry = iti.getSelectedCountryData();
-                if (selectedCountry && selectedCountry.dialCode) {
-                    phoneCountryCode.value = '+' + selectedCountry.dialCode;
-                } else {
-                    phoneCountryCode.value = '';
-                }
-            });
-
-            // Set country if we have a saved dial code
+            // Set initial country if we have a saved dial code
             if (phoneCountryCode.value) {
                 setTimeout(() => {
                     const allCountries = iti.getCountryData();
@@ -142,6 +131,15 @@
                     }
                 }, 100);
             }
+
+            // On submit, update hidden input with selected country code
+            const form = phoneInput.closest('form');
+            form.addEventListener('submit', function() {
+                const selectedCountry = iti.getSelectedCountryData();
+                phoneCountryCode.value = selectedCountry && selectedCountry.dialCode ? '+' + selectedCountry.dialCode : '';
+                // Remove country code from phone input value before submit
+                phoneInput.value = iti.getNumber(intlTelInputUtils.numberFormat.NATIONAL);
+            });
         });
     </script>
 @endpush
