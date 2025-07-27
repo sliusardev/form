@@ -103,8 +103,6 @@ class SubmissionController extends Controller
             $formData = $validator->validated();
         }
 
-//        $allData = array_merge($formData, $request->query());
-
         $submission = $submissionService->createSubmission(
             $form,
             $formData,
