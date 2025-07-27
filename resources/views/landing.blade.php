@@ -51,12 +51,22 @@
         </nav>
 
         <!-- Right-side actions -->
-        <div class="hidden md:flex items-center gap-3">
-            <a href="{{route('login')}}" type="button" class="text-sm hover:text-gray-900 cursor-pointer p-2">Login</a>
-            <a href="{{route('register')}}" type="button" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg shadow transition cursor-pointer p-2">
-                Get Started
-            </a>
-        </div>
+        @if (Route::has('login'))
+            @auth
+                <a href="{{route('register')}}" type="button" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg shadow transition cursor-pointer p-2">
+                    {{__('dashboard.dashboard')}}
+                </a>
+            @else
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="{{route('login')}}" type="button" class="text-sm hover:text-gray-900 cursor-pointer p-2">
+                        {{__('dashboard.login')}}
+                    </a>
+                    <a href="{{route('register')}}" type="button" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg shadow transition cursor-pointer p-2">
+                        {{__('dashboard.get_started')}}
+                    </a>
+                </div>
+            @endauth
+        @endif
 
         <!-- Mobile hamburger -->
         <button id="menuBtn" class="md:hidden p-2 rounded-lg border border-gray-200" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobilePanel">
@@ -220,7 +230,7 @@
 
         <div class="rounded-xl border border-gray-200 p-6 shadow-sm">
             <div class="text-sm text-gray-700 mb-2 font-medium">HTML example</div>
-            <pre class="text-sm bg-gray-50 border border-gray-200 rounded-lg p-3 overflow-x-auto"><code>&lt;form action="https://formpost.io/your-endpoint" method="POST"&gt;
+            <pre class="text-sm bg-gray-50 border border-gray-200 rounded-lg p-3 overflow-x-auto"><code>&lt;form action="https://formpost.org/your-endpoint" method="POST"&gt;
   &lt;label&gt;Your Email&lt;/label&gt;
   &lt;input type="email" name="email" required /&gt;
 
@@ -350,10 +360,10 @@
 ======================== -->
 <footer class="container mx-auto px-4 py-8 text-sm text-gray-600">
     <div class="border-t border-gray-200 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
-        <div>&copy; 2025 FormPost. All rights reserved.</div>
+        <div>&copy; 2024 - {{now()->year}} FormPost. All rights reserved.</div>
         <div class="flex items-center gap-4">
-            <a href="/pricing.html" class="hover:underline">Pricing</a>
-            <a href="/docs.html" class="hover:underline">Docs</a>
+            <a href="#pricing" class="hover:underline">Pricing</a>
+            <a href="#docs" class="hover:underline">Docs</a>
             <a href="/terms.html" class="hover:underline">Terms</a>
             <a href="/privacy.html" class="hover:underline">Privacy</a>
         </div>
@@ -382,7 +392,7 @@
         const costSubs  = Math.ceil(subs / 1000) * 10; // $10 per 1000
         const costForms = Math.ceil(forms / 10) * 10;  // $10 per 10
         let total = costSubs + costForms;
-        if (total < 15) total = 15;                    // $15 minimum
+        // if (total < 15) total = 15;                    // $15 minimum
         totalCostSpan.textContent = '$' + total.toFixed(2);
     }
     subInput.addEventListener('input', updateCost);

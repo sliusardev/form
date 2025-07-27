@@ -5,6 +5,7 @@ use App\Http\Controllers\Billing\WayForPayController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\UserController;
@@ -12,9 +13,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\FormSubmissionMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('landing');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/payment-success', function () {
     return view('pages.payment-success');

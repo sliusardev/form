@@ -21,6 +21,7 @@ return [
     'logout' => 'Logout',
     'login' => 'Login',
     'register' => 'Register',
+    'get_started' => 'Get Started',
     'home' => 'Home',
     'about' => 'About Us',
     'contact' => 'Contact Us',
