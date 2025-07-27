@@ -61,10 +61,8 @@ class SubmissionController extends Controller
     }
     public function store(StoreSubmissionRequest $request, string $hash, SubmissionService $submissionService)
     {
-        // Get the form from the request attributes (set by the middleware)
         $form = $request->attributes->get('form');
 
-        // If the form is not in the request attributes, load it (fallback)
         if (!$form) {
             $form = Form::query()
                 ->where('hash', $hash)
@@ -79,7 +77,6 @@ class SubmissionController extends Controller
                 ], 404);
             }
         } else {
-            // Ensure company relationship is loaded
             $form->load('company');
         }
 
@@ -90,10 +87,8 @@ class SubmissionController extends Controller
             ], 403);
         }
 
-        // Use validated data instead of all request data
         $formData = $request->validated();
 
-        // If the request is JSON, merge the validated data with JSON data
         if ($request->isJson()) {
             $jsonData = $request->json()->all();
             $validator = validator($jsonData, $request->rules());
@@ -108,12 +103,11 @@ class SubmissionController extends Controller
             $formData = $validator->validated();
         }
 
-        // Merge GET params with validated data
-        $allData = array_merge($formData, $request->query());
+//        $allData = array_merge($formData, $request->query());
 
         $submission = $submissionService->createSubmission(
             $form,
-            $allData,
+            $formData,
             $request->ip(),
             $request->getMethod()
         );
