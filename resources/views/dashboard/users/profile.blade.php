@@ -29,7 +29,7 @@
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('dashboard.phone') }}</label>
-                <input type="tel" id="phone" name="phone" value="{{ old('phone', $user->phone) }}"
+                <input type="tel" id="phone" name="phone" value="{{$user->phone_country_code . $user->phone }}"
                        class="w-full bg-white border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                        placeholder="123-456-7890" />
                 <input type="hidden" name="phone_country_code" id="phone_country_code" value="{{ $user->phone_country_code}}">
