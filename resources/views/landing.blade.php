@@ -382,6 +382,10 @@
         menuBtn.setAttribute('aria-expanded', String(!isHidden));
     });
 
+    const submissionCost = {{ $submissionCost }};
+    const formCost = {{ $formCost }};
+    const minPayment = {{ $minPayment }};
+
     // Pricing calculator
     const subInput = document.getElementById('subInput');
     const formInput = document.getElementById('formInput');
