@@ -52,8 +52,8 @@
 
         <!-- Right-side actions -->
         <div class="hidden md:flex items-center gap-3">
-            <a href="{{route('login')}}" class="text-sm hover:text-gray-900">Login</a>
-            <a href="{{route('register')}}" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg shadow transition">
+            <a href="{{route('login')}}" type="button" class="text-sm hover:text-gray-900 cursor-pointer p-2">Login</a>
+            <a href="{{route('register')}}" type="button" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg shadow transition cursor-pointer p-2">
                 Get Started
             </a>
         </div>
