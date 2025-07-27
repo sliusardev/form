@@ -38,7 +38,7 @@
 <header class="w-full border-b border-gray-200 bg-white sticky top-0 z-50">
     <div class="container mx-auto px-4 flex items-center justify-between py-4">
         <!-- Brand -->
-        <a href="#" class="text-2xl font-semibold text-gray-800">FormPost</a>
+        <a href="{{route('home')}}" class="text-2xl font-semibold text-gray-800">FormPost</a>
 
         <!-- Desktop nav -->
         <nav id="navMenu" class="hidden md:flex items-center gap-8 text-sm">
