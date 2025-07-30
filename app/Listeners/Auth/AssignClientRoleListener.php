@@ -24,10 +24,6 @@ class AssignClientRoleListener
      */
     public function handle(Registered $event): void
     {
-        Log::log('info', 'Assigning client role to user', [
-            'user_id' => $event->user->id,
-            'email' => $event->user->email,
-        ]);
         $clientRole = Role::query()->where('name', RoleEnum::CLIENT->value)->first();
         if ($clientRole) {
             $event->user->assignRole($clientRole);

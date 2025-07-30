@@ -23,10 +23,6 @@ class SetupCompanySessionListener
      */
     public function handle(Login $event): void
     {
-        Log::log('info', 'Setting up company session for user', [
-            'user_id' => $event->user->id,
-            'email' => $event->user->email,
-        ]);
         $company = $this->companyService->createNew($event->user);
         session()->put('company_id', $company->id);
     }
