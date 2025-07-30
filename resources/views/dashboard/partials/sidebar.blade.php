@@ -1,6 +1,11 @@
 <div id="sidebar" class="w-64 bg-gray-800 text-white flex-col p-4 hidden absolute xl:relative xl:flex z-30 h-full ">
     <div class="flex justify-between items-center mb-4">
-        <h4 class="text-lg font-semibold">FormPost</h4>
+        <div class="flex items-center">
+            <img src="{{ asset('android-chrome-192x192.png') }}" alt="Logo" class="w-5 h-5 mr-2">
+            <h4 class="text-lg font-semibold">
+                FormPost
+            </h4>
+        </div>
         <button id="sidebarCollapse" class="text-white focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
