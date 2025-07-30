@@ -43,9 +43,9 @@ class PaymentService
 
         $currency = app()->getLocale() == 'uk' ? CurrenciesEnum::UAH->value : CurrenciesEnum::USD->value;
 
-        $submissionCost = $settings['one_submission_cost_' . $currency];
-        $formCost = $settings['one_form_cost_' . $currency];
-        $minPayment = $settings['min_payment_' . $currency];
+        $submissionCost = $settings['one_submission_cost_' . $currency] ?? 0;
+        $formCost = $settings['one_form_cost_' . $currency] ?? 0;
+        $minPayment = $settings['min_payment_' . $currency] ?? 0;
 
         return [
             'submissionCost' => $submissionCost,

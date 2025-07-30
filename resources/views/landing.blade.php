@@ -247,7 +247,7 @@
 <!-- =======================
      SCREENSHOTS (Swiper)
 ======================== -->
-<section id="screens" class="container mx-auto px-4 py-12">
+<section id="screens" class="max-w-[1200px] mx-auto px-4 py-12">
     <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-6">Product Screenshots</h2>
 
     <div class="swiper bg-white rounded-xl border border-gray-200 shadow-sm flex items-center justify-center" id="screensSwiper" aria-label="Product screenshots">
@@ -409,6 +409,7 @@
             loop: true,
             slidesPerView: 1,
             spaceBetween: 16,
+            speed: 800, // плавний перехід (800 мс)
             autoplay: { delay: 5000, disableOnInteraction: false },
             pagination: { el: '.swiper-pagination', clickable: true },
             navigation: {
