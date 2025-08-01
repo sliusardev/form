@@ -13,6 +13,14 @@ Route::middleware('guest')->group(function () {
     Route::post('/auth/store', [AuthController::class, 'store'])->name('auth.store');
     Route::post('/auth/login', [AuthController::class, 'auth'])->name('auth.login');
 
+    Route::get('/app/register', function () {
+        return redirect('/register');
+    });
+
+    Route::get('/app/login', function () {
+        return redirect('/login');
+    });
+
 
     Route::get('/auth/{provider}/redirect', ProviderRedirectController::class)
         ->name('socialite.auth.redirect');
