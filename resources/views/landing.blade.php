@@ -40,33 +40,33 @@
 <!-- =======================
      HEADER / NAV
 ======================== -->
-<header class="w-full border-b border-gray-200 bg-white sticky top-0 z-50">
+<header class="w-full border-b border-gray-800 bg-gray-800 text-white sticky top-0 z-50">
     <div class="container mx-auto px-4 flex items-center justify-between py-4">
         <!-- Brand -->
-        <a href="{{route('home')}}" class="text-2xl font-semibold text-gray-800">FormPost</a>
+        <a href="{{route('home')}}" class="text-3xl font-semibold text-white">FormPost</a>
 
         <!-- Desktop nav -->
-        <nav id="navMenu" class="hidden md:flex items-center gap-8 text-sm">
-            <a href="#features" class="hover:text-gray-900">Features</a>
-            <a href="#pricing" class="hover:text-gray-900">Pricing</a>
-            <a href="#integration" class="hover:text-gray-900">How It Works</a>
-            <a href="#screens" class="hover:text-gray-900">Screenshots</a>
-            <a href="#" class="hover:text-gray-900">Docs</a>
-            <a href="#" class="hover:text-gray-900">Contact</a>
+        <nav id="navMenu" class="hidden md:flex items-center gap-8 text-base">
+            <a href="#features" class="hover:text-gray-300">Features</a>
+            <a href="#pricing" class="hover:text-gray-300">Pricing</a>
+            <a href="#integration" class="hover:text-gray-300">How It Works</a>
+            <a href="#screens" class="hover:text-gray-300">Screenshots</a>
+            <a href="#" class="hover:text-gray-300">Docs</a>
+            <a href="#" class="hover:text-gray-300">Contact</a>
         </nav>
 
         <!-- Right-side actions -->
         @if (Route::has('login'))
             @auth
-                <a href="{{route('register')}}" type="button" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg shadow transition cursor-pointer p-2">
+                <a href="{{route('register')}}" type="button" class="bg-white hover:bg-gray-100 text-gray-800 text-base font-medium py-2 px-4 rounded-lg shadow transition cursor-pointer p-2">
                     {{__('dashboard.dashboard')}}
                 </a>
             @else
                 <div class="hidden md:flex items-center gap-3">
-                    <a href="{{route('login')}}" type="button" class="text-sm hover:text-gray-900 cursor-pointer p-2">
+                    <a href="{{route('login')}}" type="button" class="text-base hover:text-gray-300 cursor-pointer p-2">
                         {{__('dashboard.login')}}
                     </a>
-                    <a href="{{route('register')}}" type="button" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg shadow transition cursor-pointer p-2">
+                    <a href="{{route('register')}}" type="button" class="bg-white hover:bg-gray-100 text-gray-800 text-base font-medium py-2 px-4 rounded-lg shadow transition cursor-pointer p-2">
                         {{__('dashboard.get_started')}}
                     </a>
                 </div>
@@ -74,32 +74,31 @@
         @endif
 
         <!-- Mobile hamburger -->
-        <button id="menuBtn" class="md:hidden p-2 rounded-lg border border-gray-200" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobilePanel">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button id="menuBtn" class="md:hidden p-2 rounded-lg border border-gray-700 bg-gray-800 text-white" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobilePanel">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
         </button>
     </div>
 
     <!-- Mobile panel -->
-    <div id="mobilePanel" class="md:hidden hidden border-t border-gray-200 bg-white" role="dialog" aria-label="Mobile navigation">
-        <div class="container mx-auto px-4 py-3 text-sm space-y-2">
-            <a href="#features" class="block hover:text-gray-900">Features</a>
-            <a href="#pricing" class="block hover:text-gray-900">Pricing</a>
-            <a href="#integration" class="block hover:text-gray-900">How It Works</a>
-            <a href="#screens" class="block hover:text-gray-900">Screenshots</a>
-            <a href="#" class="block hover:text-gray-900">Docs</a>
-            <a href="#" class="block hover:text-gray-900">Contact</a>
+    <div id="mobilePanel" class="md:hidden hidden border-t border-gray-800 bg-gray-800 text-white" role="dialog" aria-label="Mobile navigation">
+        <div class="container mx-auto px-4 py-3 text-base space-y-2">
+            <a href="#features" class="block hover:text-gray-300">Features</a>
+            <a href="#pricing" class="block hover:text-gray-300">Pricing</a>
+            <a href="#integration" class="block hover:text-gray-300">How It Works</a>
+            <a href="#screens" class="block hover:text-gray-300">Screenshots</a>
+            <a href="#" class="block hover:text-gray-300">Docs</a>
+            <a href="#" class="block hover:text-gray-300">Contact</a>
 {{--            <div class="pt-2 flex items-center gap-3">--}}
-{{--                <a href="#" class="text-sm hover:text-gray-900">Login</a>--}}
-{{--                <a href="#pricing" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg shadow">--}}
+{{--                <a href="#" class="text-base hover:text-gray-300">Login</a>--}}
+{{--                <a href="#pricing" class="bg-white hover:bg-gray-100 text-gray-800 text-base font-medium py-2 px-4 rounded-lg shadow">--}}
 {{--                    Get Started--}}
 {{--                </a>--}}
 {{--            </div>--}}
         </div>
     </div>
 </header>
-
 <!-- =======================
      HERO
 ======================== -->
