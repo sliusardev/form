@@ -6,12 +6,12 @@
     ======================== -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FormPost — Simple Form Submissions (No Subscriptions)</title>
+    <title>FormPost — Simple Form Submissions from your site.</title>
     <meta name="description" content="Collect form submissions without a backend. Buy submissions and forms as needed. No subscriptions, no frameworks — just simple integration.">
     <meta property="og:title" content="FormPost — Simple Form Submissions" />
     <meta property="og:description" content="Buy submissions and forms as needed. No subscriptions. Easy integration." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image" content="{{asset('img/screens/1.png')}}" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
