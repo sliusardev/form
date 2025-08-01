@@ -25,7 +25,7 @@
                     <a href="{{ route('password.request') }}" class="text-blue-500 hover:underline">{{ __('auth.forgot_password') }}</a>
                 </p>
 
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-150">
+                <button type="submit" class="w-full bg-gray-800 text-white py-2 rounded-lg hover:bg-gray-600 transition duration-150">
                     {{__('auth.login')}}
                 </button>
                 <p class="mt-4 text-sm text-center text-gray-600">
