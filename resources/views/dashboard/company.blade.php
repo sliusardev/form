@@ -63,7 +63,7 @@
                     <input type="text" name="hash" id="hash" value="{{ old('hash', $company->hash ?? '') }}" required class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled/>
                 </div>
                 <div>
-                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">{{__('dashboard.save')}}</button>
+                    <button type="submit" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition">{{__('dashboard.save')}}</button>
                 </div>
             </form>
         </div>
