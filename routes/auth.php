@@ -21,7 +21,6 @@ Route::middleware('guest')->group(function () {
         return redirect('/login');
     });
 
-
     Route::get('/auth/{provider}/redirect', ProviderRedirectController::class)
         ->name('socialite.auth.redirect');
 
