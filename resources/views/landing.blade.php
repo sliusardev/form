@@ -83,19 +83,21 @@
 
     <!-- Mobile panel -->
     <div id="mobilePanel" class="md:hidden hidden border-t border-gray-800 bg-gray-800 text-white" role="dialog" aria-label="Mobile navigation">
-        <div class="container mx-auto px-4 py-3 text-base space-y-2">
+        <div class="container mx-auto px-4 py-3 text-lg space-y-2">
             <a href="#features" class="block hover:text-gray-300">Features</a>
             <a href="#pricing" class="block hover:text-gray-300">Pricing</a>
             <a href="#integration" class="block hover:text-gray-300">How It Works</a>
             <a href="#screens" class="block hover:text-gray-300">Screenshots</a>
             <a href="#" class="block hover:text-gray-300">Docs</a>
             <a href="#" class="block hover:text-gray-300">Contact</a>
-{{--            <div class="pt-2 flex items-center gap-3">--}}
-{{--                <a href="#" class="text-base hover:text-gray-300">Login</a>--}}
-{{--                <a href="#pricing" class="bg-white hover:bg-gray-100 text-gray-800 text-base font-medium py-2 px-4 rounded-lg shadow">--}}
-{{--                    Get Started--}}
-{{--                </a>--}}
-{{--            </div>--}}
+            @guest
+                <div class="pt-2 flex items-center gap-4 border-t border-gray-700 mt-3">
+                    <a href="{{route('login')}}" class="hover:text-gray-300 bg-gray-700 text-lg font-medium py-2 px-4 rounded-lg border-1 border-white shadow">Login</a>
+                    <a href="{{route('register')}}" class="bg-white  text-gray-800 text-lg font-medium py-2 px-4 rounded-lg shadow">
+                        Get Started
+                    </a>
+                </div>
+            @endguest
         </div>
     </div>
 </header>
@@ -115,7 +117,7 @@
     </p>
 
     <div class="flex items-center justify-center gap-3">
-        <a href="#pricing" class="bg-gray-800 hover:bg-gray-900 text-white font-medium py-3 px-6 rounded-lg shadow transition">
+        <a href="{{route('register')}}" class="bg-gray-800 hover:bg-gray-900 text-white font-medium py-3 px-6 rounded-lg shadow transition">
             Start Now
         </a>
         <a href="#integration" class="border border-gray-300 hover:border-gray-400 text-gray-800 font-medium py-3 px-6 rounded-lg transition">
