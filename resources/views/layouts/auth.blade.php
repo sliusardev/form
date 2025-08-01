@@ -7,9 +7,14 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>
-        @yield('title', 'Login')
-    </title>
+
+    <title>@yield('title', 'Login'). FormPost — Simple Form Submissions from your site.</title>
+    <meta name="description" content="Collect form submissions without a backend. Buy submissions and forms as needed. No subscriptions, no frameworks — just simple integration.">
+    <meta property="og:title" content="FormPost — Simple Form Submissions" />
+    <meta property="og:description" content="Collect form submissions without a backend. Buy submissions and forms as needed. No subscriptions, no frameworks — just simple integration." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{{asset('img/screens/landing.png')}}" />
+
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 font-sans">
