@@ -61,6 +61,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasRole(RoleEnum::ADMIN->value);
     }
 
+    public function company(): HasOne
+    {
+        return $this->hasOne(Company::class, 'user_id', 'id');
+    }
+
+    public function companyForms()
+    {
+        return $this->company?->forms();
+    }
+
     public function isClient(): bool
     {
         return $this->hasRole(RoleEnum::CLIENT->value);
@@ -74,11 +84,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class, 'user_id', 'id');
-    }
-
-    public function company(): HasOne
-    {
-        return $this->hasOne(Company::class, 'user_id', 'id');
     }
 
     public function getAvatar(): string

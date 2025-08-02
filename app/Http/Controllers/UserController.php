@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::query();
+        $query = User::query()->with(['roles', 'company']);
 
         if ($request->filled('search')) {
             $searchTerm = $request->input('search');
@@ -30,7 +30,7 @@ class UserController extends Controller
             }
         }
 
-        $users = $query->paginate(15);
+        $users = $query->paginate(25);
 
         return view('dashboard.users.index', [
             'users' => $users

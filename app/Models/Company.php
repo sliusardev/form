@@ -36,7 +36,7 @@ class Company extends Model
 
     public function submissions(): HasMany
     {
-        return $this->hasMany(Submission::class, 'company_id', 'id');
+        return $this->hasMany(Submission::class);
     }
 
     public function forms(): HasMany

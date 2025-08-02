@@ -5,7 +5,7 @@
         <div class="card-body">
             <div class="flex flex-col md:flex-row md:justify-between items-center mb-6">
                 <h2 class="card-title text-center md:text-2xl font-semibold my-3">{{ __('dashboard.my_forms') }}</h2>
-                <a href="{{ route('forms.create') }}" class="btn bg-gray-700 text-white hover:bg-gray-500 transition-colors flex items-center gap-2">
+                <a href="{{ route('forms.create') }}" class="btn bg-gray-800 text-white hover:bg-gray-500 transition-colors flex items-center gap-2">
                     {{__('dashboard.create')}}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
                 </a>

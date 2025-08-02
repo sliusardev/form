@@ -6,6 +6,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\UserController;
@@ -61,6 +62,11 @@ Route::prefix('dashboard')
             Route::post('/settings/update', [SettingsController::class, 'update'])->name('settings.update');
 
             Route::get('users', [UserController::class, 'index'])->name('users.index');
+
+
+            Route::get('payments', [PaymentController::class, 'index'])->name('payments.index');
+
+
         });
     });
 
