@@ -134,4 +134,6 @@ return [
     'payments' => 'Payments',
     'user_name' => 'User Name',
     'provider' => 'provider',
+    'amount' => 'Amount',
+    'currency' => 'Currency',
 ];

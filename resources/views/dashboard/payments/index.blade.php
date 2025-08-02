@@ -36,6 +36,7 @@
                             <th>{{ __('dashboard.status') }}</th>
                             <th>{{ __('dashboard.provider') }}</th>
                             <th>{{ __('dashboard.amount') }}</th>
+                            <th>{{ __('dashboard.currency') }}</th>
                             <th>{{ __('dashboard.created_at') }}</th>
                             <th></th>
                         </tr>
@@ -49,6 +50,7 @@
                                 <td>{{ $item->status }}</td>
                                 <td>{{ $item->provider }}</td>
                                 <td>{{ $item->amount }}</td>
+                                <td>{{ $item->currency }}</td>
                                 <td>{{ $item->created_at->format('Y-m-d') }}</td>
                                 <td>
                                     <div class="flex justify-end gap-2">
