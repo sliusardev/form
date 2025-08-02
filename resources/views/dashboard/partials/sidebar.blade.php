@@ -1,4 +1,4 @@
-<div id="sidebar" class="w-64 bg-gray-800 text-white flex-col p-4 hidden absolute xl:relative xl:flex z-30 h-full ">
+<div id="sidebar" class="w-64 bg-gray-800 text-white flex-col p-4 absolute xl:relative xl:flex z-30 h-full hidden">
     <div class="flex justify-between items-center mb-4">
         <div class="flex items-center">
             <img src="{{ asset('android-chrome-192x192.png') }}" alt="Logo" class="w-6 h-6 mr-2">
@@ -91,4 +91,14 @@
 </div>
 
 @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('sidebarToggle');
+
+            toggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('hidden');
+            });
+        });
+    </script>
 @endpush

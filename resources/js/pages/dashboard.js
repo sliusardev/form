@@ -1,22 +1,22 @@
 import Chart from "chart.js/auto";
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     sidebarToggle();
     mainChart();
 });
 
 function sidebarToggle() {
     const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.getElementById('sidebarToggle');
-    const toggleSidebarBtn = document.getElementById('sidebarCollapse');
+    const toggles = document.querySelectorAll('#sidebarToggle, #sidebarCollapse');
 
     function toggleSidebar() {
-        sidebar.classList.toggle('hidden');
         sidebar.classList.toggle('xl:hidden');
+        document.getElementById('sidebar').classList.toggle('hidden');
     }
 
-    toggleBtn.addEventListener('click', toggleSidebar);
-    toggleSidebarBtn.addEventListener('click', toggleSidebar);
+    toggles.forEach(btn => {
+        btn?.addEventListener('click', toggleSidebar);
+    });
 }
 
 function mainChart() {
