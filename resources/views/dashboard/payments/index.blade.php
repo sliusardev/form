@@ -10,7 +10,7 @@
             <div class="data-list">
                 <div class="mb-4 flex justify-end">
                     <form action="{{ route('payments.index') }}" method="GET" class="join">
-                        <input type="text" name="search" placeholder="{{ __('dashboard.search') }}" value="{{ request('search') }}" class="input input-bordered join-item w-full max-w-xs input-sm">
+                        <input type="text" name="search" placeholder="{{ __('dashboard.search') }}" value="{{ request('search') }}" class="input input-sm input-bordered join-item w-full max-w-xs ">
                         <button class="join-item btn btn-sm bg-gray-800 text-white hover:bg-gray-500 transition-colors flex items-center gap-2">{{ __('dashboard.search') }}</button>
                     </form>
                 </div>
