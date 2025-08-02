@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\CurrenciesEnum;
 use App\Models\Settings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class SettingsController extends Controller
 {
@@ -32,6 +33,22 @@ class SettingsController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Settings updated successfully.');
+    }
+
+    public function artisanActions(Request $request)
+    {
+        $action = $request->input('action');
+
+        if (!$action) {
+            return redirect()->back()->with('error', 'No action specified.');
+        }
+
+        if ($action == 'optimize:clear') {
+            Artisan::call('optimize:clear');
+            return redirect()->back()->with('success', 'Cache cleared successfully.');
+        }
+
+        return redirect()->back()->with('error', 'No such action found.');
     }
 
 }

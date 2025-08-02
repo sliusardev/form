@@ -60,6 +60,8 @@ Route::prefix('dashboard')
         Route::middleware([AdminMiddleware::class])->group(function () {
             Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
             Route::post('/settings/update', [SettingsController::class, 'update'])->name('settings.update');
+            Route::post('/settings/artisan', [SettingsController::class, 'artisanActions'])
+                ->name('settings.artisan');
 
             Route::get('users', [UserController::class, 'index'])->name('users.index');
 
