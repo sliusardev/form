@@ -140,4 +140,7 @@ return [
     'clear_cache' => 'Clear Cache',
     'run_migrations' => 'Run Migrations',
     'execute_command' => 'Execute Command',
+    'roles' => 'Roles',
+    'role' => 'Role',
+    'admin' => 'Administrator',
 ];

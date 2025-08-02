@@ -7,6 +7,34 @@
         </button>
     </div>
     <div class="flex items-center space-x-4">
+        <!-- Language Switcher Dropdown -->
+        <div class="relative" id="lang-menu">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 rounded-lg px-3 py-2 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="font-medium text-gray-700">{{ strtoupper(app()->getLocale()) }}</span>
+                    <svg class="ml-1 w-4 h-4 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </label>
+                <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow-lg bg-white rounded-lg w-32 border border-gray-100">
+                    <li>
+                        <a href="{{ route('lang.switch', ['locale' => 'en']) }}" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-50 rounded-md transition-colors duration-150">
+                            <span class="text-gray-700">English</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('lang.switch', ['locale' => 'uk']) }}" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-50 rounded-md transition-colors duration-150">
+                            <span class="text-gray-700">Українська</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- End Language Switcher Dropdown -->
+
         <div class="relative" id="user-menu">
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 rounded-lg px-3 py-2 transition-colors duration-200">
@@ -63,4 +91,3 @@
         })
     </script>
 @endpush
-
