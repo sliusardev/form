@@ -136,4 +136,8 @@ return [
     'provider' => 'provider',
     'amount' => 'Amount',
     'currency' => 'Currency',
+    'artisan_commands' => 'Artisan Commands',
+    'clear_cache' => 'Clear Cache',
+    'run_migrations' => 'Run Migrations',
+    'execute_command' => 'Execute Command',
 ];

@@ -48,6 +48,11 @@ class SettingsController extends Controller
             return redirect()->back()->with('success', 'Cache cleared successfully.');
         }
 
+        if ($action == 'migrate') {
+            Artisan::call('migrate', ['--force' => true]);
+            return redirect()->back()->with('success', 'Database migrated successfully.');
+        }
+
         return redirect()->back()->with('error', 'No such action found.');
     }
 
