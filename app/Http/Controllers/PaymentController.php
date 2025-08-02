@@ -14,8 +14,11 @@ class PaymentController extends Controller
         if ($request->filled('search')) {
             $searchTerm = $request->input('search');
             $query->where(function ($q) use ($searchTerm) {
-                $q->where('user.name', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('company.name', 'like', '%' . $searchTerm . '%');
+                $q->whereHas('user', function ($userQuery) use ($searchTerm) {
+                    $userQuery->where('name', 'like', '%' . $searchTerm . '%');
+                })->orWhereHas('company', function ($companyQuery) use ($searchTerm) {
+                    $companyQuery->where('name', 'like', '%' . $searchTerm . '%');
+                });
             });
         }
 
