@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('phone_country_code', 5)->nullable();
             $table->text('avatar')->nullable();
+            $table->boolean('is_enabled')->default(true);
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

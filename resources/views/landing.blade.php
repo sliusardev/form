@@ -280,6 +280,8 @@
         const subInput = document.getElementById('subInput');
         const formInput = document.getElementById('formInput');
         const totalCostSpan = document.getElementById('totalCost');
+
+
         function updateCost() {
             const subs = Math.max(0, Number(subInput.value) || 0);
             const forms = Math.max(0, Number(formInput.value) || 0);

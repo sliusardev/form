@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\RoleEnum;
 use App\Notifications\CustomVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -31,6 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone',
         'phone_country_code',
         'avatar',
+        'is_enabled',
     ];
 
     /**
@@ -54,6 +56,11 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function scopeEnabled(Builder $query): void
+    {
+        $query->where('is_enabled', true);
     }
 
     public function isAdmin(): bool
