@@ -33,6 +33,26 @@
         <!-- Dashboard -->
         <div class="p-4 my-5">
 
+            @if ($errors->any())
+                <div class="mb-4 mx-auto">
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                        <ul class="list-disc pl-5">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+
+            @if (session('success'))
+                <div class="mb-4 mx-auto">
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            @endif
+
             @includeIf('dashboard.partials.notify-section')
 
             @yield('content')

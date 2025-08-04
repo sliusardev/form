@@ -1,9 +1,9 @@
-@extends('layouts.auth')
+@extends('layouts.site')
 
 @section('title', __('auth.reset_password'))
 
 @section('content')
-    <div class="min-h-screen flex items-center justify-center p-4">
+    <div class="min-h-screen flex items-center justify-center p-4 bg-gray-100">
         <div class="max-w-md w-full bg-white shadow-md rounded-lg p-8">
             <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">{{ __('auth.reset_password') }}</h2>
             <form method="POST" action="{{ route('password.update') }}" class="space-y-4">
@@ -32,11 +32,11 @@
                     <input type="password" id="password_confirmation" name="password_confirmation"
                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" required>
                 </div>
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-150">
+                <button type="submit" class="w-full bg-gray-800 text-white py-2 rounded-lg hover:bg-gray-600 transition duration-150">
                     {{ __('auth.reset_password') }}
                 </button>
             </form>
-            
+
             <p class="mt-4 text-sm text-center text-gray-600">
                 <a href="{{ route('login') }}" class="text-blue-500 hover:underline">{{ __('auth.back_to_login') }}</a>
             </p>

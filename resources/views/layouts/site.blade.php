@@ -6,7 +6,7 @@
     ======================== -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FormPost — Simple Form Submissions from your site.</title>
+    <title>@yield('title', '').FormPost — Simple Form Submissions from your site.</title>
     <meta name="description" content="Collect form submissions without a backend. Buy submissions and forms as needed. No subscriptions, no frameworks — just simple integration.">
     <meta property="og:title" content="FormPost — Simple Form Submissions" />
     <meta property="og:description" content="Collect form submissions without a backend. Buy submissions and forms as needed. No subscriptions, no frameworks — just simple integration." />

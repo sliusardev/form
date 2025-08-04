@@ -1,9 +1,9 @@
-@extends('layouts.auth')
+@extends('layouts.site')
 
 @section('title', __('auth.forgot_password'))
 
 @section('content')
-    <div class="min-h-screen flex items-center justify-center p-4">
+    <div class="min-h-screen flex items-center justify-center p-4 bg-gray-100">
         <div class="max-w-md w-full bg-white shadow-md rounded-lg p-8">
             <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">{{ __('auth.forgot_password') }}</h2>
             @if(session('status'))
@@ -20,7 +20,7 @@
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-150">
+                <button type="submit" class="w-full bg-gray-800 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-150">
                     {{ __('auth.send_password_reset_link') }}
                 </button>
             </form>
