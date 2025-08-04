@@ -143,4 +143,7 @@ return [
     'roles' => 'Roles',
     'role' => 'Role',
     'admin' => 'Administrator',
+    'terms_of_service' => 'Terms of Service',
+    'privacy_policy' => 'Privacy Policy',
+    'all_rights_reserved' => 'All rights reserved',
 ];

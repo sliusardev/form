@@ -16,6 +16,7 @@ use App\Http\Middleware\FormSubmissionMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
 
 Route::get('/payment-success', function () {
     return view('pages.payment-success');

@@ -23,4 +23,9 @@ class HomeController extends Controller
             'currency' => $currency,
         ]);
     }
+
+    public function terms()
+    {
+        return view('pages.terms');
+    }
 }

@@ -143,4 +143,7 @@ return [
     'roles' => 'Ролі',
     'role' => 'Роль',
     'admin' => 'Адміністратор',
+    'terms_of_service' => 'Умови використання',
+    'privacy_policy' => 'Політика конфіденційності',
+    'all_rights_reserved' => 'Всі права захищені',
 ];
