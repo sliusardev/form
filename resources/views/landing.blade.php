@@ -81,9 +81,9 @@
                 <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
                     <h3 class="text-lg font-semibold text-gray-900 mb-3">Rates</h3>
                     <ul class="space-y-2 text-gray-800">
-                        <li>• <strong>$10</strong> per <strong>1,000</strong> submissions</li>
-                        <li>• <strong>$10</strong> per <strong>10</strong> forms</li>
-                        <li>• <strong>$15</strong> minimum purchase</li>
+                        <li>• <strong>{{$submissionCost * 1000}} {{$currency}}</strong> per <strong>1,000</strong> submissions</li>
+                        <li>• <strong>{{$formCost * 10}} {{$currency}}</strong> per <strong>10</strong> forms</li>
+                        <li>• <strong>{{$minPayment}} {{$currency}}</strong> minimum purchase</li>
                     </ul>
                     <div class="mt-6">
                         <a href="{{route('register')}}" class="inline-block bg-gray-800 hover:bg-gray-900 text-white font-medium py-2.5 px-5 rounded-lg shadow">
@@ -98,13 +98,13 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label for="subInput" class="text-sm text-gray-700">Submissions</label>
-                            <input id="subInput" type="number" min="0" step="1000" value="1000"
+                            <input id="subInput" type="number" min="0" step="100" value="1000"
                                    class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-800" />
                             <p class="text-xs text-gray-500 mt-1">Billed in blocks of 1,000</p>
                         </div>
                         <div>
                             <label for="formInput" class="text-sm text-gray-700">Forms</label>
-                            <input id="formInput" type="number" min="0" step="10" value="10"
+                            <input id="formInput" type="number" min="0" step="1" value="10"
                                    class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-800" />
                             <p class="text-xs text-gray-500 mt-1">Billed in blocks of 10</p>
                         </div>
@@ -112,8 +112,10 @@
                     <div class="mt-4 flex items-end justify-between">
                         <div>
                             <div class="text-sm text-gray-600">Total</div>
-                            <div class="text-2xl font-semibold text-gray-900" id="totalCost">$20.00</div>
-                            <div class="text-xs text-gray-500">(Minimum $15)</div>
+                            <div class="text-2xl font-semibold text-gray-900">
+                                {{$currency}} <span id="totalCost">0.00</span>
+                            </div>
+{{--                            <div class="text-xs text-gray-500">(Minimum {{$minPayment}} {{$currency}})</div>--}}
                         </div>
                         <a href="{{route('register')}}" class="bg-gray-800 hover:bg-gray-900 text-white font-medium py-2.5 px-5 rounded-lg shadow">
                             Continue
@@ -278,17 +280,15 @@
         const subInput = document.getElementById('subInput');
         const formInput = document.getElementById('formInput');
         const totalCostSpan = document.getElementById('totalCost');
-
         function updateCost() {
             const subs = Math.max(0, Number(subInput.value) || 0);
             const forms = Math.max(0, Number(formInput.value) || 0);
-            const costSubs  = Math.ceil(subs / 1000) * submissionCost;
-            const costForms = Math.ceil(forms / 10) * formCost;
+            const costSubs  = subs * submissionCost; // Use submissionCost for per 1000 submissions
+            const costForms = forms * formCost;        // Use formCost for per 10 forms
             let total = costSubs + costForms;
-            if (total < minPayment) total = minPayment;
-            totalCostSpan.textContent = '$' + total.toFixed(2);
+            // if (total < minPayment) total = minPayment;               // Apply minimum payment
+            totalCostSpan.textContent = total.toFixed(2);
         }
-
         subInput.addEventListener('input', updateCost);
         formInput.addEventListener('input', updateCost);
         updateCost();
