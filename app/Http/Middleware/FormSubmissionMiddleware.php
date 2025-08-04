@@ -30,12 +30,20 @@ class FormSubmissionMiddleware
         // Check if the form exists and is enabled
         $form = Form::where('hash', $hash)
             ->where('is_enabled', true)
+            ->with('company')
             ->first();
 
         if (!$form) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Form not found or disabled',
+            ], 404);
+        }
+
+        if (!$form->company->is_enabled) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Company is disabled',
             ], 404);
         }
 

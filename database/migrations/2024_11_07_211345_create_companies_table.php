@@ -20,6 +20,7 @@ return new class extends Migration
             $table->json('data')->nullable();
             $table->unsignedInteger('submission_limit')->default(100);
             $table->unsignedInteger('form_limit')->default(10);
+            $table->boolean('is_enabled')->default(true);
             $table->timestamps();
         });
     }

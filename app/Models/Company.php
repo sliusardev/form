@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,6 +18,7 @@ class Company extends Model
         'data',
         'submission_limit',
         'form_limit',
+        'is_enabled',
     ];
 
     protected function casts(): array
@@ -47,5 +49,10 @@ class Company extends Model
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class, 'company_id', 'id');
+    }
+
+    public function scopeEnabled(Builder $query): void
+    {
+        $query->where('is_enabled', true);
     }
 }
