@@ -10,7 +10,7 @@ class LanguageController extends Controller
     public function switch($locale)
     {
         Session::put('locale', $locale);
-        return Redirect::back()->with('success', __('Language switched successfully.'));
+        return Redirect::back();
     }
 }
 

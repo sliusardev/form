@@ -60,4 +60,9 @@ return [
     'nav_get_started' => 'Get Started',
     'lang_english' => 'English',
     'lang_ukrainian' => 'Ukrainian',
+    'meta_title' => 'FormPost — Simple Form Submissions from your site.',
+    'meta_keywords' => 'form submissions, no backend, pay as you go, simple integration, static site forms, form endpoint',
+    'meta_description' => 'Collect form submissions without a backend. Buy submissions and forms as needed. No subscriptions, no frameworks — just simple integration.',
+    'og_title' => 'FormPost — Simple Form Submissions',
+    'og_description' => 'Collect form submissions without a backend. Buy submissions and forms as needed. No subscriptions, no frameworks — just simple integration.',
 ];

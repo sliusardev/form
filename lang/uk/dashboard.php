@@ -146,4 +146,5 @@ return [
     'terms_of_service' => 'Умови використання',
     'privacy_policy' => 'Політика конфіденційності',
     'all_rights_reserved' => 'Всі права захищені',
+    'seo_configuration' => 'Налаштування SEO',
 ];
