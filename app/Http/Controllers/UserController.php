@@ -76,4 +76,24 @@ class UserController extends Controller
         return redirect()->route('user.profile')
             ->with('success', 'Password updated successfully.');
     }
+
+    public function loginAs(Request $request)
+    {
+        $request->validate([
+            'user_id' => ['required', 'exists:users,id']
+        ]);
+
+        $user = User::findOrFail($request->input('user_id'));
+
+        // Check if the user is not the currently authenticated user
+        if ($user->id === Auth::id()) {
+            return redirect()->back()->withErrors(['error' => 'You cannot log in as yourself.']);
+        }
+
+        Auth::login($user);
+
+        return redirect()->route('dashboard')
+            ->with('success', 'Logged in as ' . $user->name);
+
+    }
 }

@@ -54,11 +54,27 @@
                                     <td>{{ $user->company->name }}</td>
                                     <td>{{ $user->companyForms->count() }}</td>
                                     <td>{{ $user->created_at->format('Y-m-d') }}</td>
-                                    <td>
-                                        <div class="flex justify-end gap-2">
-                                            <a href="#" class="btn btn-ghost btn-xs">{{ __('dashboard.edit') }}</a>
-                                            <a href="#" class="btn btn-ghost btn-xs text-error">{{ __('dashboard.delete') }}</a>
-                                        </div>
+                                    <td class="text-right">
+                                        <button class="btn btn-sm btn-neutral bg-gray-800" popovertarget="user-{{ $user->id }}" style="anchor-name:--user-{{ $user->id }}">
+                                            Actions
+                                        </button>
+                                        <ul class="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
+                                            popover id="user-{{ $user->id }}" style="position-anchor:--user-{{ $user->id }}">
+                                            <li>
+                                                <a href="#" class="">{{ __('dashboard.edit') }}</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="">{{ __('dashboard.delete') }}</a>
+                                            </li>
+                                            <li>
+                                                <form action="{{route('users.login-as')}}" method="post" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                                    <button type="submit" class="">{{ __('dashboard.login') }}</button>
+                                                </form>
+
+                                            </li>
+                                        </ul>
                                     </td>
                                 </tr>
                             @empty

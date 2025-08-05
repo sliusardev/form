@@ -66,6 +66,8 @@ Route::prefix('dashboard')
                 ->name('settings.artisan');
 
             Route::get('users', [UserController::class, 'index'])->name('users.index');
+            Route::post('users/login-as', [UserController::class, 'loginAs'])
+                ->name('users.login-as');
 
 
             Route::get('payments', [PaymentController::class, 'index'])->name('payments.index');
