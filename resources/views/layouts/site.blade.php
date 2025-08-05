@@ -47,14 +47,12 @@
 
         <!-- Desktop nav -->
         <nav id="navMenu" class="hidden md:flex items-center gap-8 text-base">
-            <a href="#features" class="hover:text-gray-300">Features</a>
-            <a href="#pricing" class="hover:text-gray-300">Pricing</a>
-            <a href="#integration" class="hover:text-gray-300">How It Works</a>
-            <a href="#screens" class="hover:text-gray-300">Screenshots</a>
-            <a href="#" class="hover:text-gray-300">Docs</a>
-            <a href="#" class="hover:text-gray-300">Contact</a>
-
-            <!-- Language Switcher -->
+            <a href="#features" class="hover:text-gray-300">{{__('main.nav_features')}}</a>
+            <a href="#pricing" class="hover:text-gray-300">{{__('main.nav_pricing')}}</a>
+            <a href="#integration" class="hover:text-gray-300">{{__('main.nav_how_it_works')}}</a>
+            <a href="#screens" class="hover:text-gray-300">{{__('main.nav_screenshots')}}</a>
+            <a href="#" class="hover:text-gray-300">{{__('main.nav_docs')}}</a>
+            <a href="#" class="hover:text-gray-300">{{__('main.nav_contact')}}</a>
         </nav>
 
 
@@ -104,12 +102,12 @@
     <!-- Mobile panel -->
     <div id="mobilePanel" class="md:hidden hidden border-t border-gray-800 bg-gray-800 text-white" role="dialog" aria-label="Mobile navigation">
         <div class="container mx-auto px-4 py-3 text-lg space-y-2">
-            <a href="#features" class="block hover:text-gray-300">Features</a>
-            <a href="#pricing" class="block hover:text-gray-300">Pricing</a>
-            <a href="#integration" class="block hover:text-gray-300">How It Works</a>
-            <a href="#screens" class="block hover:text-gray-300">Screenshots</a>
-            <a href="#" class="block hover:text-gray-300">Docs</a>
-            <a href="#" class="block hover:text-gray-300">Contact</a>
+            <a href="#features" class="block hover:text-gray-300">{{__('main.nav_features')}}</a>
+            <a href="#pricing" class="block hover:text-gray-300">{{__('main.nav_pricing')}}</a>
+            <a href="#integration" class="block hover:text-gray-300">{{__('main.nav_how_it_works')}}</a>
+            <a href="#screens" class="block hover:text-gray-300">{{__('main.nav_screenshots')}}</a>
+            <a href="#" class="block hover:text-gray-300">{{__('main.nav_docs')}}</a>
+            <a href="#" class="block hover:text-gray-300">{{__('main.nav_contact')}}</a>
             <div class=" border-t border-gray-700 my-t pt-3">
                 @auth
                     <a href="{{route('dashboard')}}" type="button" class="bg-white hover:bg-gray-100 text-gray-800 text-base font-medium py-2 px-4 rounded-lg shadow transition cursor-pointer p-2">
@@ -117,16 +115,15 @@
                     </a>
                 @else
                     <div class="pt-2 flex items-center gap-4">
-                        <a href="{{route('login')}}" class="hover:text-gray-300 bg-gray-700 text-lg font-medium py-2 px-4 rounded-lg border-1 border-white shadow">Login</a>
+                        <a href="{{route('login')}}" class="hover:text-gray-300 bg-gray-700 text-lg font-medium py-2 px-4 rounded-lg border-1 border-white shadow">{{__('main.nav_login')}}</a>
                         <a href="{{route('register')}}" class="bg-white  text-gray-800 text-lg font-medium py-2 px-4 rounded-lg shadow">
-                            Get Started
+                            {{__('main.nav_get_started')}}
                         </a>
                     </div>
                 @endauth
             </div>
         </div>
-    </div>
-</header>
+    </div></header>
 
 @includeIf('dashboard.partials.notify-section')
 
