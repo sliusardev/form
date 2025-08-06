@@ -18,24 +18,23 @@ class CustomVerifyEmail extends BaseVerifyEmail
     {
         return (new MailMessage)
             ->from(config('mail.from.address'), config('mail.from.name'))
-            ->subject(Lang::get('Welcome to Our Application - Verify Your Email'))
-            ->greeting(Lang::get('Hello!'))
-            ->line(Lang::get('Thank you for registering with our application.'))
-            ->line(Lang::get('Please click the button below to verify your email address and complete your registration.'))
-            ->action(Lang::get('Verify My Email'), $url)
-            ->line(Lang::get('This verification link will expire in :count minutes.', ['count' => config('auth.verification.expire', 60)]))
-            ->line(Lang::get('If you did not create an account, no further action is required.'))
-            ->salutation(Lang::get('Regards, The Team'));
+            ->subject(Lang::get('auth.email_verification_email_subject'))
+            ->greeting(Lang::get('auth.password_reset_email_greeting'))
+            ->line(Lang::get('auth.email_verification_email_body'))
+            ->action(Lang::get('auth.verify_email'), $url)
+//            ->line(Lang::get('auth.email_verification_link_expired', ['count' => config('auth.verification.expire', 60)]))
+            ->line(Lang::get('auth.email_verification_email_footer'))
+            ->salutation(Lang::get('auth.password_reset_email_salutation'));
     }
 
-    public function toMail($notifiable)
-    {
-        $url = $this->verificationUrl($notifiable);
-
-        return (new \Illuminate\Notifications\Messages\MailMessage)
-            ->view('emails.verify', [
-                'url' => $url,
-                'user' => $notifiable,
-            ]);
-    }
+//    public function toMail($notifiable)
+//    {
+//        $url = $this->verificationUrl($notifiable);
+//
+//        return (new \Illuminate\Notifications\Messages\MailMessage)
+//            ->view('emails.verify', [
+//                'url' => $url,
+//                'user' => $notifiable,
+//            ]);
+//    }
 }
