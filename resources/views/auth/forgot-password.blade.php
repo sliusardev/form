@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="min-h-screen flex items-center justify-center p-4 bg-gray-100">
-        <div class="max-w-md w-full bg-white shadow-md rounded-lg p-8">
+        <div class="max-w-xl w-full bg-white shadow-md rounded-lg p-8">
             <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">{{ __('auth.forgot_password') }}</h2>
             @if(session('status'))
                 <div class="alert alert-success text-green-600 text-center mb-4">{{ session('status') }}</div>

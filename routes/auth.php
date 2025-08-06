@@ -2,6 +2,8 @@
 
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Socialite\ProviderCallbackController;
 use App\Http\Controllers\Socialite\ProviderRedirectController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -32,14 +34,14 @@ Route::middleware('guest')->group(function () {
         return view('auth.forgot-password');
     })->middleware('guest')->name('password.request');
 
-    Route::post('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])
         ->middleware('guest')->name('password.email');
 
     Route::get('/reset-password/{token}', function ($token) {
         return view('auth.reset-password', ['token' => $token]);
     })->middleware('guest')->name('password.reset');
 
-    Route::post('/reset-password', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])
+    Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
         ->middleware('guest')->name('password.update');
 });
 

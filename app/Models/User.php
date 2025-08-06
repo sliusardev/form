@@ -73,9 +73,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Company::class, 'user_id', 'id');
     }
 
-    public function companyForms()
+    public function companyForms(): ?HasMany
     {
-        return $this->company?->forms();
+        return $this?->company?->forms();
     }
 
     public function isClient(): bool

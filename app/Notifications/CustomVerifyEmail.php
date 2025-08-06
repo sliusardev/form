@@ -27,4 +27,15 @@ class CustomVerifyEmail extends BaseVerifyEmail
             ->line(Lang::get('If you did not create an account, no further action is required.'))
             ->salutation(Lang::get('Regards, The Team'));
     }
+
+    public function toMail($notifiable)
+    {
+        $url = $this->verificationUrl($notifiable);
+
+        return (new \Illuminate\Notifications\Messages\MailMessage)
+            ->view('emails.verify', [
+                'url' => $url,
+                'user' => $notifiable,
+            ]);
+    }
 }

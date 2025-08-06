@@ -47,13 +47,13 @@
                         <tbody>
                             @forelse ($users as $user)
                                 <tr class="hover">
-                                    <th>{{ $user->id }}</th>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->getRolesNames() }}</td>
-                                    <td>{{ $user->company->name }}</td>
-                                    <td>{{ $user->companyForms->count() }}</td>
-                                    <td>{{ $user->created_at->format('Y-m-d') }}</td>
+                                    <th>{{ $user->id ?? ''}}</th>
+                                    <td>{{ $user->name ?? ''}}</td>
+                                    <td>{{ $user->email ?? ''}}</td>
+                                    <td>{{ $user->getRolesNames() ?? ''}}</td>
+                                    <td>{{ $user->company->name ?? ''}}</td>
+                                    <td>{{ $user->companyForms->count() ?? ''}}</td>
+                                    <td>{{ $user->created_at->format('Y-m-d') ?? ''}}</td>
                                     <td class="text-right">
                                         <button class="btn btn-sm btn-neutral bg-gray-800" popovertarget="user-{{ $user->id }}" style="anchor-name:--user-{{ $user->id }}">
                                             Actions
