@@ -66,3 +66,26 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="https://www.google.com/recaptcha/api.js?render={{config('services.recaptcha.site_key')}}"></script>
+    <script>
+        let recaptchaSiteKey = "{{config('services.recaptcha.site_key')}}";
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                grecaptcha.ready(function() {
+                    grecaptcha.execute(recaptchaSiteKey, {action: 'register'}).then(function(token) {
+                        let input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'g-recaptcha-response';
+                        input.value = token;
+                        form.appendChild(input);
+                        form.submit();
+                    });
+                });
+            });
+        });
+    </script>
+@endpush

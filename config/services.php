@@ -59,4 +59,9 @@ return [
         'password' => env('WAYFORPAY_PASSWORD'),
     ],
 
+    'recaptcha' => [
+        'site_key' => env('RECAPTCHA_SITE_KEY'),
+        'secret' => env('RECAPTCHA_SECRET'),
+    ],
+
 ];
