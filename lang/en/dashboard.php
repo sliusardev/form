@@ -149,4 +149,5 @@ return [
     'seo_configuration' => 'SEO Configuration',
     'payment_id' => 'Payment ID',
     'payload' => 'Payload',
+    'order' => 'Order',
 ];

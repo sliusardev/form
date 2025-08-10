@@ -148,4 +148,5 @@ return [
     'seo_configuration' => 'Налаштування SEO',
     'payment_id' => 'ID платежу',
     'payload' => 'Дані',
+    'order' => 'Замовлення',
 ];

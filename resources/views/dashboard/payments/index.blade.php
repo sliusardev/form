@@ -66,14 +66,37 @@
                                                         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                                                     </form>
                                                     <h3 class="text-lg font-bold">{{ $item->payment_id }}</h3>
-                                                    <p class="py-4 code">
-                                                    <pre><code>{{ $item->getPayloadJson() }}</code></pre>
-                                                    </p>
+                                                    <div class="py-4 code">
+                                                        <pre><code>{{ $item->getPayloadJson() }}</code></pre>
+                                                    </div>
                                                 </div>
                                             </dialog>
                                         </div>
 
-                                        <a href="#" class="btn btn-ghost btn-xs text-error">{{ __('dashboard.delete') }}</a>
+                                        <div>
+                                            <button class="btn btn-ghost btn-xs" onclick="order{{ $item->id }}.showModal()" id="modal-order-{{ $item->id }}">
+                                                {{ __('dashboard.order') }}
+                                            </button>
+                                            <dialog id="order{{ $item->id }}" class="modal modal-bottom sm:modal-middle">
+                                                <div class="modal-box">
+                                                    <form method="dialog">
+                                                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                                    </form>
+                                                    <h3 class="text-lg font-bold">{{ $item->payment_id }}</h3>
+
+                                                    <div class="py-4 code">
+                                                        @foreach($item->order as $key => $value)
+                                                            <div class="mb-2">
+                                                                <span class="font-semibold">{{ $key }}:</span>
+                                                                <span>{{ is_array($value) ? json_encode($value, JSON_PRETTY_PRINT) : $value }}</span>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </dialog>
+                                        </div>
+
+{{--                                        <a href="#" class="btn btn-ghost btn-xs text-error">{{ __('dashboard.delete') }}</a>--}}
                                     </div>
                                 </td>
                             </tr>
