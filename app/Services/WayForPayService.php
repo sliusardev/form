@@ -114,7 +114,21 @@ class WayForPayService
             return response()->json(['reason' => 'Invalid signature'], 403);
         }
 
-        $status = ($data['transactionStatus'] ?? '') === 'Approved' ? PaymentStatusEnum::PAID : PaymentStatusEnum::FAILED;
+        $paymentStatus = $data['transactionStatus'] ?? '';
+
+        $status = PaymentStatusEnum::PENDING;
+
+        if ($paymentStatus === 'Approved') {
+            $status = PaymentStatusEnum::PAID;
+        }
+
+        if ($paymentStatus === 'Declined') {
+            $status = PaymentStatusEnum::FAILED;
+        }
+
+        if ($paymentStatus === 'Refunded') {
+            $status = PaymentStatusEnum::REFUNDED;
+        }
 
         $payment = Payment::query()->where('payment_id', $data['orderReference'])->first();
 
