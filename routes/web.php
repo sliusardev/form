@@ -88,11 +88,11 @@ Route::match(['get', 'post'], 'f/{hash}', [SubmissionController::class, 'store']
     ->name('forms.store-submission')
     ->middleware([FormSubmissionMiddleware::class]);
 
-Route::post('/payment-success', [WayForPayController::class, 'approvedPayment'])
+Route::get('/payment-success', [WayForPayController::class, 'approvedPayment'])
     ->name('payment-success')
     ->withoutMiddleware(['csrf']);
 
-Route::post('/payment-wrong', [WayForPayController::class, 'declinedPayment'])
+Route::get('/payment-wrong', [WayForPayController::class, 'declinedPayment'])
     ->name('payment-wrong')
     ->withoutMiddleware(['csrf']);
 
