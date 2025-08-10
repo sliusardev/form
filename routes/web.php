@@ -18,10 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
 
-Route::post('/payment-success', [WayForPayController::class, 'approvedPayment'])->name('payment-success');
-
-Route::post('/payment-wrong', [WayForPayController::class, 'declinedPayment'])->name('payment-wrong');
-
 Route::prefix('dashboard')
     ->middleware(['auth', 'verified'])
     ->group(function () {
@@ -91,6 +87,14 @@ Route::match(['get', 'post'], 'f/{hash}', [SubmissionController::class, 'store']
     ->where('hash', '[a-zA-Z0-9]+')
     ->name('forms.store-submission')
     ->middleware([FormSubmissionMiddleware::class]);
+
+Route::post('/payment-success', [WayForPayController::class, 'approvedPayment'])
+    ->name('payment-success')
+    ->withoutMiddleware(['csrf']);
+
+Route::post('/payment-wrong', [WayForPayController::class, 'declinedPayment'])
+    ->name('payment-wrong')
+    ->withoutMiddleware(['csrf']);
 
 Route::get('/lang/{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
 
