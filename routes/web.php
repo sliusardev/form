@@ -22,6 +22,10 @@ Route::get('/payment-success', function () {
     return view('pages.payment-success');
 })->name('payment-success');
 
+Route::get('/payment-wrong', function () {
+    return view('pages.payment-wrong');
+})->name('payment-wrong');
+
 Route::prefix('dashboard')
     ->middleware(['auth', 'verified'])
     ->group(function () {
