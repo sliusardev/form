@@ -48,12 +48,12 @@
                                 <th>{{ $item->id }}</th>
                                 <td>{{ $item->user->name }}</td>
                                 <td>{{ $item->company->name }}</td>
-                                <td>{{ $item->status }}</td>
                                 <td>
                                     <span class="px-2 py-1 rounded text-xs font-semibold {{ $item->getStatusColor() }}">
                                         {{ $item->status }}
                                     </span>
                                 </td>
+                                <td>{{ $item->provider }}</td>
                                 <td>{{ $item->amount }}</td>
                                 <td>{{ $item->currency }}</td>
                                 <td>{{ $item->payment_id }}</td>
