@@ -15,7 +15,12 @@ class CompanyController extends Controller
      */
     public function show()
     {
-        $company = Company::query()->where('user_id', selectedCompanyId())->first(); // Fetch the first company record
+        $company = Company::query()
+            ->where('id', selectedCompanyId())
+            ->with(['payments'])
+            ->first(); // Fetch the first company record
+
+
         return view('dashboard.company', compact('company'));
     }
 
