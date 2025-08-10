@@ -37,4 +37,11 @@ class Payment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getPayloadJson(): false|string
+    {
+        return is_array($this->payload)
+            ? json_encode($this->payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+            : '';
+    }
 }

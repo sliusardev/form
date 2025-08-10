@@ -23,6 +23,8 @@ class UserController extends Controller
             });
         }
 
+        $query->orderBy('id', 'desc');
+
         if ($request->filled('sort')) {
             $direction = $request->input('direction', 'desc');
             if (in_array($direction, ['asc', 'desc'])) {

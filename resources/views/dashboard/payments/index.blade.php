@@ -37,6 +37,7 @@
                             <th>{{ __('dashboard.provider') }}</th>
                             <th>{{ __('dashboard.amount') }}</th>
                             <th>{{ __('dashboard.currency') }}</th>
+                            <th>{{ __('dashboard.payment_id') }}</th>
                             <th>{{ __('dashboard.created_at') }}</th>
                             <th></th>
                         </tr>
@@ -51,10 +52,27 @@
                                 <td>{{ $item->provider }}</td>
                                 <td>{{ $item->amount }}</td>
                                 <td>{{ $item->currency }}</td>
-                                <td>{{ $item->created_at->format('Y-m-d') }}</td>
+                                <td>{{ $item->payment_id }}</td>
+                                <td>{{ $item->created_at->format('Y-m-d H:m:s') }}</td>
                                 <td>
                                     <div class="flex justify-end gap-2">
-                                        <a href="#" class="btn btn-ghost btn-xs">{{ __('dashboard.edit') }}</a>
+                                        <div>
+                                            <button class="btn btn-ghost btn-xs" onclick="payload{{ $item->id }}.showModal()" id="modal-payload-{{ $item->id }}">
+                                                {{ __('dashboard.payload') }}
+                                            </button>
+                                            <dialog id="payload{{ $item->id }}" class="modal modal-bottom sm:modal-middle">
+                                                <div class="modal-box">
+                                                    <form method="dialog">
+                                                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                                    </form>
+                                                    <h3 class="text-lg font-bold">{{ $item->payment_id }}</h3>
+                                                    <p class="py-4 code">
+                                                    <pre><code>{{ $item->getPayloadJson() }}</code></pre>
+                                                    </p>
+                                                </div>
+                                            </dialog>
+                                        </div>
+
                                         <a href="#" class="btn btn-ghost btn-xs text-error">{{ __('dashboard.delete') }}</a>
                                     </div>
                                 </td>
