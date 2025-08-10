@@ -50,13 +50,7 @@
                                 <td>{{ $item->company->name }}</td>
                                 <td>{{ $item->status }}</td>
                                 <td>
-                                    <span class="badge
-                                        @if($item->status === 'paid') badge-success
-                                        @elseif($item->status === 'pending') badge-warning
-                                        @elseif($item->status === 'refunded') badge-error
-                                        @else badge-neutral
-                                        @endif
-                                    ">
+                                    <span class="px-2 py-1 rounded text-xs font-semibold {{ $item->getStatusColor() }}">
                                         {{ $item->status }}
                                     </span>
                                 </td>
