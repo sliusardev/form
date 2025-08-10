@@ -18,7 +18,10 @@ class PaymentController extends Controller
                     $userQuery->where('name', 'like', '%' . $searchTerm . '%');
                 })->orWhereHas('company', function ($companyQuery) use ($searchTerm) {
                     $companyQuery->where('name', 'like', '%' . $searchTerm . '%');
-                });
+                })->orWhere('payment_id', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('amount', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('currency', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('status', 'like', '%' . $searchTerm . '%');
             });
         }
 
