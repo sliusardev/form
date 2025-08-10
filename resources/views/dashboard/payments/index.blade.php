@@ -49,7 +49,17 @@
                                 <td>{{ $item->user->name }}</td>
                                 <td>{{ $item->company->name }}</td>
                                 <td>{{ $item->status }}</td>
-                                <td>{{ $item->provider }}</td>
+                                <td>
+                                    <span class="badge
+                                        @if($item->status === 'paid') badge-success
+                                        @elseif($item->status === 'pending') badge-warning
+                                        @elseif($item->status === 'refunded') badge-error
+                                        @else badge-neutral
+                                        @endif
+                                    ">
+                                        {{ $item->status }}
+                                    </span>
+                                </td>
                                 <td>{{ $item->amount }}</td>
                                 <td>{{ $item->currency }}</td>
                                 <td>{{ $item->payment_id }}</td>
