@@ -18,13 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
 
-Route::get('/payment-success', function () {
-    return view('pages.payment-success');
-})->name('payment-success');
+Route::get('/payment-success', [WayForPayController::class, 'approvedPayment'])->name('payment-success');
 
-Route::get('/payment-wrong', function () {
-    return view('pages.payment-wrong');
-})->name('payment-wrong');
+Route::get('/payment-wrong', [WayForPayController::class, 'declinedPayment'])->name('payment-wrong');
 
 Route::prefix('dashboard')
     ->middleware(['auth', 'verified'])

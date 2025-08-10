@@ -104,4 +104,14 @@ class WayForPayController extends Controller
             'message' => 'Оплата не вдалася.',
         ]);
     }
+
+    public function approvedPayment(Request $request)
+    {
+        return response()->redirectToRoute('billing.index');
+    }
+
+    public function declinedPayment(Request $request)
+    {
+        return response()->redirectToRoute('billing.index');
+    }
 }
