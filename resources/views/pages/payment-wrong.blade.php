@@ -3,13 +3,13 @@
 @section('content')
     <div class="flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
         <div class="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
-            <div class="bg-emerald-500 p-6 text-center">
+            <div class="bg-red-500 p-6 text-center">
                 <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-full mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
-                <h1 class="text-white text-2xl font-bold">Payment Successful!</h1>
+                <h1 class="text-white text-2xl font-bold">Payment Wrong!</h1>
             </div>
 
             <div class="p-6">
@@ -30,12 +30,12 @@
                 {{--                </div>--}}
                 {{--                <div class="flex justify-between items-center">--}}
                 {{--                    <span class="text-gray-600">Amount:</span>--}}
-                {{--                    <span class="font-semibold text-emerald-600">${{ $amount ?? '0.00' }}</span>--}}
+                {{--                    <span class="font-semibold text-red-600">${{ $amount ?? '0.00' }}</span>--}}
                 {{--                </div>--}}
                 {{--            </div>--}}
 
                 <div class="mt-8 text-center">
-                    <a href="{{ route('home') }}" class="inline-block px-6 py-3 bg-emerald-500 text-white font-medium rounded-lg shadow-md hover:bg-emerald-600 transition duration-200 ease-in-out transform hover:scale-105">
+                    <a href="{{ route('home') }}" class="inline-block px-6 py-3 bg-red-500 text-white font-medium rounded-lg shadow-md hover:bg-red-600 transition duration-200 ease-in-out transform hover:scale-105">
                         Return to Home
                     </a>
                 </div>

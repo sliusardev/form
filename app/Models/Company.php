@@ -48,7 +48,8 @@ class Company extends Model
 
     public function payments(): HasMany
     {
-        return $this->hasMany(Payment::class, 'company_id', 'id');
+        return $this->hasMany(Payment::class, 'company_id', 'id')
+            ->orderBy('created_at', 'desc');
     }
 
     public function scopeEnabled(Builder $query): void

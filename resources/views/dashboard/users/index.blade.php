@@ -40,6 +40,8 @@
                                 <th>{{ __('dashboard.roles') }}</th>
                                 <th>{{ __('dashboard.company') }}</th>
                                 <th>{{ __('dashboard.forms_count') }}</th>
+                                <th>{{ __('dashboard.form_limit') }}</th>
+                                <th>{{ __('dashboard.submission_limit') }}</th>
                                 <th>{{ __('dashboard.created_at') }}</th>
                                 <th></th>
                             </tr>
@@ -53,6 +55,8 @@
                                     <td>{{ $user->getRolesNames() ?? ''}}</td>
                                     <td>{{ $user->company->name ?? ''}}</td>
                                     <td>{{ $user->companyForms->count() ?? ''}}</td>
+                                    <td>{{ $user->company->form_limit }}</td>
+                                    <td>{{ $user->company->submission_limit }}</td>
                                     <td>{{ $user->created_at->format('Y-m-d') ?? ''}}</td>
                                     <td class="text-right">
                                         <button class="btn btn-sm btn-neutral bg-gray-800" popovertarget="user-{{ $user->id }}" style="anchor-name:--user-{{ $user->id }}">

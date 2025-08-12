@@ -19,8 +19,6 @@ class ProviderRedirectController extends Controller
         }
 
         try {
-            Log::error($provider. ' redirect');
-
             return Socialite::driver($provider)->redirect();
         } catch (\Exception $e) {
             return redirect(route('login'))->withErrors(['provider' => 'Something went wrong']);

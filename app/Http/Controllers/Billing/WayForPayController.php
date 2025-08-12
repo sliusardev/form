@@ -33,6 +33,8 @@ class WayForPayController extends Controller
             return back()->withErrors(['total_cost' => 'Minimum payment is ' . $minPayment . ' ' . $currency]);
         }
 
+        $totalCost = 1;
+
         $productName = trans('dashboard.billing') .': '
             . $submissionLimit  . ' ' . trans('dashboard.submissions') . ', '
             . $formLimit  . ' '  . trans('dashboard.forms');
@@ -101,5 +103,15 @@ class WayForPayController extends Controller
             'status' => 'failed',
             'message' => 'Оплата не вдалася.',
         ]);
+    }
+
+    public function approvedPayment(Request $request)
+    {
+        return response()->redirectToRoute('billing.index')->with('success', 'Оплата пройшла успішно!');
+    }
+
+    public function declinedPayment(Request $request)
+    {
+        return response()->redirectToRoute('billing.index')->with('error', 'Оплата не вдалася. Будь ласка, спробуйте ще раз.');
     }
 }

@@ -147,4 +147,7 @@ return [
     'privacy_policy' => 'Privacy Policy',
     'all_rights_reserved' => 'All rights reserved',
     'seo_configuration' => 'SEO Configuration',
+    'payment_id' => 'Payment ID',
+    'payload' => 'Payload',
+    'order' => 'Order',
 ];

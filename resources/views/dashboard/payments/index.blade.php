@@ -37,6 +37,7 @@
                             <th>{{ __('dashboard.provider') }}</th>
                             <th>{{ __('dashboard.amount') }}</th>
                             <th>{{ __('dashboard.currency') }}</th>
+                            <th>{{ __('dashboard.payment_id') }}</th>
                             <th>{{ __('dashboard.created_at') }}</th>
                             <th></th>
                         </tr>
@@ -47,15 +48,59 @@
                                 <th>{{ $item->id }}</th>
                                 <td>{{ $item->user->name }}</td>
                                 <td>{{ $item->company->name }}</td>
-                                <td>{{ $item->status }}</td>
+                                <td>
+                                    <span class="px-2 py-1 rounded text-xs font-semibold {{ $item->getStatusColor() }}">
+                                        {{ $item->status }}
+                                    </span>
+                                </td>
                                 <td>{{ $item->provider }}</td>
                                 <td>{{ $item->amount }}</td>
                                 <td>{{ $item->currency }}</td>
-                                <td>{{ $item->created_at->format('Y-m-d') }}</td>
+                                <td>{{ $item->payment_id }}</td>
+                                <td>{{ $item->created_at->format('Y-m-d H:m:s') }}</td>
                                 <td>
                                     <div class="flex justify-end gap-2">
-                                        <a href="#" class="btn btn-ghost btn-xs">{{ __('dashboard.edit') }}</a>
-                                        <a href="#" class="btn btn-ghost btn-xs text-error">{{ __('dashboard.delete') }}</a>
+                                        <div>
+                                            <button class="btn btn-ghost btn-xs" onclick="payload{{ $item->id }}.showModal()" id="modal-payload-{{ $item->id }}">
+                                                {{ __('dashboard.payload') }}
+                                            </button>
+                                            <dialog id="payload{{ $item->id }}" class="modal modal-bottom sm:modal-middle">
+                                                <div class="modal-box">
+                                                    <form method="dialog">
+                                                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                                    </form>
+                                                    <h3 class="text-lg font-bold">{{ $item->payment_id }}</h3>
+                                                    <div class="py-4 code">
+                                                        <pre><code>{{ $item->getPayloadJson() }}</code></pre>
+                                                    </div>
+                                                </div>
+                                            </dialog>
+                                        </div>
+
+                                        <div>
+                                            <button class="btn btn-ghost btn-xs" onclick="order{{ $item->id }}.showModal()" id="modal-order-{{ $item->id }}">
+                                                {{ __('dashboard.order') }}
+                                            </button>
+                                            <dialog id="order{{ $item->id }}" class="modal modal-bottom sm:modal-middle">
+                                                <div class="modal-box">
+                                                    <form method="dialog">
+                                                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                                    </form>
+                                                    <h3 class="text-lg font-bold">{{ $item->payment_id }}</h3>
+
+                                                    <div class="py-4 code">
+                                                        @foreach($item->order as $key => $value)
+                                                            <div class="mb-2">
+                                                                <span class="font-semibold">{{ $key }}:</span>
+                                                                <span>{{ is_array($value) ? json_encode($value, JSON_PRETTY_PRINT) : $value }}</span>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </dialog>
+                                        </div>
+
+{{--                                        <a href="#" class="btn btn-ghost btn-xs text-error">{{ __('dashboard.delete') }}</a>--}}
                                     </div>
                                 </td>
                             </tr>

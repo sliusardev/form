@@ -18,10 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
 
-Route::get('/payment-success', function () {
-    return view('pages.payment-success');
-})->name('payment-success');
-
 Route::prefix('dashboard')
     ->middleware(['auth', 'verified'])
     ->group(function () {
@@ -78,11 +74,7 @@ Route::prefix('dashboard')
 
 Route::post('/billing/callback/way-for-pay/service-url', [WayForPayController::class, 'serviceUrl'])
     ->name('billing.way-for-pay.service-url')
-//    ->middleware('web') // Only web middleware, no auth
     ->withoutMiddleware(['csrf']);  // Important: exclude CSRF for external callbacks
-
-Route::match(['get', 'post'],'/billing/callback/way-for-pay/callback', [WayForPayController::class, 'callback'])
-    ->name('billing.way-for-pay.callback');
 
 Route::match(['get', 'post'], '/billing/callback/way-for-pay/return-url', [WayForPayController::class, 'returnUrl'])
     ->name('billing.way-for-pay.return-url');
@@ -91,6 +83,14 @@ Route::match(['get', 'post'], 'f/{hash}', [SubmissionController::class, 'store']
     ->where('hash', '[a-zA-Z0-9]+')
     ->name('forms.store-submission')
     ->middleware([FormSubmissionMiddleware::class]);
+
+Route::get('/payment-success', [WayForPayController::class, 'approvedPayment'])
+    ->name('payment-success')
+    ->withoutMiddleware(['csrf']);
+
+Route::get('/payment-wrong', [WayForPayController::class, 'declinedPayment'])
+    ->name('payment-wrong')
+    ->withoutMiddleware(['csrf']);
 
 Route::get('/lang/{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
 
