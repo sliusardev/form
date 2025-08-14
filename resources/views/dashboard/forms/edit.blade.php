@@ -45,9 +45,8 @@
 
                     <div class="form-control">
                         <label class="label cursor-pointer">
+                            <input type="checkbox" id="is_enabled" name="is_enabled" class="toggle toggle-success" {{ old('is_enabled', $form->is_enabled) ? 'checked' : '' }}>
                             <span class="label-text">{{ __('dashboard.enabled') }}</span>
-                            <input type="checkbox" id="is_enabled" name="is_enabled" class="checkbox"
-                                  {{ old('is_enabled', $form->is_enabled) ? 'checked' : '' }}>
                         </label>
                         @error('is_enabled')
                             <div class="label">
@@ -58,9 +57,8 @@
 
                     <div class="form-control">
                         <label class="label cursor-pointer">
+                            <input type="checkbox" id="send_notify" name="send_notify" class="toggle toggle-success" {{ old('send_notify', $form->send_notify) ? 'checked' : '' }}>
                             <span class="label-text">{{ __('dashboard.send_notifications') }}</span>
-                            <input type="checkbox" id="send_notify" name="send_notify" class="checkbox"
-                                  {{ old('send_notify', $form->send_notify) ? 'checked' : '' }}>
                         </label>
                         @error('send_notify')
                             <div class="label">
