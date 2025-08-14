@@ -20,6 +20,13 @@ class FormSubmissionMiddleware
         // Get the form hash from the route parameter
         $hash = $request->route('hash');
 
+        $origin  = $request->headers->get('Origin');   // e.g. https://example.com
+        $referer = $request->headers->get('Referer');
+
+        // Detect Postman
+        $userAgent = $request->userAgent() ?? '';
+//        $isPostman = preg_match('/PostmanRuntime|Postman/i', $userAgent) === 1;
+
         if (!$hash) {
             return response()->json([
                 'status' => 'error',
@@ -36,7 +43,7 @@ class FormSubmissionMiddleware
         if (!$form) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Form not found or disabled',
+                'message' => 'Form not found',
             ], 404);
         }
 
@@ -45,6 +52,13 @@ class FormSubmissionMiddleware
                 'status' => 'error',
                 'message' => 'Company is disabled',
             ], 404);
+        }
+
+        if ($form->company->submission_limit === 0) {
+            return response()->json([
+                'status' => 'submission_limit_reached',
+                'data' => [],
+            ], 403);
         }
 
         // Rate limiting: Allow max 10 submissions per minute per IP address per form
@@ -77,6 +91,9 @@ class FormSubmissionMiddleware
         }
 
         // Add the form to the request for use in the controller
+        $request->attributes->set('origin', $origin);
+        $request->attributes->set('referer', $referer);
+        $request->attributes->set('user_agent', $userAgent);
         $request->attributes->set('form', $form);
 
         return $next($request);

@@ -62,30 +62,10 @@ class SubmissionController extends Controller
     public function store(StoreSubmissionRequest $request, string $hash, SubmissionService $submissionService)
     {
         $form = $request->attributes->get('form');
-
-        if (!$form) {
-            $form = Form::query()
-                ->where('hash', $hash)
-                ->where('is_enabled', true)
-                ->with('company')
-                ->first();
-
-            if (!$form) {
-                return response()->json([
-                    'status' => 'form_not_found',
-                    'data' => [],
-                ], 404);
-            }
-        } else {
-            $form->load('company');
-        }
-
-        if ($form->company->submission_limit === 0) {
-            return response()->json([
-                'status' => 'submission_limit_reached',
-                'data' => [],
-            ], 403);
-        }
+        $origin = $request->attributes->get('origin');
+        $referer = $request->attributes->get('referer');
+        $user_agent = $request->attributes->get('user_agent');
+        $form->load('company');
 
         $formData = $request->validated();
 
@@ -109,6 +89,10 @@ class SubmissionController extends Controller
             $request->ip(),
             $request->getMethod()
         );
+
+        if ($referer) {
+            return response()->redirectTo($referer);
+        }
 
         return response()->json([
             'success' => true,

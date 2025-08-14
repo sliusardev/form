@@ -79,11 +79,6 @@ Route::post('/billing/callback/way-for-pay/service-url', [WayForPayController::c
 Route::match(['get', 'post'], '/billing/callback/way-for-pay/return-url', [WayForPayController::class, 'returnUrl'])
     ->name('billing.way-for-pay.return-url');
 
-Route::match(['get', 'post'], 'f/{hash}', [SubmissionController::class, 'store'])
-    ->where('hash', '[a-zA-Z0-9]+')
-    ->name('forms.store-submission')
-    ->middleware([FormSubmissionMiddleware::class]);
-
 Route::get('/payment-success', [WayForPayController::class, 'approvedPayment'])
     ->name('payment-success')
     ->withoutMiddleware(['csrf']);
@@ -93,6 +88,11 @@ Route::get('/payment-wrong', [WayForPayController::class, 'declinedPayment'])
     ->withoutMiddleware(['csrf']);
 
 Route::get('/lang/{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
+
+Route::match(['get', 'post'], 'f/{hash}', [SubmissionController::class, 'store'])
+    ->where('hash', '[a-zA-Z0-9]+')
+    ->name('forms.store-submission')
+    ->middleware([FormSubmissionMiddleware::class]);
 
 
 require __DIR__.'/auth.php';

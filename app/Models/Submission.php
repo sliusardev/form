@@ -15,6 +15,9 @@ class Submission extends Model
         'ip_address',
         'hash',
         'method',
+        'user_agent',
+        'referer',
+        'origin',
     ];
 
     protected $casts = [

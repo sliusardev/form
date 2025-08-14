@@ -38,10 +38,10 @@
     <!-- Feedback Form -->
     <section class="bg-white p-6 rounded shadow">
         <h2 class="text-xl font-semibold mb-4">Зворотній зв'язок</h2>
-        <form class="space-y-4" onsubmit="event.preventDefault(); alert('Форма відправлена!');">
-            <input type="text" placeholder="Ім’я" required class="w-full border p-2 rounded" />
-            <input type="email" placeholder="Email" required class="w-full border p-2 rounded" />
-            <textarea placeholder="Ваше повідомлення" required class="w-full border p-2 rounded"></textarea>
+        <form class="space-y-4" action="https://formspree.io/f/myzpkybz" method="post">
+            <input type="text" name="name" placeholder="Ім’я" required class="w-full border p-2 rounded" />
+            <input type="email" name="email" placeholder="Email" required class="w-full border p-2 rounded" />
+            <textarea name="message" placeholder="Ваше повідомлення" required class="w-full border p-2 rounded"></textarea>
             <button class="bg-blue-600 text-white px-4 py-2 rounded">Надіслати</button>
         </form>
     </section>
@@ -49,8 +49,8 @@
     <!-- Subscribe Form -->
     <section class="bg-white p-6 rounded shadow">
         <h2 class="text-xl font-semibold mb-4">Підписка на новини</h2>
-        <form class="flex gap-4" onsubmit="event.preventDefault(); alert('Підписка оформлена!');">
-            <input type="email" placeholder="Ваш Email" required class="flex-grow border p-2 rounded" />
+        <form class="flex gap-4" action="https://form.test/f/JbsaNYYB1HJBosZ" method="post">
+            <input type="email" name="subscribe_email" placeholder="Ваш Email" required class="flex-grow border p-2 rounded" />
             <button class="bg-green-600 text-white px-4 py-2 rounded">Підписатися</button>
         </form>
     </section>
@@ -71,9 +71,9 @@
 <div id="callbackModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
     <div class="bg-white p-6 rounded shadow w-full max-w-md">
         <h3 class="text-lg font-semibold mb-4">Передзвоніть мені</h3>
-        <form onsubmit="event.preventDefault(); alert('Запит на дзвінок надіслано!');">
-            <input type="text" placeholder="Ваше ім’я" required class="w-full border p-2 rounded mb-3" />
-            <input type="tel" placeholder="Номер телефону" required class="w-full border p-2 rounded mb-3" />
+        <form action="https://form.test/f/JbsaNYYB1HJBosZ" method="post">
+            <input type="text" name="callback_name" placeholder="Ваше ім’я" required class="w-full border p-2 rounded mb-3" />
+            <input type="tel" name="callback_phone" placeholder="Номер телефону" required class="w-full border p-2 rounded mb-3" />
             <div class="flex justify-end gap-2">
                 <button type="button" data-modal-close class="text-gray-600">Скасувати</button>
                 <button class="bg-blue-600 text-white px-4 py-2 rounded">Надіслати</button>
@@ -85,8 +85,8 @@
 <div id="errorModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
     <div class="bg-white p-6 rounded shadow w-full max-w-md">
         <h3 class="text-lg font-semibold mb-4">Знайшли помилку?</h3>
-        <form onsubmit="event.preventDefault(); alert('Дякуємо за повідомлення!');">
-            <textarea placeholder="Опишіть помилку" required class="w-full border p-2 rounded mb-3"></textarea>
+        <form action="https://form.test/f/JbsaNYYB1HJBosZ" method="post">
+            <textarea name="error_message" placeholder="Опишіть помилку" required class="w-full border p-2 rounded mb-3"></textarea>
             <div class="flex justify-end gap-2">
                 <button type="button" data-modal-close class="text-gray-600">Скасувати</button>
                 <button class="bg-red-600 text-white px-4 py-2 rounded">Надіслати</button>
@@ -98,8 +98,8 @@
 <div id="reviewModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
     <div class="bg-white p-6 rounded shadow w-full max-w-md">
         <h3 class="text-lg font-semibold mb-4">Залишити відгук</h3>
-        <form onsubmit="event.preventDefault(); alert('Відгук надіслано!');">
-            <textarea placeholder="Ваш відгук" required class="w-full border p-2 rounded mb-3"></textarea>
+        <form action="https://form.test/f/JbsaNYYB1HJBosZ" method="post">
+            <textarea name="review_message" placeholder="Ваш відгук" required class="w-full border p-2 rounded mb-3"></textarea>
             <div class="flex items-center gap-1 mb-3">
                 <span>Оцінка:</span>
                 <div class="flex gap-1">
