@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('method')->nullable();
             $table->string('user_agent')->nullable();
             $table->string('referer')->nullable();
-            $table->string('user_agent')->nullable();
+            $table->string('origin')->nullable();
             $table->timestamps();
         });
     }

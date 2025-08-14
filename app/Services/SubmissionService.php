@@ -9,7 +9,15 @@ use Str;
 
 class SubmissionService
 {
-    public function createSubmission(Form $form, array $formData, string $ipAddress, string $method): Submission
+    public function createSubmission(
+        Form $form,
+        array $formData,
+        string $ipAddress,
+        string $method,
+        ?string $userAgent,
+        ?string $referer,
+        ?string $origin
+    ): Submission
     {
         // Sanitize form data to prevent XSS attacks
         $sanitizedData = $this->sanitizeFormData($formData);
@@ -21,7 +29,10 @@ class SubmissionService
             'company_id' => $form->company_id,
             'status' => 'success',
             'hash' => Str::random(20),
-            'method' => $method
+            'method' => $method,
+            'user_agent' => $userAgent,
+            'referer' => $referer,
+            'origin' => $origin,
         ]);
 
         // Update the submission count for the company

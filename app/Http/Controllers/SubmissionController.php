@@ -87,7 +87,10 @@ class SubmissionController extends Controller
             $form,
             $formData,
             $request->ip(),
-            $request->getMethod()
+            $request->getMethod(),
+            $user_agent,
+            $origin,
+            $referer
         );
 
         if ($referer) {
