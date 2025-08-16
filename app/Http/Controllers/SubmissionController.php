@@ -93,8 +93,13 @@ class SubmissionController extends Controller
             $referer
         );
 
+        $text = 'Your submission has been successfully received.';
+
         if ($referer) {
-            return response()->redirectTo($referer);
+            return view('answers.success', [
+                'text' => $text,
+                'redirect' => $referer,
+            ]);
         }
 
         return response()->json([

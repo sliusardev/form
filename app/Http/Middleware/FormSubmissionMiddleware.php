@@ -22,14 +22,14 @@ class FormSubmissionMiddleware
 
         $origin  = $request->headers->get('Origin');   // e.g. https://example.com
         $referer = $request->headers->get('Referer');
+        $userAgent = $request->userAgent() ?? '';
 
         // Detect Postman
-        $userAgent = $request->userAgent() ?? '';
 //        $isPostman = preg_match('/PostmanRuntime|Postman/i', $userAgent) === 1;
 
         if (!$hash) {
             return response()->json([
-                'status' => 'error',
+                'status' => 'error_invalid_hash',
                 'message' => 'Invalid form request',
             ], 400);
         }
@@ -40,24 +40,45 @@ class FormSubmissionMiddleware
             ->with('company')
             ->first();
 
-        if (!$form) {
+
+        if (!$form && $referer) {
+
+            return response()->redirectToRoute(
+                'answer.error',
+                [
+                    'text' => 'Form not found or disabled. Please check the link or contact support.',
+                    'redirect' => $referer,
+                ]
+            )->setStatusCode(404);
+        }
+
+
+
+        if(!$form && !$referer) {
+
             return response()->json([
-                'status' => 'error',
-                'message' => 'Form not found',
+                'status' => 'error_not_found',
+                'text' => 'Form not found or disabled. Please check the link or contact support.',
             ], 404);
         }
 
-        if (!$form->company->is_enabled) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Company is disabled',
-            ], 404);
+
+
+        if ($form->company->submission_limit === 0 && $referer) {
+            return response()->redirectToRoute(
+                'answer.error',
+                [
+                    'text' => 'Submission limit reached for this form. Please increase submissions count.',
+                    'redirect' => $referer,
+
+                ]
+            )->setStatusCode(403);
         }
 
-        if ($form->company->submission_limit === 0) {
+        if ($form->company->submission_limit === 0 && !$referer) {
             return response()->json([
                 'status' => 'submission_limit_reached',
-                'data' => [],
+                'text' => 'Submission limit reached for this form. Please increase submissions count.'
             ], 403);
         }
 
