@@ -1,173 +1,137 @@
-<div class="container mx-auto px-4 py-16 text-gray-800 shadow-md">
-    <h1 class="text-3xl font-bold mb-8">Terms of Service — FormPost</h1>
+<main class="mx-auto max-w-3xl px-5 py-12 sm:py-16">
+    <header class="mb-10">
+        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">FormPost Terms of Service</h1>
+        <p class="mt-2 text-sm text-gray-500">Last updated: August 16, 2025</p>
+    </header>
 
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">0. Important Disclaimer</h2>
-        <p class="mb-2">FormPost is a technical platform provider. We do not control or monitor the content submitted or processed by users. FormPost disclaims all liability for violations of the law committed by users.</p>
-        <p class="mb-2">You represent and warrant that you are not subject to any sanctions imposed by the EU, US, UN, or other competent jurisdictions. You agree not to use the Services on behalf of any prohibited person, organization, or country. FormPost reserves the right to immediately suspend access in case of violation.</p>
-    </section>
+    <article class="space-y-10 text-base leading-relaxed sm:text-lg">
+        <section id="sec-0" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">0. Important Disclaimer</h2>
+            <p>FormPost is a <strong>technical platform provider</strong>. We do not control the content submitted or processed by users. Responsibility for legality, accuracy, and third-party rights lies solely with the user.</p>
+            <p>You confirm that you are not subject to sanctions of the EU, USA, UN, or other jurisdictions, and that you are not using the Service on behalf of restricted entities or countries. FormPost reserves the right to suspend or terminate access immediately in case of violations.</p>
+        </section>
 
-    <!-- Section 1 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">1. Agreement Between You and FormPost</h2>
-        <p>Welcome to FormPost. These Terms of Service (“Terms”) are a legally binding agreement between you and FormPost. The FormPost website and other services (collectively, the “Services”) are operated by FormPost. By accessing or using any of our Services (even just browsing the website), you agree to these Terms. If you do not agree — do not use our Services. Please read and retain a copy of these Terms.</p>
-        <p class="text-red-700 font-semibold mt-2">Important: Section 11 includes a mandatory arbitration clause and class action waiver. By accepting these Terms, you waive your right to a jury trial or to participate in a class action.</p>
-        <p>FormPost is a service for receiving, storing, and processing web form submissions.</p>
-        <p>FormPost does not control or assume responsibility for any content submitted or transmitted by users through the Services. You are solely responsible for your content and warrant that its use does not violate applicable laws.</p>
-    </section>
+        <section id="sec-1" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">1. Agreement Between User and FormPost</h2>
+            <p>These Terms (“Agreement”) are a <strong>legally binding contract</strong> between you and FormPost LLC. By using any of our services (including simply browsing the website), you agree to these Terms. If you disagree — stop using the service.</p>
+            <p><strong>Note:</strong> Section 13 contains mandatory arbitration provisions.</p>
+        </section>
 
-    <!-- Section 2 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">2. Privacy</h2>
-        <p>Your privacy is important to us. Your use of FormPost is governed by our Privacy Policy. FormPost only performs technical processing; users are fully responsible for the data they submit. If you disclose or compromise personal data — you are solely liable.</p>
-        <p>If you and FormPost are considered joint data controllers, and FormPost incurs a penalty due to your actions — you agree to reimburse those costs (see Section 10).</p>
-        <p>We may remove or restrict access to infringing content under our notice-and-takedown policy in response to copyright complaints.</p>
-    </section>
+        <section id="sec-2" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">2. Privacy and Personal Data</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>Your privacy is governed by the <strong>Privacy Policy</strong>, which forms part of these Terms.</li>
+                <li>FormPost performs only <strong>technical data processing</strong>.</li>
+                <li>You are responsible for compliance with the Law of Ukraine on Personal Data Protection, as well as international norms (GDPR, CCPA) regarding third-party data.</li>
+                <li>If FormPost suffers penalties or lawsuits due to your actions — you shall reimburse damages (see Section 10).</li>
+            </ul>
+        </section>
 
-    <!-- Section 3 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">3. Electronic Communications</h2>
-        <p>By sending us emails or using the site, you consent to receive electronic communications. Your click or message constitutes a legal signature.</p>
-    </section>
+        <section id="sec-3" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">3. Electronic Communication</h2>
+            <p>Email correspondence, clicking “I Agree,” or using the Service constitutes an electronic signature with legal effect.</p>
+        </section>
 
-    <!-- Section 4 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">4. Account Responsibility</h2>
-        <p>You are responsible for maintaining the confidentiality of your password and limiting access to your device. FormPost is not liable for third-party access to your account. If you are under 18, use is permitted only with parental consent.</p>
-    </section>
+        <section id="sec-4" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">4. Account</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>You are responsible for keeping your password and account secure.</li>
+                <li>FormPost is not liable for unauthorized access due to your negligence.</li>
+                <li><strong>Age restriction:</strong> the Service is not intended for individuals under 18.</li>
+            </ul>
+        </section>
 
-    <!-- Section 5 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">5. Third-Party Services</h2>
-        <p>FormPost may link to external sites. We are not responsible for their content. By using our Services, you agree that we may share data with partners as necessary to provide functionality.</p>
-    </section>
+        <section id="sec-5" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">5. Third-Party Services</h2>
+            <p>The site may contain links to third-party services. FormPost does not control them and bears no responsibility for their content or policies. For service operation, we may share minimal data with trusted partners (hosting, payments, analytics).</p>
+        </section>
 
-    <!-- Section 6 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">6. Prohibited Use / Intellectual Property</h2>
-        <p>You are granted a limited license to use the site under these Terms. You may not:<br>
-            • Use the site for unlawful purposes;<br>
-            • Infringe intellectual property rights;<br>
-            • Modify or distribute the site’s content.</p>
-    </section>
+        <section id="sec-6" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">6. Prohibited Use</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>Illegal purposes;</li>
+                <li>Violating copyright or third-party rights;</li>
+                <li>Uploading/distributing malicious code, spam, or viruses;</li>
+                <li>Phishing, fraud, promotion of violence or hate speech.</li>
+            </ul>
+        </section>
 
-    <!-- Section 7 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">7. Use of the Services</h2>
-        <p>FormPost complies with export control and sanctions laws of Ukraine. You may not:<br>
-            • Use the Services on behalf of sanctioned individuals, entities, or jurisdictions;<br>
-            • Harm the platform (e.g., spam, malware);<br>
-            • Use the site for phishing, fraud, hate speech, or incitement to violence.</p>
-    </section>
+        <section id="sec-7" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">7. Intellectual Property</h2>
+            <p>You receive a limited, non-exclusive license to use FormPost under these Terms. Copying or modifying site elements without prior written consent is prohibited.</p>
+        </section>
 
-    <!-- Section 8 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">8. Confidential Information</h2>
-        <p>Both parties agree to:<br>
-            • Protect each other’s confidential information;<br>
-            • Not disclose it unnecessarily;<br>
-            • Only disclose when legally required or with prior written consent.</p>
-    </section>
+        <section id="sec-8" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">8. Confidential Information</h2>
+            <p>Both parties agree to maintain confidentiality of exchanged information.</p>
+            <p><strong>Exceptions:</strong> information already public; independently obtained; disclosure required by law or court order.</p>
+        </section>
 
-    <!-- Section 9 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">9. International Users</h2>
-        <p>The Services are operated from the United States. If you access them from abroad, you are solely responsible for complying with local laws.</p>
-    </section>
+        <section id="sec-9" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">9. International Users</h2>
+            <p>The Service is operated from Ukraine. By using it outside Ukraine, you are solely responsible for compliance with local laws.</p>
+        </section>
 
-    <!-- Section 10 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">10. Indemnification</h2>
-        <p>You agree to indemnify and hold harmless FormPost from any losses, damages, or claims related to:<br>
-            • Your breach of these Terms;<br>
-            • Use of the Services;<br>
-            • Infringement of third-party rights;<br>
-            • Violations of the law.</p>
-    </section>
+        <section id="sec-10" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">10. Indemnification</h2>
+            <p>You agree to indemnify FormPost for damages caused by violations of these Terms, unlawful use of the Service, or third-party claims.</p>
+        </section>
 
-    <!-- Section 11 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">11. Disclaimer of Warranties</h2>
-        <p>FormPost does not guarantee:<br>
-            • Uninterrupted service;<br>
-            • Error-free performance;<br>
-            • Accuracy of content.</p>
-        <p>We are not liable for:<br>
-            • Direct or indirect damages;<br>
-            • Loss of profit or data;<br>
-            • Security breaches, viruses, or outages.</p>
-        <p>Our maximum liability is limited to the amount you paid over the past 3 months.</p>
-    </section>
+        <section id="sec-11" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">11. Disclaimer of Warranties</h2>
+            <p>FormPost is provided “as is.” We do not guarantee uninterrupted operation, absence of errors/vulnerabilities, or the legality/accuracy of user content.</p>
+        </section>
 
-    <!-- Section 12 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">12. Limitation of Liability</h2>
-        <p>FormPost is not responsible for:<br>
-            • Malicious code or phishing attempts;<br>
-            • Your own violations;<br>
-            • Third-party content or actions;<br>
-            • Technical failures or downtime.</p>
-    </section>
+        <section id="sec-12" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">12. Limitation of Liability</h2>
+            <p>FormPost is not liable for direct or indirect damages, loss of profit or data. <strong>Maximum liability</strong> is limited to the amount you paid for services in the last 3 months.</p>
+        </section>
 
-    <!-- Section 13 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">13. Disputes with FormPost</h2>
-        <p>
-            • All disputes are governed by the laws of Ukraine;<br>
-            • Disputes must be resolved by binding arbitration (not in court);<br>
-            • The place of arbitration shall be Kyiv, Ukraine, under the rules of the International Commercial Arbitration Court (ICAC).
-        </p>
-    </section>
+        <section id="sec-13" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">13. Disputes and Arbitration</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>Ukrainian law applies.</li>
+                <li>Disputes are resolved in the <strong>ICAC at the Ukrainian CCI</strong>, Kyiv.</li>
+                <li>Class actions are waived to the extent permitted by law.</li>
+            </ul>
+        </section>
 
-    <!-- Section 14 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">14. Refund / Chargeback Policy</h2>
-        <p>• All payments are non-refundable;<br>
-            • Fraudulent payments may result in account suspension;<br>
-            • Unpaid debts may be transferred to collection agencies.</p>
-    </section>
+        <section id="sec-14" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">14. Refund Policy</h2>
+            <p>Payments are non-refundable, <strong>except as expressly required by Ukrainian law</strong>. Accounts may be blocked in cases of fraud or abuse.</p>
+        </section>
 
-    <!-- Section 15 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">15. Public Use</h2>
-        <p>You agree that FormPost may list your company or brand as a client in our marketing materials.</p>
-    </section>
+        <section id="sec-15" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">15. Public Use</h2>
+            <p>FormPost may list you as a client in marketing materials, <strong>unless you explicitly prohibit such use in writing</strong>.</p>
+        </section>
 
-    <!-- Section 16 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">16. Termination of Access</h2>
-        <p>FormPost may suspend access at any time without prior notice. These Terms survive account termination.<br>
-            This Agreement does not create employment, agency, or partnership. If any provision is deemed invalid, the rest remain in force.</p>
-    </section>
+        <section id="sec-16" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">16. Termination</h2>
+            <p>We may suspend or terminate your account without notice in case of violation. Liability and confidentiality provisions survive termination.</p>
+        </section>
 
-    <!-- Section 17 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">17. Changes to the Terms</h2>
-        <p>We may update these Terms at any time. The latest version is always available on the website. We recommend reviewing it regularly.</p>
-    </section>
+        <section id="sec-17" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">17. Changes to Terms</h2>
+            <p>We may update these Terms. Notice will be provided at least 7 days before changes take effect. Continued use means acceptance of the updated Terms.</p>
+        </section>
 
-    <!-- Section 18 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">18. Contact</h2>
-        <p>For questions, contact: <a href="mailto:formpostorg@gmail.com" class="text-blue-600 underline">formpostorg@gmail.com</a><br>
-            Last updated: August 4, 2025</p>
-    </section>
+        <section id="sec-18" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">18. Contact</h2>
+            <address class="not-italic">
+                FormPost LLC<br />
+                Email: <a class="text-blue-600 underline hover:no-underline" href="mailto:formpostorg@gmail.com">formpostorg@gmail.com</a>
+            </address>
+        </section>
 
-    <!-- Section 19 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">19. User-Generated Content</h2>
-        <p>FormPost does not control content transmitted through the Services and disclaims any liability. You warrant that you hold all necessary rights to the content and that it does not violate any laws or third-party rights.</p>
-    </section>
+        <section id="sec-19" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">19. User Content</h2>
+            <p>FormPost does not control your content. You guarantee you have the rights and that it complies with laws and third-party rights.</p>
+        </section>
 
-    <!-- Section 20 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">20. Copyright Policy</h2>
-        <p>FormPost respects copyright law. If you believe content on our Services infringes your rights, we may restrict access or remove it under our notice-and-takedown procedure. Send complaints to: <a href="mailto:team@FormPost.io" class="text-blue-600 underline">team@FormPost.io</a>.</p>
-    </section>
-
-    <!-- Section 21 -->
-    <section class="mb-6">
-        <h2 class="text-2xl font-semibold mb-2">21. Notification of Changes</h2>
-        <p>FormPost reserves the right to update these Terms. Users will be notified by email or website banner at least 7 days in advance. Continued use constitutes acceptance of the new Terms.</p>
-    </section>
-</div>
+        <section id="sec-20" class="space-y-4">
+            <h2 class="text-xl font-semibold tracking-tight">20. Copyright</h2>
+            <p>FormPost complies with copyright law. Report claims to <a class="text-blue-600 underline hover:no-underline" href="mailto:formpostorg@gmail.com">formpostorg@gmail.com</a>. We may restrict access or remove disputed content.</p>
+        </section>
+    </article>
+</main>

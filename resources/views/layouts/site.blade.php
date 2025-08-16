@@ -163,7 +163,7 @@
         <div>&copy; 2024 - {{now()->year}} FormPost. {{__('dashboard.all_rights_reserved')}}</div>
         <div class="flex items-center gap-4">
             <a href="{{route('terms')}}" class="hover:underline">{{__('dashboard.terms_of_service')}}</a>
-            <a href="/privacy.html" class="hover:underline">{{__('dashboard.privacy_policy')}}</a>
+            <a href="{{route('privacy')}}" class="hover:underline">{{__('dashboard.privacy_policy')}}</a>
         </div>
     </div>
 </footer>
