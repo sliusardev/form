@@ -32,6 +32,6 @@ public function update(UpdateCompanyRequest $request)
     $company->user_id = auth()->user()->id;
     $company->save();
 
-    return redirect()->back()->with('success', 'Updated successfully.');
+    return redirect()->back()->with('success', __('dashboard.updated_successfully'));
 }
 }

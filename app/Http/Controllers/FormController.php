@@ -30,7 +30,7 @@ class FormController extends Controller
     {
         $form = Form::query()->create($request->validated());
 
-        return redirect()->route('forms.edit', $form)->with('success', 'Form created successfully');
+        return redirect()->route('forms.edit', $form)->with('success', __('dashboard.form_created'));
     }
 
     public function edit(Form $form)
@@ -48,7 +48,7 @@ class FormController extends Controller
         $form->update($request->validated());
 
         return redirect()->route('forms.index')
-            ->with('success', 'Form updated successfully');
+            ->with('success', __('dashboard.form_updated'));
     }
 
     public function destroy(Form $form)

@@ -32,7 +32,7 @@ class SettingsController extends Controller
            'data' => $data
         ]);
 
-        return redirect()->back()->with('success', 'Settings updated successfully.');
+        return redirect()->back()->with('success', __('dashboard.settings_updated'));
     }
 
     public function artisanActions(Request $request)
@@ -45,12 +45,12 @@ class SettingsController extends Controller
 
         if ($action == 'optimize:clear') {
             Artisan::call('optimize:clear');
-            return redirect()->back()->with('success', 'Cache cleared successfully.');
+            return redirect()->back()->with('success', __('dashboard.cache_cleared'));
         }
 
         if ($action == 'migrate') {
             Artisan::call('migrate', ['--force' => true]);
-            return redirect()->back()->with('success', 'Database migrated successfully.');
+            return redirect()->back()->with('success', __('dashboard.database_migrated'));
         }
 
         return redirect()->back()->with('error', 'No such action found.');

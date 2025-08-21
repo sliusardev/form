@@ -60,6 +60,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/email/verification-notification', function (\Illuminate\Http\Request $request) {
         $request->user()->sendEmailVerificationNotification();
-        return back()->with('success', 'Verification link sent!');
+        return back()->with('success', __('dashboard.verification_link_sent'));
     })->middleware(['throttle:6,1'])->name('verification.send');
 });

@@ -149,4 +149,13 @@ return [
     'payment_id' => 'ID платежу',
     'payload' => 'Дані',
     'order' => 'Замовлення',
+    'verification_link_sent' => 'Посилання для підтвердження надіслано!',
+    'updated_successfully' => 'Успішно оновлено.',
+    'payment_successful' => 'Оплата пройшла успішно!',
+    'settings_updated' => 'Налаштування успішно оновлено.',
+    'cache_cleared' => 'Кеш успішно очищено.',
+    'database_migrated' => 'Базу даних успішно мігровано.',
+    'profile_updated' => 'Профіль успішно оновлено.',
+    'password_updated' => 'Пароль успішно оновлено.',
+    'logged_in_as' => 'Ви увійшли як :user',
 ];

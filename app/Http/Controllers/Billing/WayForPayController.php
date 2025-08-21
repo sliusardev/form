@@ -107,7 +107,7 @@ class WayForPayController extends Controller
 
     public function approvedPayment(Request $request)
     {
-        return response()->redirectToRoute('billing.index')->with('success', 'Оплата пройшла успішно!');
+        return response()->redirectToRoute('billing.index')->with('success', __('dashboard.payment_successful'));
     }
 
     public function declinedPayment(Request $request)

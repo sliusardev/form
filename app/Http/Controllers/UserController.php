@@ -53,7 +53,7 @@ class UserController extends Controller
         $user->update($request->validated());
 
         return redirect()->route('user.profile')
-            ->with('success', 'Profile updated successfully.');
+            ->with('success', __('dashboard.profile_updated'));
     }
 
     public function updatePassword(Request $request)
@@ -76,7 +76,7 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('user.profile')
-            ->with('success', 'Password updated successfully.');
+            ->with('success', __('dashboard.password_updated'));
     }
 
     public function loginAs(Request $request)
@@ -95,7 +95,7 @@ class UserController extends Controller
         Auth::login($user);
 
         return redirect()->route('dashboard')
-            ->with('success', 'Logged in as ' . $user->name);
+            ->with('success', __('dashboard.logged_in_as', ['user' => $user->name]));
 
     }
 }

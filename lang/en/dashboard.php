@@ -150,4 +150,14 @@ return [
     'payment_id' => 'Payment ID',
     'payload' => 'Payload',
     'order' => 'Order',
+    'verification_link_sent' => 'Verification link sent!',
+    'updated_successfully' => 'Updated successfully.',
+    'payment_successful' => 'Payment completed successfully!',
+    'settings_updated' => 'Settings updated successfully.',
+    'cache_cleared' => 'Cache cleared successfully.',
+    'database_migrated' => 'Database migrated successfully.',
+    // form_created and form_updated already exist
+    'profile_updated' => 'Profile updated successfully.',
+    'password_updated' => 'Password updated successfully.',
+    'logged_in_as' => 'Logged in as :user',
 ];
