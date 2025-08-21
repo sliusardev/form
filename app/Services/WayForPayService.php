@@ -43,9 +43,6 @@ class WayForPayService
 //            'serviceUrl' => route('billing.way-for-pay.service-url'),
 //            'returnUrl' => route('billing.way-for-pay.return-url'),
 //            'callbackUrl' => route('billing.way-for-pay.callback'),
-//            'serviceUrl' => 'https://formpost.org/f/q7d5DXLhWekoYoi',
-//            'callbackUrl' => 'https://formpost.org/f/oiYfBzCHdrsxkCx',
-//            'returnUrl' => 'https://formpost.org/f/DzguzbgKNmSVYNd',
         ];
 
         if ($testMode) {
