@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('avatar')->nullable();
             $table->string('nickname')->nullable();
-            $table->string('token')->nullable();
-            $table->string('refresh_token')->nullable();
+            $table->text('token')->nullable();
+            $table->text('refresh_token')->nullable();
             $table->timestamps();
         });
     }

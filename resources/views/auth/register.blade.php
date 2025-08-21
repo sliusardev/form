@@ -35,6 +35,7 @@
                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
                            required>
                 </div>
+
                 <button type="submit" class="w-full bg-gray-800 text-white py-2 rounded-lg hover:bg-gray-600 transition duration-150">
                     {{__('auth.register')}}
                 </button>
