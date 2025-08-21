@@ -12,33 +12,33 @@ use Str;
 
 class SubmissionController extends Controller
 {
-   public function index(Request $request)
-   {
-       $view = $request->input('view', $request->cookie('submissions_view_preference', 'table'));
+    public function index(Request $request)
+    {
+        $view = $request->input('view', $request->cookie('submissions_view_preference', 'table'));
 
-       if ($request->has('view')) {
-           Cookie::queue('submissions_view_preference', $view, 43200); // 30 days
-       }
+        if ($request->has('view')) {
+            Cookie::queue('submissions_view_preference', $view, 43200); // 30 days
+        }
 
-       $companyId = selectedCompanyId();
+        $companyId = selectedCompanyId();
 
-       $submissions = Submission::query()
-           ->where('company_id', $companyId)
-           ->with('form:id,title')
-           ->when($request->filled('form_id'), function ($query) use ($request) {
-               $query->where('form_id', $request->form_id);
-           })
-           ->latest()
-           ->paginate(20);
+        $submissions = Submission::query()
+            ->where('company_id', $companyId)
+            ->with('form:id,title')
+            ->when($request->filled('form_id'), function ($query) use ($request) {
+                $query->where('form_id', $request->form_id);
+            })
+            ->latest()
+            ->paginate(20);
 
-       $forms = Form::query()
-           ->where('company_id', $companyId)
-           ->orderBy('title')
-           ->select('title', 'id')
-           ->get();
+        $forms = Form::query()
+            ->where('company_id', $companyId)
+            ->orderBy('title')
+            ->select('title', 'id')
+            ->get();
 
-       return view('dashboard.submissions.index', compact('submissions', 'forms', 'view'));
-   }
+        return view('dashboard.submissions.index', compact('submissions', 'forms', 'view'));
+    }
 
     public function show(Submission $submission)
     {
@@ -55,52 +55,50 @@ class SubmissionController extends Controller
         return view('dashboard.submissions.detail', compact('submission'));
     }
 
-    public function formSubmissions(Form $form)
+    public function store(StoreSubmissionRequest $request, SubmissionService $submissionService)
     {
-
-    }
-    public function store(StoreSubmissionRequest $request, string $hash, SubmissionService $submissionService)
-    {
+        /** @var Form|null $form */
         $form = $request->attributes->get('form');
+        if (!$form) {
+            return response()->json([
+                'status' => 'error_not_found',
+                'text' => 'Form not found.',
+            ], 404);
+        }
+
         $origin = $request->attributes->get('origin');
         $referer = $request->attributes->get('referer');
-        $user_agent = $request->attributes->get('user_agent');
-        $form->load('company');
+        $userAgent = $request->attributes->get('user_agent');
 
+        // Already validated by StoreSubmissionRequest
         $formData = $request->validated();
-
-        if ($request->isJson()) {
-            $jsonData = $request->json()->all();
-            $validator = validator($jsonData, $request->rules());
-
-            if ($validator->fails()) {
-                return response()->json([
-                    'status' => 'validation_error',
-                    'errors' => $validator->errors(),
-                ], 422);
-            }
-
-            $formData = $validator->validated();
-        }
 
         $submission = $submissionService->createSubmission(
             $form,
             $formData,
             $request->ip(),
             $request->getMethod(),
-            $user_agent,
+            $userAgent,
             $origin,
             $referer
         );
 
+        $message = 'Your submission has been successfully received.';
+
         if ($referer) {
-            return response()->redirectTo($referer);
+            // HTML (embedded form) flow
+            return view('answers.success', [
+                'text' => $message,
+                'redirect' => $referer,
+            ]);
         }
 
+        // API / AJAX flow
         return response()->json([
             'success' => true,
-            'message' => 'Submission successful',
+            'message' => $message,
             'submission_id' => $submission->id,
-        ]);
+        ], 201);
     }
+
 }
