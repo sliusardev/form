@@ -126,7 +126,7 @@ return [
     'no_submissions_found' => 'Відправлень не знайдено',
     'search_by_name_or_email' => 'Пошук за імʼям або електронною поштою...',
     'search' => 'Пошук',
-    'created_at' => 'Створено о',
+    'created_at' => 'Створено',
     'delete' => 'Видалити',
     'no_users_found' => 'Користувачів не знайдено.',
     'no_payments_found' => 'Платежів не знайдено.',
