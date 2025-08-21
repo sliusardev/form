@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -20,6 +21,30 @@
         </style>
     @endif
     @stack('head')
+    <!-- Add inside <head> before existing @stack('head') -->
+    <meta name="description" content="@yield('meta_description', 'FormPost dashboard to manage and monitor your form submissions securely.')" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="{{ config('app.name', 'FormPost') }}" />
+    <meta property="og:type" content="@yield('og_type', 'website')" />
+    <meta property="og:url" content="@yield('og_url', url()->current())" />
+    <meta property="og:title" content="@yield('og_title', trim(($title ?? '') . ' — ' . config('app.name', 'FormPost')))"/>
+    <meta property="og:description" content="@yield('og_description', 'FormPost helps you receive, store, and act on form submissions.')" />
+    <meta property="og:image" content="@yield('og_image', asset('images/og-image.jpg'))" />
+    <meta property="og:image:alt" content="@yield('og_image_alt', 'FormPost preview')" />
+    <meta property="og:locale" content="{{ str_replace('_','-', app()->getLocale()) }}" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="@yield('twitter_card', 'summary_large_image')" />
+    <meta name="twitter:title" content="@yield('twitter_title', trim(($title ?? '') . ' — ' . config('app.name', 'FormPost')))"/>
+    <meta name="twitter:description" content="@yield('twitter_description', 'FormPost helps you receive, store, and act on form submissions.')" />
+    <meta name="twitter:image" content="@yield('twitter_image', asset('images/og-image.jpg'))" />
+    <meta name="twitter:image:alt" content="@yield('twitter_image_alt', 'FormPost preview')" />
+
+    <!-- Optional canonical -->
+    <link rel="canonical" href="@yield('canonical', url()->current())" />
+
+    @stack('meta')
 </head>
 <body class="h-screen overflow-hidden bg-gray-50 font-sans">
 <div class="flex h-screen">
