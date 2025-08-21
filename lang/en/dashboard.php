@@ -160,4 +160,9 @@ return [
     'profile_updated' => 'Profile updated successfully.',
     'password_updated' => 'Password updated successfully.',
     'logged_in_as' => 'Logged in as :user',
+    'failed_process_payment' => 'Failed to process payment. Please try again.',
+    'no_action_specified' => 'No action specified.',
+    'no_such_action' => 'No such action found.',
+    'payment_failed_try_again' => 'Payment failed. Please try again.',
+    'no_permission' => 'You do not have permission to access this area.',
 ];

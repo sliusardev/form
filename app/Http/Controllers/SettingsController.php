@@ -40,7 +40,7 @@ class SettingsController extends Controller
         $action = $request->input('action');
 
         if (!$action) {
-            return redirect()->back()->with('error', 'No action specified.');
+            return redirect()->back()->with('error', __('dashboard.no_action_specified'));
         }
 
         if ($action == 'optimize:clear') {
@@ -53,7 +53,7 @@ class SettingsController extends Controller
             return redirect()->back()->with('success', __('dashboard.database_migrated'));
         }
 
-        return redirect()->back()->with('error', 'No such action found.');
+        return redirect()->back()->with('error', __('dashboard.no_such_action'));
     }
 
 }

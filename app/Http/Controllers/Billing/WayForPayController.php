@@ -10,7 +10,6 @@ use App\Models\Payment;
 use App\Services\PaymentService;
 use App\Services\WayForPayService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class WayForPayController extends Controller
 {
@@ -74,14 +73,11 @@ class WayForPayController extends Controller
 
     public function serviceUrl(Request $request)
     {
-        \Log::info('WayForPay serviceUrl Request: ', $request->all());
         return resolve(WayForPayService::class)->handleServiceUrl($request);
     }
 
     public function returnUrl(Request $request)
     {
-        \Log::info('WayForPay returnUrl Request: ', $request->all());
-        \Log::info('Method: '. $request->getMethod());
         $orderId = $request->get('orderReference'); // іноді передається в URL
         $payment = Payment::query()->where('payment_id', $orderId)->first();
 
@@ -112,6 +108,6 @@ class WayForPayController extends Controller
 
     public function declinedPayment(Request $request)
     {
-        return response()->redirectToRoute('billing.index')->with('error', 'Оплата не вдалася. Будь ласка, спробуйте ще раз.');
+        return response()->redirectToRoute('billing.index')->with('error', __('dashboard.payment_failed_try_again'));
     }
 }

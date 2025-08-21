@@ -17,7 +17,7 @@
             if (!auth()->check() || !auth()->user()->isAdmin()) {
                 // Redirect to dashboard with error message if not admin
                 return redirect()->route('dashboard')
-                    ->with('error', 'You do not have permission to access this area.');
+                    ->with('error', __('dashboard.no_permission'));
             }
 
             return $next($request);

@@ -33,7 +33,7 @@ class PaymentService
             ]);
         } catch (\Exception $e) {
             Log::error('Failed to save payment: ' . $e->getMessage());
-            return back()->with('error', 'Failed to process payment. Please try again.');
+            return back()->with('error', __('dashboard.failed_process_payment'));
         }
     }
 

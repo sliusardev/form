@@ -158,4 +158,9 @@ return [
     'profile_updated' => 'Профіль успішно оновлено.',
     'password_updated' => 'Пароль успішно оновлено.',
     'logged_in_as' => 'Ви увійшли як :user',
+    'failed_process_payment' => 'Не вдалося обробити платіж. Спробуйте ще раз.',
+    'no_action_specified' => 'Дію не вказано.',
+    'no_such_action' => 'Такої дії не знайдено.',
+    'payment_failed_try_again' => 'Оплата не вдалася. Будь ласка, спробуйте ще раз.',
+    'no_permission' => 'У вас немає прав доступу до цієї області.',
 ];
