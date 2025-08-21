@@ -57,6 +57,10 @@ return [
         'login' => env('WAYFORPAY_LOGIN'),
         'secret_key' => env('WAYFORPAY_SECRET_KEY'),
         'password' => env('WAYFORPAY_PASSWORD'),
+        'sandbox' => env('WAYFORPAY_SANDBOX', false),
+        'sandbox_login' => env('WAYFORPAY_SANDBOX_LOGIN'),
+        'sandbox_secret_key' => env('WAYFORPAY_SANDBOX_SECRET_KEY'),
+
     ],
 
     'recaptcha' => [

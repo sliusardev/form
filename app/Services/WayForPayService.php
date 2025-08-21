@@ -17,6 +17,13 @@ class WayForPayService
         $orderDate = time();
         $merchantAccount = config('services.wayforpay.login');
         $merchantSecretKey = config('services.wayforpay.secret_key');
+        $testMode = config('services.wayforpay.sandbox');
+
+        if ($testMode) {
+            $merchantAccount = config('services.wayforpay.sandbox_login');
+            $merchantSecretKey = config('services.wayforpay.sandbox_secret_key');
+        }
+
         $merchantDomainName = $request->getHost();
 
         $paymentData = [
@@ -33,13 +40,18 @@ class WayForPayService
             'clientPhone' => $company->phone ?? '',
             'clientEmail' => auth()->user()->email,
             'language' => app()->getLocale(),
-//            'serviceUrl' => route('billing.way-for-pay.service-url'),
-//            'returnUrl' => route('billing.way-for-pay.return-url'),
+            'serviceUrl' => route('billing.way-for-pay.service-url'),
+            'returnUrl' => route('billing.way-for-pay.return-url'),
 //            'callbackUrl' => route('billing.way-for-pay.callback'),
 //            'serviceUrl' => 'https://formpost.org/f/q7d5DXLhWekoYoi',
 //            'callbackUrl' => 'https://formpost.org/f/oiYfBzCHdrsxkCx',
 //            'returnUrl' => 'https://formpost.org/f/DzguzbgKNmSVYNd',
         ];
+
+        if ($testMode) {
+            $paymentData['serviceUrl'] = route('billing.way-for-pay.service-url');
+            $paymentData['returnUrl'] = route('billing.way-for-pay.return-url');
+        }
 
         $signatureString = implode(';', [
             $merchantAccount,
