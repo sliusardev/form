@@ -165,4 +165,5 @@ return [
     'no_such_action' => 'No such action found.',
     'payment_failed_try_again' => 'Payment failed. Please try again.',
     'no_permission' => 'You do not have permission to access this area.',
+    'no_payments' => 'No payments found.',
 ];
