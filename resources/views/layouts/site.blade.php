@@ -132,8 +132,9 @@
             <a href="#pricing" class="block hover:text-gray-300">{{__('main.nav_pricing')}}</a>
             <a href="#integration" class="block hover:text-gray-300">{{__('main.nav_how_it_works')}}</a>
             <a href="#screens" class="block hover:text-gray-300">{{__('main.nav_screenshots')}}</a>
-            <a href="#" class="block hover:text-gray-300">{{__('main.nav_docs')}}</a>
-            <a href="#" class="block hover:text-gray-300">{{__('main.nav_contact')}}</a>
+            <a href="{{route('about')}}" class="hover:text-gray-300">{{__('main.about_us')}}</a>
+{{--            <a href="#" class="block hover:text-gray-300">{{__('main.nav_docs')}}</a>--}}
+{{--            <a href="#" class="block hover:text-gray-300">{{__('main.nav_contact')}}</a>--}}
             <div class=" border-t border-gray-700 my-t pt-3">
                 @auth
                     <a href="{{route('dashboard')}}" type="button" class="bg-white hover:bg-gray-100 text-gray-800 text-base font-medium py-2 px-4 rounded-lg shadow transition cursor-pointer p-2">
