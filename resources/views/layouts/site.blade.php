@@ -76,8 +76,9 @@
             <a href="#pricing" class="hover:text-gray-300">{{__('main.nav_pricing')}}</a>
             <a href="#integration" class="hover:text-gray-300">{{__('main.nav_how_it_works')}}</a>
             <a href="#screens" class="hover:text-gray-300">{{__('main.nav_screenshots')}}</a>
-            <a href="#" class="hover:text-gray-300">{{__('main.nav_docs')}}</a>
-            <a href="#" class="hover:text-gray-300">{{__('main.nav_contact')}}</a>
+            <a href="{{route('about')}}" class="hover:text-gray-300">{{__('main.about_us')}}</a>
+{{--            <a href="#" class="hover:text-gray-300">{{__('main.nav_docs')}}</a>--}}
+{{--            <a href="#" class="hover:text-gray-300">{{__('main.nav_contact')}}</a>--}}
         </nav>
 
 

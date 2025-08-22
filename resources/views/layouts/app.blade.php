@@ -30,15 +30,18 @@
     <meta property="og:url" content="@yield('og_url', url()->current())" />
     <meta property="og:title" content="@yield('og_title', trim(($title ?? '') . ' — ' . config('app.name', 'FormPost')))"/>
     <meta property="og:description" content="@yield('og_description', 'FormPost helps you receive, store, and act on form submissions.')" />
-    <meta property="og:image" content="@yield('og_image', asset('images/og-image.jpg'))" />
+    <meta property="og:image" content="@yield('og_image', asset('img/screens/1.png'))" />
     <meta property="og:image:alt" content="@yield('og_image_alt', 'FormPost preview')" />
     <meta property="og:locale" content="{{ str_replace('_','-', app()->getLocale()) }}" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="@yield('twitter_card', 'summary_large_image')" />
     <meta name="twitter:title" content="@yield('twitter_title', trim(($title ?? '') . ' — ' . config('app.name', 'FormPost')))"/>
     <meta name="twitter:description" content="@yield('twitter_description', 'FormPost helps you receive, store, and act on form submissions.')" />
-    <meta name="twitter:image" content="@yield('twitter_image', asset('images/og-image.jpg'))" />
+    <meta name="twitter:image" content="@yield('twitter_image', asset('img/screens/1.png'))" />
     <meta name="twitter:image:alt" content="@yield('twitter_image_alt', 'FormPost preview')" />
 
     <!-- Optional canonical -->

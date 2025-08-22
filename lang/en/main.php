@@ -65,4 +65,5 @@ return [
     'meta_description' => 'Collect form data without a server. Buy submissions and forms as needed. No subscriptions, no extra costs.',
     'og_title' => 'FormPost — Simple Solutions for Data Collection',
     'og_description' => 'Collect form data without a server. Buy submissions and forms as needed. No subscriptions, no extra costs.',
+    'about_us' => 'About Us',
 ];
