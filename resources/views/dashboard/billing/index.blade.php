@@ -4,7 +4,7 @@
     <div class="max-w-full mx-auto bg-white p-6 rounded-lg shadow-md">
         <h2 class="text-3xl font-semibold text-gray-800 mb-6">{{ __('dashboard.billing') }}</h2>
 
-        <form action="{{ route('way-for-pay.pay') }}" method="POST" class="space-y-6">
+        <form method="POST" class="space-y-6">
             @csrf
 
             <div class="gap-4 grid grid-cols-1">
@@ -32,9 +32,11 @@
                 <small class="text-green-800">{{ __('dashboard.min_payment_note', ['min' => $minPayment, 'currency' => $currency]) }}</small>
             </div>
 
-            <div class="flex items-center gap-3">
-                <button type="submit" class="btn bg-blue-900 text-white hover:bg-blue-700 transition-colors flex items-center gap-2">{{ __('dashboard.pay') }} (WayForPay)</button>
-                <button type="submit" formaction="{{ route('monobank.pay') }}" class="btn btn-outline transition-colors flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white">
+            <div class="flex items-center gap-3 flex-col md:flex-row">
+                <button type="submit" formaction="{{ route('way-for-pay.pay') }}" class="btn bg-blue-900 text-white hover:bg-blue-700 transition-colors flex items-center gap-2 w-full md:w-auto justify-center">
+                    {{ __('dashboard.pay') }} (WayForPay)
+                </button>
+                <button type="submit" formaction="{{ route('monobank.pay') }}" class="btn btn-outline transition-colors flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white w-full md:w-auto justify-center">
                     {{ __('dashboard.pay') }}
                     <img src="{{asset('img/billing/footer_plata_light_bg@3x.png')}}" alt="" srcset="{{asset('img/billing/footer_plata_dark_bg@2x.png')}}" class="w-[100px]">
                 </button>
