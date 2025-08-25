@@ -34,8 +34,28 @@ class MonobankController extends Controller
             . $submissionLimit  . ' ' . trans('dashboard.submissions') . ', '
             . $formLimit  . ' '  . trans('dashboard.forms');
 
+        $paymentData = [
+            'submission_limit' => $submissionLimit,
+            'form_limit' => $formLimit,
+        ];
+
+        $order = [
+            'productName' => $productName,
+            'submission_limit' => $submissionLimit,
+            'form_limit' => $formLimit,
+        ];
+
+        $payment = resolve(PaymentService::class)->init(
+            PaymentProviderEnum::MONOBANK->value,
+            $paymentData,
+            (int) round($totalCost),
+            $currency,
+            $company,
+            $order
+        );
+
         $invoice = resolve(MonobankService::class)
-            ->createInvoice($request, $company, $productName, $totalCost, $currency);
+            ->createInvoice($payment, $productName, $totalCost, $currency);
 
         if (isset($invoice['error']) || empty($invoice['invoiceId']) || empty($invoice['pageUrl'])) {
             return back()->with('error', __('dashboard.failed_process_payment'));
@@ -49,41 +69,22 @@ class MonobankController extends Controller
             'form_limit' => $formLimit,
         ];
 
-        $order = [
-            'productName' => $productName,
-            'submission_limit' => $submissionLimit,
-            'form_limit' => $formLimit,
-        ];
-
-        resolve(PaymentService::class)->init(
-            PaymentProviderEnum::MONOBANK->value,
-            $paymentData,
-            (int) round($totalCost),
-            $currency,
-            $company,
-            $order
-        );
+        $payment->update([
+            'payment_id' => $invoice['invoiceId'],
+            'payload' => $paymentData
+        ]);
 
         return redirect()->away($invoice['pageUrl']);
     }
 
     public function webhook(Request $request)
     {
-        dump('webhook', $request->all(), $request->getMethod());
         return resolve(MonobankService::class)->handleWebhook($request);
     }
 
-    public function return(Request $request)
+    public function return($paymentId)
     {
-        $invoiceId = $request->get('invoiceId') ?? $request->get('orderReference');
-        if (!$invoiceId) {
-            return view('pages.payment-result', [
-                'status' => 'error',
-                'message' => 'Платіж не знайдено.',
-            ]);
-        }
-
-        $payment = Payment::query()->where('payment_id', $invoiceId)->first();
+        $payment = Payment::query()->where('id', $paymentId)->first();
 
         if (!$payment) {
             return view('pages.payment-result', [
@@ -92,16 +93,16 @@ class MonobankController extends Controller
             ]);
         }
 
+        $status = trans('dashboard.pending');
+
         if ($payment->status === PaymentStatusEnum::PAID) {
-            return view('pages.payment-result', [
-                'status' => 'success',
-                'message' => 'Оплата пройшла успішно!',
-            ]);
+            $status = trans('dashboard.paid');
         }
 
-        return view('pages.payment-result', [
-            'status' => 'failed',
-            'message' => 'Оплата не вдалася.',
-        ]);
+        if ($payment->status === PaymentStatusEnum::FAILED) {
+            $status = trans('dashboard.failed');
+        }
+
+        return response()->redirectToRoute('billing.index')->with('info', $status);
     }
 }

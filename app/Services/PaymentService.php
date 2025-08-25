@@ -20,9 +20,9 @@ class PaymentService
         array $order
     ) {
         try {
-            Payment::query()->create([
+            return Payment::query()->create([
                 'provider' => $provider,
-                'payment_id' => $paymentData['orderReference'],
+                'payment_id' => $paymentData['orderReference'] ?? '',
                 'amount' => $totalCost,
                 'currency' => $currency,
                 'status' => PaymentStatusEnum::PENDING,
@@ -33,8 +33,9 @@ class PaymentService
             ]);
         } catch (\Exception $e) {
             Log::error('Failed to save payment: ' . $e->getMessage());
-            return back()->with('error', __('dashboard.failed_process_payment'));
         }
+
+        return null;
     }
 
     public function preparedPrices(): array

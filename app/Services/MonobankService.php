@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class MonobankService
 {
-    public function createInvoice(Request $request, Company $company, string $productName, float $totalCost, string $currency): array
+    public function createInvoice(Payment $payment, string $productName, float $totalCost, string $currency): array
     {
         $token = config('services.monobank.token');
         $baseUrl = rtrim(config('services.monobank.base_url'), '/');
@@ -37,7 +37,7 @@ class MonobankService
                     ],
                 ],
             ],
-            'redirectUrl' => route('billing.monobank.return'),
+            'redirectUrl' => route('billing.monobank.return', $payment->id),
             'webHookUrl' => route('billing.monobank.webhook'),
             'validity' => 86400,
         ];

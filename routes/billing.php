@@ -23,5 +23,5 @@ Route::post('/billing/callback/monobank/webhook', [MonobankController::class, 'w
     ->name('billing.monobank.webhook')
     ->withoutMiddleware(['csrf']);
 
-Route::match(['get','post'], '/billing/callback/monobank/return', [MonobankController::class, 'return'])
+Route::match(['get','post'], '/billing/callback/monobank/return/{payment_id}', [MonobankController::class, 'return'])
     ->name('billing.monobank.return');

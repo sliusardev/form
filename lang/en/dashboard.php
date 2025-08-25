@@ -166,4 +166,12 @@ return [
     'payment_failed_try_again' => 'Payment failed. Please try again.',
     'no_permission' => 'You do not have permission to access this area.',
     'no_payments' => 'No payments found.',
+    'pending' => 'Pending',
+    'completed' => 'Completed',
+    'failed' => 'Failed',
+    'canceled' => 'Canceled',
+    'paid' => 'Paid',
+    'refunded' => 'Refunded',
+    'payment_status' => 'Payment Status',
+
 ];
