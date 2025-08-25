@@ -21,8 +21,6 @@ class MonobankService
         $amountMinor = (int) round($totalCost * 100);
         $reference = 'mono_' . uniqid();
 
-        $amountMinor = 100;
-
         $payload = [
             'amount' => $amountMinor,
             'ccy' => $currencyCode,

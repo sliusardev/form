@@ -32,8 +32,6 @@ class WayForPayController extends Controller
             return back()->withErrors(['total_cost' => 'Minimum payment is ' . $minPayment . ' ' . $currency]);
         }
 
-        $totalCost = 1;
-
         $productName = trans('dashboard.billing') .': '
             . $submissionLimit  . ' ' . trans('dashboard.submissions') . ', '
             . $formLimit  . ' '  . trans('dashboard.forms');
