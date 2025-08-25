@@ -68,7 +68,7 @@
 <header class="w-full border-b border-gray-800 bg-gray-800 text-white sticky top-0 z-50">
     <div class="container mx-auto px-4 flex items-center justify-between py-4">
         <!-- Brand -->
-        <a href="{{route('home')}}" class="text-3xl font-semibold text-white">FormPost</a>
+        <a href="{{route('home', app()->getLocale())}}" class="text-3xl font-semibold text-white">FormPost</a>
 
         <!-- Desktop nav -->
         <nav id="navMenu" class="hidden md:flex items-center gap-8 text-base">
@@ -76,7 +76,7 @@
             <a href="#pricing" class="hover:text-gray-300">{{__('main.nav_pricing')}}</a>
             <a href="#integration" class="hover:text-gray-300">{{__('main.nav_how_it_works')}}</a>
             <a href="#screens" class="hover:text-gray-300">{{__('main.nav_screenshots')}}</a>
-            <a href="{{route('about')}}" class="hover:text-gray-300">{{__('main.about_us')}}</a>
+            <a href="{{route('about', app()->getLocale())}}" class="hover:text-gray-300">{{__('main.about_us')}}</a>
 {{--            <a href="#" class="hover:text-gray-300">{{__('main.nav_docs')}}</a>--}}
 {{--            <a href="#" class="hover:text-gray-300">{{__('main.nav_contact')}}</a>--}}
         </nav>
@@ -132,7 +132,7 @@
             <a href="#pricing" class="block hover:text-gray-300">{{__('main.nav_pricing')}}</a>
             <a href="#integration" class="block hover:text-gray-300">{{__('main.nav_how_it_works')}}</a>
             <a href="#screens" class="block hover:text-gray-300">{{__('main.nav_screenshots')}}</a>
-            <a href="{{route('about')}}" class="hover:text-gray-300">{{__('main.about_us')}}</a>
+            <a href="{{route('about', app()->getLocale())}}" class="hover:text-gray-300">{{__('main.about_us')}}</a>
 {{--            <a href="#" class="block hover:text-gray-300">{{__('main.nav_docs')}}</a>--}}
 {{--            <a href="#" class="block hover:text-gray-300">{{__('main.nav_contact')}}</a>--}}
             <div class=" border-t border-gray-700 my-t pt-3">
@@ -164,8 +164,8 @@
     <div class="border-t border-gray-200 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
         <div>&copy; 2024 - {{now()->year}} FormPost. {{__('dashboard.all_rights_reserved')}}</div>
         <div class="flex items-center gap-4">
-            <a href="{{route('terms')}}" class="hover:underline">{{__('dashboard.terms_of_service')}}</a>
-            <a href="{{route('privacy')}}" class="hover:underline">{{__('dashboard.privacy_policy')}}</a>
+            <a href="{{route('terms', app()->getLocale())}}" class="hover:underline">{{__('dashboard.terms_of_service')}}</a>
+            <a href="{{route('privacy', app()->getLocale())}}" class="hover:underline">{{__('dashboard.privacy_policy')}}</a>
         </div>
     </div>
 </footer>

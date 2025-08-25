@@ -7,12 +7,6 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Middleware\FormSubmissionMiddleware;
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
-Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
-Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/lang/{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
 
 Route::match(['get', 'post'], 'f/{hash}', [SubmissionController::class, 'store'])
@@ -26,3 +20,13 @@ Route::get('/answer/error', [AnswerController::class, 'error'])->name('answer.er
 require __DIR__.'/auth.php';
 require __DIR__.'/dashboard.php';
 require __DIR__.'/billing.php';
+
+
+Route::prefix('{locale?}')
+    ->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
+        Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
+        Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+        Route::get('/about', [HomeController::class, 'about'])->name('about');
+    });
