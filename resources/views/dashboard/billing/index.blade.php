@@ -34,7 +34,10 @@
 
             <div class="flex items-center gap-3">
                 <button type="submit" class="btn bg-blue-900 text-white hover:bg-blue-700 transition-colors flex items-center gap-2">{{ __('dashboard.pay') }} (WayForPay)</button>
-                <button type="submit" formaction="{{ route('monobank.pay') }}" class="btn bg-gray-700 text-white hover:bg-gray-600 transition-colors flex items-center gap-2">{{ __('dashboard.pay') }} online</button>
+                <button type="submit" formaction="{{ route('monobank.pay') }}" class="btn btn-outline transition-colors flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white">
+                    {{ __('dashboard.pay') }}
+                    <img src="{{asset('img/billing/footer_plata_light_bg@3x.png')}}" alt="" srcset="{{asset('img/billing/footer_plata_dark_bg@2x.png')}}" class="w-[100px]">
+                </button>
             </div>
         </form>
     </div>
