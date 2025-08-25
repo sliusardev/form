@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Billing\WayForPayController;
+use App\Http\Controllers\Billing\MonobankController;
 
 Route::post('/billing/callback/way-for-pay/service-url', [WayForPayController::class, 'serviceUrl'])
     ->name('billing.way-for-pay.service-url')
@@ -16,3 +17,11 @@ Route::get('/payment-success', [WayForPayController::class, 'approvedPayment'])
 Route::get('/payment-wrong', [WayForPayController::class, 'declinedPayment'])
     ->name('payment-wrong')
     ->withoutMiddleware(['csrf']);
+
+// Monobank webhook and return endpoints
+Route::post('/billing/callback/monobank/webhook', [MonobankController::class, 'webhook'])
+    ->name('billing.monobank.webhook')
+    ->withoutMiddleware(['csrf']);
+
+Route::match(['get','post'], '/billing/callback/monobank/return', [MonobankController::class, 'return'])
+    ->name('billing.monobank.return');

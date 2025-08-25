@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Billing\BillingController;
 use App\Http\Controllers\Billing\WayForPayController;
+use App\Http\Controllers\Billing\MonobankController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormController;
@@ -47,6 +48,10 @@ Route::prefix('dashboard')
 
         Route::post('/billing/way-for-pay/pay', [WayForPayController::class, 'pay'])
             ->name('way-for-pay.pay');
+
+        // Monobank pay init
+        Route::post('/billing/monobank/pay', [MonobankController::class, 'pay'])
+            ->name('monobank.pay');
 
         Route::middleware([AdminMiddleware::class])->group(function () {
             Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
