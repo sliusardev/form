@@ -30,8 +30,6 @@ class ProviderCallbackController extends Controller
             $user = $this->createAndRegisterUser($socialUser, $providerUser);
         }
 
-        $this->verifyEmail($user);
-
         Auth::login($user);
 
         return redirect('/dashboard');
@@ -39,6 +37,8 @@ class ProviderCallbackController extends Controller
 
     public function updateOrCreateProvider($user, $provider, $socialUser)
     {
+        $this->verifyEmail($user);
+
         return AuthProviders::query()->updateOrCreate([
             'provider_id' => $socialUser->id,
             'provider_name' => $provider,
@@ -60,6 +60,8 @@ class ProviderCallbackController extends Controller
             'email' => $socialUser->email,
             'avatar' => $socialUser->avatar,
         ]);
+
+        $this->verifyEmail($user);
 
         $providerUser->update(['user_id' => $user->id]);
 
