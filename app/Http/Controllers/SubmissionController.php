@@ -59,18 +59,10 @@ class SubmissionController extends Controller
     {
         /** @var Form|null $form */
         $form = $request->attributes->get('form');
-        if (!$form) {
-            return response()->json([
-                'status' => 'error_not_found',
-                'text' => 'Form not found.',
-            ], 404);
-        }
-
         $origin = $request->attributes->get('origin');
         $referer = $request->attributes->get('referer');
         $userAgent = $request->attributes->get('user_agent');
 
-        // Already validated by StoreSubmissionRequest
         $formData = $request->validated();
 
         $submission = $submissionService->createSubmission(
@@ -86,14 +78,12 @@ class SubmissionController extends Controller
         $message = 'Your submission has been successfully received.';
 
         if ($referer) {
-            // HTML (embedded form) flow
             return view('answers.success', [
                 'text' => $message,
                 'redirect' => $referer,
             ]);
         }
 
-        // API / AJAX flow
         return response()->json([
             'success' => true,
             'message' => $message,
