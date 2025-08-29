@@ -36,7 +36,7 @@ return [
     'calculator_total' => 'Загалом',
     'calculator_continue' => 'Продовжити',
     'integration_title' => 'Як це працює',
-    'integration_step_1' => 'Отримайте посилання на форму, наприклад: https://form.test/f/3QQPFnq8qVtVnfW',
+    'integration_step_1' => 'Отримайте посилання на форму',
     'integration_step_2' => 'Додайте його до action вашої форми.',
     'integration_step_3' => 'Отримуйте дані.',
     'integration_description' => 'Працює з будь-яким статичним сайтом або CMS.',
@@ -66,4 +66,5 @@ return [
     'og_title' => 'FormPost — Просте рішення для збору даних',
     'og_description' => 'Збирайте дані з форм без сервера. Купуйте надсилання та форми за потреби. Без підписок, без зайвих витрат.',
     'about_us' => 'Про нас',
+    'integration_subtitle' => 'Працює з будь-яким статичним сайтом або CMS.',
 ];
